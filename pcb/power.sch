@@ -550,7 +550,7 @@ Wire Wire Line
 Connection ~ 4500 2350
 Connection ~ 3950 2350
 Wire Wire Line
-	3950 4650 5700 4650
+	3950 4650 4700 4650
 Connection ~ 5700 4650
 Wire Wire Line
 	9400 2350 9750 2350
@@ -558,4 +558,17 @@ Wire Wire Line
 	7300 4650 9750 4650
 Wire Wire Line
 	7300 2850 7750 2850
+$Comp
+L Diode:1N4148 D?
+U 1 1 623292D9
+P 4850 4650
+F 0 "D?" H 4850 4433 50  0000 C CNN
+F 1 "1N4148" H 4850 4524 50  0000 C CNN
+F 2 "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal" H 4850 4475 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 4850 4650 50  0001 C CNN
+	1    4850 4650
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5000 4650 5700 4650
 $EndSCHEMATC

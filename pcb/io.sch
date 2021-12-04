@@ -648,25 +648,25 @@ Connection ~ 7100 3800
 Wire Wire Line
 	6750 3500 7100 3500
 Text HLabel 9050 3500 2    50   Input ~ 0
-L-BTN+-OUT
+L-BTN+OUT
 Wire Wire Line
 	6450 3800 6450 3400
 Connection ~ 6450 3800
 Wire Wire Line
 	6450 3800 6550 3800
 Text HLabel 9050 3400 2    50   Output ~ 0
-L-BTN+-IN
+L-BTN+IN
 Wire Wire Line
 	7300 4100 7650 4100
 Text HLabel 9050 4100 2    50   Input ~ 0
-L-BTN--OUT
+L-BTN-OUT
 Wire Wire Line
 	6950 4400 6950 4000
 Connection ~ 6950 4400
 Wire Wire Line
 	6950 4400 7100 4400
 Text HLabel 9050 4000 2    50   Output ~ 0
-L-BTN--IN
+L-BTN-IN
 Wire Wire Line
 	6750 5000 7100 5000
 Text HLabel 9050 5000 2    50   Input ~ 0
