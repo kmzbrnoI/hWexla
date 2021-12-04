@@ -141,10 +141,10 @@ OUT+
 Text HLabel 2350 5900 0    50   Output ~ 0
 OUT-
 $Comp
-L Device:Polyfuse F?
+L Device:Polyfuse F8
 U 1 1 61AEE6B7
 P 2750 4400
-F 0 "F?" V 2525 4400 50  0000 C CNN
+F 0 "F8" V 2525 4400 50  0000 C CNN
 F 1 "200mA" V 2616 4400 50  0000 C CNN
 F 2 "" H 2800 4200 50  0001 L CNN
 F 3 "~" H 2750 4400 50  0001 C CNN
@@ -152,10 +152,10 @@ F 3 "~" H 2750 4400 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Device:Polyfuse F?
+L Device:Polyfuse F6
 U 1 1 61AEEAD2
 P 2750 2300
-F 0 "F?" V 2525 2300 50  0000 C CNN
+F 0 "F6" V 2525 2300 50  0000 C CNN
 F 1 "50mA" V 2616 2300 50  0000 C CNN
 F 2 "" H 2800 2100 50  0001 L CNN
 F 3 "~" H 2750 2300 50  0001 C CNN
@@ -163,10 +163,10 @@ F 3 "~" H 2750 2300 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Device:Polyfuse F?
+L Device:Polyfuse F7
 U 1 1 61AEEF05
 P 2750 2900
-F 0 "F?" V 2525 2900 50  0000 C CNN
+F 0 "F7" V 2525 2900 50  0000 C CNN
 F 1 "50mA" V 2616 2900 50  0000 C CNN
 F 2 "" H 2800 2700 50  0001 L CNN
 F 3 "~" H 2750 2900 50  0001 C CNN
@@ -174,10 +174,10 @@ F 3 "~" H 2750 2900 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Device:Polyfuse F?
+L Device:Polyfuse F9
 U 1 1 61AF2F04
 P 2750 5300
-F 0 "F?" V 2525 5300 50  0000 C CNN
+F 0 "F9" V 2525 5300 50  0000 C CNN
 F 1 "200mA" V 2616 5300 50  0000 C CNN
 F 2 "" H 2800 5100 50  0001 L CNN
 F 3 "~" H 2750 5300 50  0001 C CNN
@@ -185,10 +185,10 @@ F 3 "~" H 2750 5300 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Device:Polyfuse F?
+L Device:Polyfuse F10
 U 1 1 61AF2F0A
 P 2750 5900
-F 0 "F?" V 2525 5900 50  0000 C CNN
+F 0 "F10" V 2525 5900 50  0000 C CNN
 F 1 "200mA" V 2616 5900 50  0000 C CNN
 F 2 "" H 2800 5700 50  0001 L CNN
 F 3 "~" H 2750 5900 50  0001 C CNN
@@ -196,10 +196,10 @@ F 3 "~" H 2750 5900 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Diode:BAT54C D?
+L Diode:BAT54C D14
 U 1 1 61AFFF13
 P 3600 2600
-F 0 "D?" V 3646 2688 50  0000 L CNN
+F 0 "D14" V 3646 2688 50  0000 L CNN
 F 1 "BAT54C" V 3555 2688 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 3675 2725 50  0001 L CNN
 F 3 "http://www.diodes.com/_files/datasheets/ds11005.pdf" H 3520 2600 50  0001 C CNN
@@ -207,10 +207,10 @@ F 3 "http://www.diodes.com/_files/datasheets/ds11005.pdf" H 3520 2600 50  0001 C
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Diode:BAT54C D?
+L Diode:BAT54C D15
 U 1 1 61B07AF9
 P 3600 5600
-F 0 "D?" V 3646 5688 50  0000 L CNN
+F 0 "D15" V 3646 5688 50  0000 L CNN
 F 1 "BAT54C" V 3555 5688 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 3675 5725 50  0001 L CNN
 F 3 "http://www.diodes.com/_files/datasheets/ds11005.pdf" H 3520 5600 50  0001 C CNN
@@ -218,10 +218,10 @@ F 3 "http://www.diodes.com/_files/datasheets/ds11005.pdf" H 3520 5600 50  0001 C
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Device:R_Pack04_SIP_Split RN?
+L Device:R_Pack04_SIP_Split RN1
 U 1 1 61B2FD42
 P 4600 1950
-F 0 "RN?" H 4900 2000 50  0000 R CNN
+F 0 "RN1" H 4900 2000 50  0000 R CNN
 F 1 "10k" H 4850 1900 50  0000 R CNN
 F 2 "Resistor_THT:R_Array_SIP8" V 4520 1950 50  0001 C CNN
 F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 4600 1950 50  0001 C CNN
@@ -229,10 +229,10 @@ F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 4600 1950 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Device:R_Pack04_SIP_Split RN?
+L Device:R_Pack04_SIP_Split RN1
 U 2 1 61B2FD48
 P 5100 1950
-F 0 "RN?" H 5188 1996 50  0000 L CNN
+F 0 "RN1" H 5188 1996 50  0000 L CNN
 F 1 "10k" H 5188 1905 50  0000 L CNN
 F 2 "Resistor_THT:R_Array_SIP8" V 5020 1950 50  0001 C CNN
 F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 5100 1950 50  0001 C CNN
@@ -240,10 +240,10 @@ F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 5100 1950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R_Pack04_SIP_Split RN?
+L Device:R_Pack04_SIP_Split RN1
 U 3 1 61B2FD4E
 P 4600 3450
-F 0 "RN?" H 4300 3500 50  0000 L CNN
+F 0 "RN1" H 4300 3500 50  0000 L CNN
 F 1 "10k" H 4350 3400 50  0000 L CNN
 F 2 "Resistor_THT:R_Array_SIP8" V 4520 3450 50  0001 C CNN
 F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 4600 3450 50  0001 C CNN
@@ -251,10 +251,10 @@ F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 4600 3450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R_Pack04_SIP_Split RN?
+L Device:R_Pack04_SIP_Split RN1
 U 4 1 61B2FD54
 P 5100 3450
-F 0 "RN?" H 5188 3496 50  0000 L CNN
+F 0 "RN1" H 5188 3496 50  0000 L CNN
 F 1 "10k" H 5188 3405 50  0000 L CNN
 F 2 "Resistor_THT:R_Array_SIP8" V 5020 3450 50  0001 C CNN
 F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 5100 3450 50  0001 C CNN
@@ -262,10 +262,10 @@ F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 5100 3450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R R?
+L Device:R R17
 U 1 1 61B428D5
 P 5750 2300
-F 0 "R?" V 5543 2300 50  0000 C CNN
+F 0 "R17" V 5543 2300 50  0000 C CNN
 F 1 "2k2" V 5634 2300 50  0000 C CNN
 F 2 "" V 5680 2300 50  0001 C CNN
 F 3 "~" H 5750 2300 50  0001 C CNN
@@ -273,10 +273,10 @@ F 3 "~" H 5750 2300 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Device:R R?
+L Device:R R18
 U 1 1 61B43498
 P 5750 2900
-F 0 "R?" V 5543 2900 50  0000 C CNN
+F 0 "R18" V 5543 2900 50  0000 C CNN
 F 1 "2k2" V 5634 2900 50  0000 C CNN
 F 2 "" V 5680 2900 50  0001 C CNN
 F 3 "~" H 5750 2900 50  0001 C CNN
@@ -398,8 +398,8 @@ L Device:R R?
 U 1 1 61B7647E
 P 5600 6900
 AR Path="/61AA5240/61B7647E" Ref="R?"  Part="1" 
-AR Path="/61AA542B/61B7647E" Ref="R?"  Part="1" 
-F 0 "R?" H 5530 6854 50  0000 R CNN
+AR Path="/61AA542B/61B7647E" Ref="R23"  Part="1" 
+F 0 "R23" H 5530 6854 50  0000 R CNN
 F 1 "2k2" H 5530 6945 50  0000 R CNN
 F 2 "" V 5530 6900 50  0001 C CNN
 F 3 "~" H 5600 6900 50  0001 C CNN
@@ -411,8 +411,8 @@ L Device:C C?
 U 1 1 61B76484
 P 5900 6900
 AR Path="/61AA5240/61B76484" Ref="C?"  Part="1" 
-AR Path="/61AA542B/61B76484" Ref="C?"  Part="1" 
-F 0 "C?" H 6015 6946 50  0000 L CNN
+AR Path="/61AA542B/61B76484" Ref="C14"  Part="1" 
+F 0 "C14" H 6015 6946 50  0000 L CNN
 F 1 "100n" H 6015 6855 50  0000 L CNN
 F 2 "" H 5938 6750 50  0001 C CNN
 F 3 "~" H 5900 6900 50  0001 C CNN
@@ -424,8 +424,8 @@ L Diode:BZX84Cxx D?
 U 1 1 61B7648A
 P 5600 6450
 AR Path="/61AA5240/61B7648A" Ref="D?"  Part="1" 
-AR Path="/61AA542B/61B7648A" Ref="D?"  Part="1" 
-F 0 "D?" V 5554 6370 50  0000 R CNN
+AR Path="/61AA542B/61B7648A" Ref="D16"  Part="1" 
+F 0 "D16" V 5554 6370 50  0000 R CNN
 F 1 "BZX84C30" V 5645 6370 50  0000 R CNN
 F 2 "Diode_SMD:D_SOT-23_ANK" H 5600 6275 50  0001 C CNN
 F 3 "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" H 5600 6450 50  0001 C CNN
@@ -460,8 +460,8 @@ L Triac_Thyristor:BT169D Q?
 U 1 1 61B7649D
 P 6250 6450
 AR Path="/61AA5240/61B7649D" Ref="Q?"  Part="1" 
-AR Path="/61AA542B/61B7649D" Ref="Q?"  Part="1" 
-F 0 "Q?" H 6338 6496 50  0000 L CNN
+AR Path="/61AA542B/61B7649D" Ref="Q8"  Part="1" 
+F 0 "Q8" H 6338 6496 50  0000 L CNN
 F 1 "BT148" H 6338 6405 50  0000 L CNN
 F 2 "Package_TO_SOT_THT:TO-92_Inline" H 6350 6375 50  0001 L CIN
 F 3 "https://media.digikey.com/pdf/Data%20Sheets/NXP%20PDFs/BT169_Series.pdf" H 6250 6450 50  0001 L CNN
@@ -492,10 +492,10 @@ Wire Wire Line
 	5600 5600 5600 6300
 Connection ~ 5600 6300
 $Comp
-L Transistor_FET:2N7002 Q?
+L Transistor_FET:2N7002 Q6
 U 1 1 61B7E2C2
 P 6750 5200
-F 0 "Q?" V 6999 5200 50  0000 C CNN
+F 0 "Q6" V 6999 5200 50  0000 C CNN
 F 1 "2N7002" V 7090 5200 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 6950 5125 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 6750 5200 50  0001 L CNN
@@ -503,10 +503,10 @@ F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 6750 5200 50  0001 
 	0    -1   1    0   
 $EndComp
 $Comp
-L Transistor_FET:2N7002 Q?
+L Transistor_FET:2N7002 Q7
 U 1 1 61B85DA3
 P 7300 5800
-F 0 "Q?" V 7549 5800 50  0000 C CNN
+F 0 "Q7" V 7549 5800 50  0000 C CNN
 F 1 "2N7002" V 7640 5800 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 7500 5725 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 7300 5800 50  0001 L CNN
@@ -546,10 +546,10 @@ Wire Wire Line
 	3600 5300 6550 5300
 Connection ~ 3600 5300
 $Comp
-L Transistor_FET:2N7002 Q?
+L Transistor_FET:2N7002 Q4
 U 1 1 61BDED63
 P 6750 3700
-F 0 "Q?" V 6999 3700 50  0000 C CNN
+F 0 "Q4" V 6999 3700 50  0000 C CNN
 F 1 "2N7002" V 7090 3700 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 6950 3625 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 6750 3700 50  0001 L CNN
@@ -557,10 +557,10 @@ F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 6750 3700 50  0001 
 	0    -1   1    0   
 $EndComp
 $Comp
-L Transistor_FET:2N7002 Q?
+L Transistor_FET:2N7002 Q5
 U 1 1 61BDED69
 P 7300 4300
-F 0 "Q?" V 7549 4300 50  0000 C CNN
+F 0 "Q5" V 7549 4300 50  0000 C CNN
 F 1 "2N7002" V 7640 4300 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 7500 4225 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 7300 4300 50  0001 L CNN
@@ -598,10 +598,10 @@ Wire Wire Line
 Wire Wire Line
 	5100 4400 6950 4400
 $Comp
-L Device:R R?
+L Device:R R20
 U 1 1 61C044E0
 P 7650 4250
-F 0 "R?" H 7720 4296 50  0000 L CNN
+F 0 "R20" H 7720 4296 50  0000 L CNN
 F 1 "10k" H 7720 4205 50  0000 L CNN
 F 2 "" V 7580 4250 50  0001 C CNN
 F 3 "~" H 7650 4250 50  0001 C CNN
@@ -610,10 +610,10 @@ F 3 "~" H 7650 4250 50  0001 C CNN
 $EndComp
 Connection ~ 7650 4400
 $Comp
-L Device:R R?
+L Device:R R22
 U 1 1 61C07737
 P 7650 5750
-F 0 "R?" H 7720 5796 50  0000 L CNN
+F 0 "R22" H 7720 5796 50  0000 L CNN
 F 1 "10k" H 7720 5705 50  0000 L CNN
 F 2 "" V 7580 5750 50  0001 C CNN
 F 3 "~" H 7650 5750 50  0001 C CNN
@@ -622,10 +622,10 @@ F 3 "~" H 7650 5750 50  0001 C CNN
 $EndComp
 Connection ~ 7650 5900
 $Comp
-L Device:R R?
+L Device:R R21
 U 1 1 61C096D3
 P 7100 5150
-F 0 "R?" H 7170 5196 50  0000 L CNN
+F 0 "R21" H 7170 5196 50  0000 L CNN
 F 1 "10k" H 7170 5105 50  0000 L CNN
 F 2 "" V 7030 5150 50  0001 C CNN
 F 3 "~" H 7100 5150 50  0001 C CNN
@@ -634,10 +634,10 @@ F 3 "~" H 7100 5150 50  0001 C CNN
 $EndComp
 Connection ~ 7100 5300
 $Comp
-L Device:R R?
+L Device:R R19
 U 1 1 61C0AA94
 P 7100 3650
-F 0 "R?" H 7170 3696 50  0000 L CNN
+F 0 "R19" H 7170 3696 50  0000 L CNN
 F 1 "10k" H 7170 3605 50  0000 L CNN
 F 2 "" V 7030 3650 50  0001 C CNN
 F 3 "~" H 7100 3650 50  0001 C CNN
@@ -698,10 +698,10 @@ Wire Wire Line
 Wire Wire Line
 	2350 1450 2600 1450
 $Comp
-L Device:Polyfuse F?
+L Device:Polyfuse F5
 U 1 1 61D21450
 P 2750 1450
-F 0 "F?" V 2525 1450 50  0000 C CNN
+F 0 "F5" V 2525 1450 50  0000 C CNN
 F 1 "50mA" V 2616 1450 50  0000 C CNN
 F 2 "" H 2800 1250 50  0001 L CNN
 F 3 "~" H 2750 1450 50  0001 C CNN
@@ -709,10 +709,10 @@ F 3 "~" H 2750 1450 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Diode:BAT54C D?
+L Diode:BAT54C D13
 U 1 1 61D27D1C
 P 3550 1150
-F 0 "D?" V 3596 1238 50  0000 L CNN
+F 0 "D13" V 3596 1238 50  0000 L CNN
 F 1 "BAT54C" V 3505 1238 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 3625 1275 50  0001 L CNN
 F 3 "http://www.diodes.com/_files/datasheets/ds11005.pdf" H 3470 1150 50  0001 C CNN
@@ -722,10 +722,10 @@ $EndComp
 Wire Wire Line
 	2900 1450 3550 1450
 $Comp
-L Device:R R?
+L Device:R R15
 U 1 1 61D2D6EB
 P 4550 1150
-F 0 "R?" H 4620 1196 50  0000 L CNN
+F 0 "R15" H 4620 1196 50  0000 L CNN
 F 1 "R" H 4620 1105 50  0000 L CNN
 F 2 "" V 4480 1150 50  0001 C CNN
 F 3 "~" H 4550 1150 50  0001 C CNN
@@ -749,10 +749,10 @@ Wire Wire Line
 	4550 1450 4550 1300
 Connection ~ 3550 1450
 $Comp
-L Device:R R?
+L Device:R R16
 U 1 1 61D3122D
 P 5750 1450
-F 0 "R?" V 5543 1450 50  0000 C CNN
+F 0 "R16" V 5543 1450 50  0000 C CNN
 F 1 "2k2" V 5634 1450 50  0000 C CNN
 F 2 "" V 5680 1450 50  0001 C CNN
 F 3 "~" H 5750 1450 50  0001 C CNN
@@ -773,4 +773,5 @@ Wire Wire Line
 Connection ~ 4100 2600
 Text HLabel 2350 1450 0    50   Input ~ 0
 SLAVE
+NoConn ~ 3550 850 
 $EndSCHEMATC
