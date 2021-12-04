@@ -3,9 +3,9 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 4
-Title ""
-Date ""
+Sheet 3 4
+Title "hWexla - IO protection"
+Date "2021-12-04"
 Rev ""
 Comp ""
 Comment1 ""
@@ -13,4 +13,686 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+$Comp
+L Device:R R?
+U 1 1 61AD6C62
+P 4050 6250
+AR Path="/61AA5240/61AD6C62" Ref="R?"  Part="1" 
+AR Path="/61AA542B/61AD6C62" Ref="R5"  Part="1" 
+F 0 "R5" H 3980 6204 50  0000 R CNN
+F 1 "2k2" H 3980 6295 50  0000 R CNN
+F 2 "" V 3980 6250 50  0001 C CNN
+F 3 "~" H 4050 6250 50  0001 C CNN
+	1    4050 6250
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 61AD6C68
+P 4350 6250
+AR Path="/61AA5240/61AD6C68" Ref="C?"  Part="1" 
+AR Path="/61AA542B/61AD6C68" Ref="C10"  Part="1" 
+F 0 "C10" H 4465 6296 50  0000 L CNN
+F 1 "100n" H 4465 6205 50  0000 L CNN
+F 2 "" H 4388 6100 50  0001 C CNN
+F 3 "~" H 4350 6250 50  0001 C CNN
+	1    4350 6250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:BZX84Cxx D?
+U 1 1 61AD6C6E
+P 4050 5800
+AR Path="/61AA5240/61AD6C6E" Ref="D?"  Part="1" 
+AR Path="/61AA542B/61AD6C6E" Ref="D4"  Part="1" 
+F 0 "D4" V 4004 5720 50  0000 R CNN
+F 1 "BZX84C5V1" V 4095 5720 50  0000 R CNN
+F 2 "Diode_SMD:D_SOT-23_ANK" H 4050 5625 50  0001 C CNN
+F 3 "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" H 4050 5800 50  0001 C CNN
+	1    4050 5800
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	4050 5950 4350 5950
+Wire Wire Line
+	4550 5950 4550 5900
+Connection ~ 4050 5950
+Connection ~ 4350 5950
+Wire Wire Line
+	4350 5950 4550 5950
+Wire Wire Line
+	4700 5950 4700 6550
+Wire Wire Line
+	4350 6100 4350 5950
+Wire Wire Line
+	4050 6100 4050 5950
+Wire Wire Line
+	4050 6400 4050 6550
+Wire Wire Line
+	4050 6550 4350 6550
+Wire Wire Line
+	4350 6400 4350 6550
+Connection ~ 4350 6550
+Wire Wire Line
+	4350 6550 4700 6550
+$Comp
+L Triac_Thyristor:BT169D Q?
+U 1 1 61AD6C87
+P 4700 5800
+AR Path="/61AA5240/61AD6C87" Ref="Q?"  Part="1" 
+AR Path="/61AA542B/61AD6C87" Ref="Q2"  Part="1" 
+F 0 "Q2" H 4788 5846 50  0000 L CNN
+F 1 "BT148" H 4788 5755 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 4800 5725 50  0001 L CIN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/NXP%20PDFs/BT169_Series.pdf" H 4700 5800 50  0001 L CNN
+	1    4700 5800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 5650 4700 5650
+$Comp
+L power:GND #PWR?
+U 1 1 61AD6C9B
+P 4050 6700
+AR Path="/61AA5240/61AD6C9B" Ref="#PWR?"  Part="1" 
+AR Path="/61AA542B/61AD6C9B" Ref="#PWR010"  Part="1" 
+F 0 "#PWR010" H 4050 6450 50  0001 C CNN
+F 1 "GND" H 4055 6527 50  0000 C CNN
+F 2 "" H 4050 6700 50  0001 C CNN
+F 3 "" H 4050 6700 50  0001 C CNN
+	1    4050 6700
+	1    0    0    -1  
+$EndComp
+Connection ~ 4050 6550
+Wire Wire Line
+	4050 6700 4050 6550
+$Comp
+L Diode:BAT54C D3
+U 1 1 61AD8962
+P 3550 3450
+F 0 "D3" V 3596 3538 50  0000 L CNN
+F 1 "BAT54C" V 3505 3538 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3625 3575 50  0001 L CNN
+F 3 "http://www.diodes.com/_files/datasheets/ds11005.pdf" H 3470 3450 50  0001 C CNN
+	1    3550 3450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:Polyfuse F3
+U 1 1 61ADAEDE
+P 2700 3150
+F 0 "F3" V 2475 3150 50  0000 C CNN
+F 1 "200mA" V 2566 3150 50  0000 C CNN
+F 2 "" H 2750 2950 50  0001 L CNN
+F 3 "~" H 2700 3150 50  0001 C CNN
+	1    2700 3150
+	0    1    1    0   
+$EndComp
+Text HLabel 2300 3150 0    50   BiDi ~ 0
+CAN-BTN+
+Text HLabel 2300 3750 0    50   BiDi ~ 0
+CAN-BTN-
+Text HLabel 2300 1650 0    50   Input ~ 0
+CAN-IN+
+Text HLabel 2300 2250 0    50   Input ~ 0
+CAN-IN-
+Text HLabel 2300 4650 0    50   Output ~ 0
+CAN-OUT+
+Text HLabel 2300 5250 0    50   Output ~ 0
+CAN-OUT-
+$Comp
+L Device:Polyfuse F?
+U 1 1 61AEE6B7
+P 2700 3750
+F 0 "F?" V 2475 3750 50  0000 C CNN
+F 1 "200mA" V 2566 3750 50  0000 C CNN
+F 2 "" H 2750 3550 50  0001 L CNN
+F 3 "~" H 2700 3750 50  0001 C CNN
+	1    2700 3750
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:Polyfuse F?
+U 1 1 61AEEAD2
+P 2700 1650
+F 0 "F?" V 2475 1650 50  0000 C CNN
+F 1 "50mA" V 2566 1650 50  0000 C CNN
+F 2 "" H 2750 1450 50  0001 L CNN
+F 3 "~" H 2700 1650 50  0001 C CNN
+	1    2700 1650
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:Polyfuse F?
+U 1 1 61AEEF05
+P 2700 2250
+F 0 "F?" V 2475 2250 50  0000 C CNN
+F 1 "50mA" V 2566 2250 50  0000 C CNN
+F 2 "" H 2750 2050 50  0001 L CNN
+F 3 "~" H 2700 2250 50  0001 C CNN
+	1    2700 2250
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:Polyfuse F?
+U 1 1 61AF2F04
+P 2700 4650
+F 0 "F?" V 2475 4650 50  0000 C CNN
+F 1 "200mA" V 2566 4650 50  0000 C CNN
+F 2 "" H 2750 4450 50  0001 L CNN
+F 3 "~" H 2700 4650 50  0001 C CNN
+	1    2700 4650
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:Polyfuse F?
+U 1 1 61AF2F0A
+P 2700 5250
+F 0 "F?" V 2475 5250 50  0000 C CNN
+F 1 "200mA" V 2566 5250 50  0000 C CNN
+F 2 "" H 2750 5050 50  0001 L CNN
+F 3 "~" H 2700 5250 50  0001 C CNN
+	1    2700 5250
+	0    1    1    0   
+$EndComp
+$Comp
+L Diode:BAT54C D?
+U 1 1 61AFFF13
+P 3550 1950
+F 0 "D?" V 3596 2038 50  0000 L CNN
+F 1 "BAT54C" V 3505 2038 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3625 2075 50  0001 L CNN
+F 3 "http://www.diodes.com/_files/datasheets/ds11005.pdf" H 3470 1950 50  0001 C CNN
+	1    3550 1950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Diode:BAT54C D?
+U 1 1 61B07AF9
+P 3550 4950
+F 0 "D?" V 3596 5038 50  0000 L CNN
+F 1 "BAT54C" V 3505 5038 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3625 5075 50  0001 L CNN
+F 3 "http://www.diodes.com/_files/datasheets/ds11005.pdf" H 3470 4950 50  0001 C CNN
+	1    3550 4950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R_Pack04_SIP_Split RN?
+U 1 1 61B2FD42
+P 4550 1300
+F 0 "RN?" H 4850 1350 50  0000 R CNN
+F 1 "10k" H 4800 1250 50  0000 R CNN
+F 2 "Resistor_THT:R_Array_SIP8" V 4470 1300 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 4550 1300 50  0001 C CNN
+	1    4550 1300
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_SIP_Split RN?
+U 2 1 61B2FD48
+P 5050 1300
+F 0 "RN?" H 5138 1346 50  0000 L CNN
+F 1 "10k" H 5138 1255 50  0000 L CNN
+F 2 "Resistor_THT:R_Array_SIP8" V 4970 1300 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 5050 1300 50  0001 C CNN
+	2    5050 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_SIP_Split RN?
+U 3 1 61B2FD4E
+P 4550 2800
+F 0 "RN?" H 4250 2850 50  0000 L CNN
+F 1 "10k" H 4300 2750 50  0000 L CNN
+F 2 "Resistor_THT:R_Array_SIP8" V 4470 2800 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 4550 2800 50  0001 C CNN
+	3    4550 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_SIP_Split RN?
+U 4 1 61B2FD54
+P 5050 2800
+F 0 "RN?" H 5138 2846 50  0000 L CNN
+F 1 "10k" H 5138 2755 50  0000 L CNN
+F 2 "Resistor_THT:R_Array_SIP8" V 4970 2800 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 5050 2800 50  0001 C CNN
+	4    5050 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 61B428D5
+P 5700 1650
+F 0 "R?" V 5493 1650 50  0000 C CNN
+F 1 "2k2" V 5584 1650 50  0000 C CNN
+F 2 "" V 5630 1650 50  0001 C CNN
+F 3 "~" H 5700 1650 50  0001 C CNN
+	1    5700 1650
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 61B43498
+P 5700 2250
+F 0 "R?" V 5493 2250 50  0000 C CNN
+F 1 "2k2" V 5584 2250 50  0000 C CNN
+F 2 "" V 5630 2250 50  0001 C CNN
+F 3 "~" H 5700 2250 50  0001 C CNN
+	1    5700 2250
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2550 1650 2300 1650
+Wire Wire Line
+	2300 2250 2550 2250
+Wire Wire Line
+	2550 3150 2300 3150
+Wire Wire Line
+	2300 3750 2550 3750
+Wire Wire Line
+	2550 4650 2300 4650
+Wire Wire Line
+	2300 5250 2550 5250
+Wire Wire Line
+	2850 5250 3550 5250
+Wire Wire Line
+	3550 4650 2850 4650
+Wire Wire Line
+	2850 3750 3550 3750
+Wire Wire Line
+	3550 3150 2850 3150
+Wire Wire Line
+	2850 2250 3550 2250
+Wire Wire Line
+	3550 1650 2850 1650
+Wire Wire Line
+	3550 1650 4550 1650
+Connection ~ 3550 1650
+Wire Wire Line
+	5550 2250 5050 2250
+Connection ~ 3550 2250
+Wire Wire Line
+	5050 1450 5050 2250
+Connection ~ 5050 2250
+$Comp
+L power:VCC #PWR?
+U 1 1 61B4EFE7
+P 4550 1150
+F 0 "#PWR?" H 4550 1000 50  0001 C CNN
+F 1 "VCC" H 4565 1323 50  0000 C CNN
+F 2 "" H 4550 1150 50  0001 C CNN
+F 3 "" H 4550 1150 50  0001 C CNN
+	1    4550 1150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 61B4F48D
+P 5050 1150
+F 0 "#PWR?" H 5050 1000 50  0001 C CNN
+F 1 "VCC" H 5065 1323 50  0000 C CNN
+F 2 "" H 5050 1150 50  0001 C CNN
+F 3 "" H 5050 1150 50  0001 C CNN
+	1    5050 1150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3550 3150 4550 3150
+Connection ~ 3550 3150
+Connection ~ 3550 3750
+Wire Wire Line
+	5050 2950 5050 3750
+Connection ~ 5050 3750
+$Comp
+L power:VCC #PWR?
+U 1 1 61B56B18
+P 4550 2650
+F 0 "#PWR?" H 4550 2500 50  0001 C CNN
+F 1 "VCC" H 4565 2823 50  0000 C CNN
+F 2 "" H 4550 2650 50  0001 C CNN
+F 3 "" H 4550 2650 50  0001 C CNN
+	1    4550 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 61B56E93
+P 5050 2650
+F 0 "#PWR?" H 5050 2500 50  0001 C CNN
+F 1 "VCC" H 5065 2823 50  0000 C CNN
+F 2 "" H 5050 2650 50  0001 C CNN
+F 3 "" H 5050 2650 50  0001 C CNN
+	1    5050 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3550 3750 5050 3750
+Wire Wire Line
+	3550 2250 5050 2250
+Wire Wire Line
+	4550 1450 4550 1650
+Connection ~ 4550 1650
+Wire Wire Line
+	4550 1650 5550 1650
+Wire Wire Line
+	4550 2950 4550 3150
+Connection ~ 4550 3150
+Text HLabel 9000 1650 2    50   Output ~ 0
+CPU-IN+
+Text HLabel 9000 2250 2    50   Output ~ 0
+CPU-IN-
+Wire Wire Line
+	3750 3450 4050 3450
+Wire Wire Line
+	4050 3450 4050 5650
+Connection ~ 4050 5650
+Wire Wire Line
+	3750 1950 4050 1950
+Wire Wire Line
+	4050 1950 4050 3450
+Connection ~ 4050 3450
+$Comp
+L Device:R R?
+U 1 1 61B7647E
+P 5550 6250
+AR Path="/61AA5240/61B7647E" Ref="R?"  Part="1" 
+AR Path="/61AA542B/61B7647E" Ref="R?"  Part="1" 
+F 0 "R?" H 5480 6204 50  0000 R CNN
+F 1 "2k2" H 5480 6295 50  0000 R CNN
+F 2 "" V 5480 6250 50  0001 C CNN
+F 3 "~" H 5550 6250 50  0001 C CNN
+	1    5550 6250
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 61B76484
+P 5850 6250
+AR Path="/61AA5240/61B76484" Ref="C?"  Part="1" 
+AR Path="/61AA542B/61B76484" Ref="C?"  Part="1" 
+F 0 "C?" H 5965 6296 50  0000 L CNN
+F 1 "100n" H 5965 6205 50  0000 L CNN
+F 2 "" H 5888 6100 50  0001 C CNN
+F 3 "~" H 5850 6250 50  0001 C CNN
+	1    5850 6250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:BZX84Cxx D?
+U 1 1 61B7648A
+P 5550 5800
+AR Path="/61AA5240/61B7648A" Ref="D?"  Part="1" 
+AR Path="/61AA542B/61B7648A" Ref="D?"  Part="1" 
+F 0 "D?" V 5504 5720 50  0000 R CNN
+F 1 "BZX84C?" V 5595 5720 50  0000 R CNN
+F 2 "Diode_SMD:D_SOT-23_ANK" H 5550 5625 50  0001 C CNN
+F 3 "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" H 5550 5800 50  0001 C CNN
+	1    5550 5800
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	5550 5950 5850 5950
+Wire Wire Line
+	6050 5950 6050 5900
+Connection ~ 5550 5950
+Connection ~ 5850 5950
+Wire Wire Line
+	5850 5950 6050 5950
+Wire Wire Line
+	6200 5950 6200 6550
+Wire Wire Line
+	5850 6100 5850 5950
+Wire Wire Line
+	5550 6100 5550 5950
+Wire Wire Line
+	5550 6400 5550 6550
+Wire Wire Line
+	5550 6550 5850 6550
+Wire Wire Line
+	5850 6400 5850 6550
+Connection ~ 5850 6550
+Wire Wire Line
+	5850 6550 6200 6550
+$Comp
+L Triac_Thyristor:BT169D Q?
+U 1 1 61B7649D
+P 6200 5800
+AR Path="/61AA5240/61B7649D" Ref="Q?"  Part="1" 
+AR Path="/61AA542B/61B7649D" Ref="Q?"  Part="1" 
+F 0 "Q?" H 6288 5846 50  0000 L CNN
+F 1 "BT148" H 6288 5755 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 6300 5725 50  0001 L CIN
+F 3 "https://media.digikey.com/pdf/Data%20Sheets/NXP%20PDFs/BT169_Series.pdf" H 6200 5800 50  0001 L CNN
+	1    6200 5800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5550 5650 6200 5650
+$Comp
+L power:GND #PWR?
+U 1 1 61B764A4
+P 5550 6700
+AR Path="/61AA5240/61B764A4" Ref="#PWR?"  Part="1" 
+AR Path="/61AA542B/61B764A4" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5550 6450 50  0001 C CNN
+F 1 "GND" H 5555 6527 50  0000 C CNN
+F 2 "" H 5550 6700 50  0001 C CNN
+F 3 "" H 5550 6700 50  0001 C CNN
+	1    5550 6700
+	1    0    0    -1  
+$EndComp
+Connection ~ 5550 6550
+Wire Wire Line
+	5550 6700 5550 6550
+Wire Wire Line
+	3750 4950 5550 4950
+Wire Wire Line
+	5550 4950 5550 5650
+Connection ~ 5550 5650
+$Comp
+L Transistor_FET:2N7002 Q?
+U 1 1 61B7E2C2
+P 6700 4550
+F 0 "Q?" V 6949 4550 50  0000 C CNN
+F 1 "2N7002" V 7040 4550 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 6900 4475 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 6700 4550 50  0001 L CNN
+	1    6700 4550
+	0    -1   1    0   
+$EndComp
+$Comp
+L Transistor_FET:2N7002 Q?
+U 1 1 61B85DA3
+P 7250 5150
+F 0 "Q?" V 7499 5150 50  0000 C CNN
+F 1 "2N7002" V 7590 5150 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7450 5075 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 7250 5150 50  0001 L CNN
+	1    7250 5150
+	0    -1   1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 61BA9E12
+P 7050 4650
+F 0 "#PWR?" H 7050 4400 50  0001 C CNN
+F 1 "GND" H 7055 4477 50  0000 C CNN
+F 2 "" H 7050 4650 50  0001 C CNN
+F 3 "" H 7050 4650 50  0001 C CNN
+	1    7050 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 61BAA7E4
+P 7600 5250
+F 0 "#PWR?" H 7600 5000 50  0001 C CNN
+F 1 "GND" H 7605 5077 50  0000 C CNN
+F 2 "" H 7600 5250 50  0001 C CNN
+F 3 "" H 7600 5250 50  0001 C CNN
+	1    7600 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6900 4650 7050 4650
+Wire Wire Line
+	7450 5250 7600 5250
+Wire Wire Line
+	7050 5250 3550 5250
+Connection ~ 3550 5250
+Wire Wire Line
+	3550 4650 6500 4650
+Connection ~ 3550 4650
+$Comp
+L Transistor_FET:2N7002 Q?
+U 1 1 61BDED63
+P 6700 3050
+F 0 "Q?" V 6949 3050 50  0000 C CNN
+F 1 "2N7002" V 7040 3050 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 6900 2975 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 6700 3050 50  0001 L CNN
+	1    6700 3050
+	0    -1   1    0   
+$EndComp
+$Comp
+L Transistor_FET:2N7002 Q?
+U 1 1 61BDED69
+P 7250 3650
+F 0 "Q?" V 7499 3650 50  0000 C CNN
+F 1 "2N7002" V 7590 3650 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7450 3575 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 7250 3650 50  0001 L CNN
+	1    7250 3650
+	0    -1   1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 61BDED6F
+P 7050 3150
+F 0 "#PWR?" H 7050 2900 50  0001 C CNN
+F 1 "GND" H 7055 2977 50  0000 C CNN
+F 2 "" H 7050 3150 50  0001 C CNN
+F 3 "" H 7050 3150 50  0001 C CNN
+	1    7050 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 61BDED75
+P 7600 3750
+F 0 "#PWR?" H 7600 3500 50  0001 C CNN
+F 1 "GND" H 7605 3577 50  0000 C CNN
+F 2 "" H 7600 3750 50  0001 C CNN
+F 3 "" H 7600 3750 50  0001 C CNN
+	1    7600 3750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6900 3150 7050 3150
+Wire Wire Line
+	7450 3750 7600 3750
+Wire Wire Line
+	4550 3150 6400 3150
+Wire Wire Line
+	5050 3750 6900 3750
+$Comp
+L Device:R R?
+U 1 1 61C044E0
+P 7600 3600
+F 0 "R?" H 7670 3646 50  0000 L CNN
+F 1 "10k" H 7670 3555 50  0000 L CNN
+F 2 "" V 7530 3600 50  0001 C CNN
+F 3 "~" H 7600 3600 50  0001 C CNN
+	1    7600 3600
+	1    0    0    -1  
+$EndComp
+Connection ~ 7600 3750
+$Comp
+L Device:R R?
+U 1 1 61C07737
+P 7600 5100
+F 0 "R?" H 7670 5146 50  0000 L CNN
+F 1 "10k" H 7670 5055 50  0000 L CNN
+F 2 "" V 7530 5100 50  0001 C CNN
+F 3 "~" H 7600 5100 50  0001 C CNN
+	1    7600 5100
+	1    0    0    -1  
+$EndComp
+Connection ~ 7600 5250
+$Comp
+L Device:R R?
+U 1 1 61C096D3
+P 7050 4500
+F 0 "R?" H 7120 4546 50  0000 L CNN
+F 1 "10k" H 7120 4455 50  0000 L CNN
+F 2 "" V 6980 4500 50  0001 C CNN
+F 3 "~" H 7050 4500 50  0001 C CNN
+	1    7050 4500
+	1    0    0    -1  
+$EndComp
+Connection ~ 7050 4650
+$Comp
+L Device:R R?
+U 1 1 61C0AA94
+P 7050 3000
+F 0 "R?" H 7120 3046 50  0000 L CNN
+F 1 "10k" H 7120 2955 50  0000 L CNN
+F 2 "" V 6980 3000 50  0001 C CNN
+F 3 "~" H 7050 3000 50  0001 C CNN
+	1    7050 3000
+	1    0    0    -1  
+$EndComp
+Connection ~ 7050 3150
+Wire Wire Line
+	6700 2850 7050 2850
+Text HLabel 9000 2850 2    50   Input ~ 0
+CPU-BTN+-OUT
+Wire Wire Line
+	6400 3150 6400 2750
+Connection ~ 6400 3150
+Wire Wire Line
+	6400 3150 6500 3150
+Text HLabel 9000 2750 2    50   Output ~ 0
+CPU-BTN+-IN
+Wire Wire Line
+	7250 3450 7600 3450
+Text HLabel 9000 3450 2    50   Input ~ 0
+CPU-BTN--OUT
+Wire Wire Line
+	6900 3750 6900 3350
+Connection ~ 6900 3750
+Wire Wire Line
+	6900 3750 7050 3750
+Text HLabel 9000 3350 2    50   Output ~ 0
+CPU-BTN--IN
+Wire Wire Line
+	6700 4350 7050 4350
+Text HLabel 9000 4350 2    50   Input ~ 0
+CPU-OUT+
+Wire Wire Line
+	7250 4950 7600 4950
+Text HLabel 9000 4950 2    50   Input ~ 0
+CPU-OUT-
+Wire Wire Line
+	7600 4950 9000 4950
+Connection ~ 7600 4950
+Wire Wire Line
+	7050 4350 9000 4350
+Connection ~ 7050 4350
+Wire Wire Line
+	7600 3450 9000 3450
+Connection ~ 7600 3450
+Wire Wire Line
+	6900 3350 9000 3350
+Wire Wire Line
+	7050 2850 9000 2850
+Connection ~ 7050 2850
+Wire Wire Line
+	6400 2750 9000 2750
+Wire Wire Line
+	5850 2250 9000 2250
+Wire Wire Line
+	5850 1650 9000 1650
 $EndSCHEMATC
