@@ -1,3 +1,4 @@
 (fp_lib_table
   (lib (name universalStepDown)(type KiCad)(uri ${KIPRJMOD}/universalStepDown.pretty)(options "")(descr ""))
+  (lib (name hwexla)(type KiCad)(uri ${KIPRJMOD}/hwexla.pretty)(options "")(descr ""))
 )

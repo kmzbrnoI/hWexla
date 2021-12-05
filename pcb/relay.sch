@@ -33,7 +33,7 @@ U 1 1 620E6427
 P 5850 3500
 F 0 "K1" V 6617 3500 50  0000 C CNN
 F 1 "HFD2/005" V 6526 3500 50  0000 C CNN
-F 2 "Relay_THT:Relay_DPDT_Kemet_EC2" H 5850 3500 50  0001 C CNN
+F 2 "hwexla:HFD2" H 5850 3500 50  0001 C CNN
 F 3 "https://content.kemet.com/datasheets/KEM_R7002_EC2_EE2.pdf" H 5850 3500 50  0001 C CNN
 	1    5850 3500
 	0    -1   -1   0   
