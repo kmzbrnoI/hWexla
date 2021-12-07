@@ -43,17 +43,6 @@ SERVO-POWER-EN
 Text HLabel 9750 2350 2    50   Output ~ 0
 SERVO-VCC
 $Comp
-L Regulator_Linear:L78L05_SOT89 U3
-U 1 1 61AC96A1
-P 6500 4650
-F 0 "U3" H 6500 4892 50  0000 C CNN
-F 1 "L78L05_SOT89" H 6500 4801 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:SOT-89-3_Handsoldering" H 6500 4850 50  0001 C CIN
-F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/15/55/e5/aa/23/5b/43/fd/CD00000446.pdf/files/CD00000446.pdf/jcr:content/translations/en.CD00000446.pdf" H 6500 4600 50  0001 C CNN
-	1    6500 4650
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:C C6
 U 1 1 61ACB33B
 P 5700 4900
@@ -289,6 +278,7 @@ F 0 "D12" H 4850 4433 50  0000 C CNN
 F 1 "1N4148" H 4850 4524 50  0000 C CNN
 F 2 "Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4850 4475 50  0001 C CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 4850 4650 50  0001 C CNN
+F 4 "C64898" H 4850 4650 50  0001 C CNN "LCSC"
 	1    4850 4650
 	-1   0    0    1   
 $EndComp
@@ -370,4 +360,15 @@ Wire Wire Line
 	6650 2350 8200 2350
 Text Notes 8050 2500 0    50   ~ 0
 Non-reversible
+$Comp
+L Regulator_Linear:KA78M05_TO252 U3
+U 1 1 61BB8EA3
+P 6500 4650
+F 0 "U3" H 6500 4892 50  0000 C CNN
+F 1 "KA78M05_TO252" H 6500 4801 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:TO-252-2" H 6500 4875 50  0001 C CIN
+F 3 "https://www.onsemi.com/pub/Collateral/MC78M00-D.PDF" H 6500 4600 50  0001 C CNN
+	1    6500 4650
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

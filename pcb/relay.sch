@@ -109,6 +109,7 @@ F 0 "D13" H 5850 4150 50  0000 C CNN
 F 1 "1N4148" H 5850 4050 50  0000 C CNN
 F 2 "Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5850 4125 50  0001 C CNN
 F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 5850 4300 50  0001 C CNN
+F 4 "C64898" H 5850 4300 50  0001 C CNN "LCSC"
 	1    5850 4300
 	1    0    0    -1  
 $EndComp

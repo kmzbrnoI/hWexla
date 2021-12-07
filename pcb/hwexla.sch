@@ -184,7 +184,7 @@ L Device:Polyfuse F1
 U 1 1 61D86674
 P 1750 3350
 F 0 "F1" V 1525 3350 50  0000 C CNN
-F 1 "50mA" V 1616 3350 50  0000 C CNN
+F 1 "200mA" V 1616 3350 50  0000 C CNN
 F 2 "Fuse:Fuse_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 1800 3150 50  0001 L CNN
 F 3 "~" H 1750 3350 50  0001 C CNN
 	1    1750 3350
@@ -377,12 +377,12 @@ Wire Wire Line
 $Comp
 L Device:R R1
 U 1 1 61E3B085
-P 9350 3400
-F 0 "R1" H 9280 3354 50  0000 R CNN
-F 1 "10k" H 9280 3445 50  0000 R CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 9280 3400 50  0001 C CNN
-F 3 "~" H 9350 3400 50  0001 C CNN
-	1    9350 3400
+P 9350 3450
+F 0 "R1" H 9280 3404 50  0000 R CNN
+F 1 "10k" H 9280 3495 50  0000 R CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 9280 3450 50  0001 C CNN
+F 3 "~" H 9350 3450 50  0001 C CNN
+	1    9350 3450
 	1    0    0    1   
 $EndComp
 Wire Wire Line
@@ -669,17 +669,6 @@ F 3 "~" H 9650 3650 50  0001 C CNN
 	1    9650 3650
 	0    1    1    0   
 $EndComp
-$Comp
-L power:GND #PWR026
-U 1 1 6200F7A1
-P 5200 7000
-F 0 "#PWR026" H 5200 6750 50  0001 C CNN
-F 1 "GND" H 5205 6827 50  0000 C CNN
-F 2 "" H 5200 7000 50  0001 C CNN
-F 3 "" H 5200 7000 50  0001 C CNN
-	1    5200 7000
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	4100 6500 4350 6500
 Wire Wire Line
@@ -688,30 +677,8 @@ Wire Wire Line
 	5200 6400 5800 6400
 Wire Wire Line
 	4650 6500 5800 6500
-$Comp
-L Diode:BZX84Cxx D9
-U 1 1 620413B7
-P 5200 6850
-F 0 "D9" V 5150 7050 50  0000 R CNN
-F 1 "BZX84C5V1" V 5250 7350 50  0000 R CNN
-F 2 "Diode_SMD:D_SOT-23_ANK" H 5200 6675 50  0001 C CNN
-F 3 "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" H 5200 6850 50  0001 C CNN
-	1    5200 6850
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	5800 6700 5800 6800
-$Comp
-L Diode:BZX84Cxx D8
-U 1 1 620661CE
-P 5000 6850
-F 0 "D8" V 4950 6650 50  0000 L CNN
-F 1 "BZX84C5V1" V 5050 6350 50  0000 L CNN
-F 2 "Diode_SMD:D_SOT-23_ANK" H 5000 6675 50  0001 C CNN
-F 3 "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" H 5000 6850 50  0001 C CNN
-	1    5000 6850
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	5000 6700 5000 6300
 Wire Wire Line
@@ -719,12 +686,12 @@ Wire Wire Line
 $Comp
 L power:GND #PWR025
 U 1 1 6206C78F
-P 5000 7000
-F 0 "#PWR025" H 5000 6750 50  0001 C CNN
-F 1 "GND" H 5005 6827 50  0000 C CNN
-F 2 "" H 5000 7000 50  0001 C CNN
-F 3 "" H 5000 7000 50  0001 C CNN
-	1    5000 7000
+P 5100 7100
+F 0 "#PWR025" H 5100 6850 50  0001 C CNN
+F 1 "GND" H 5105 6927 50  0000 C CNN
+F 2 "" H 5100 7100 50  0001 C CNN
+F 3 "" H 5100 7100 50  0001 C CNN
+	1    5100 7100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -866,8 +833,6 @@ Text GLabel 9200 3650 0    50   Input ~ 0
 SERVO-PWM
 Wire Wire Line
 	9200 3650 9350 3650
-Wire Wire Line
-	9350 3550 9350 3650
 Connection ~ 9350 3650
 Wire Wire Line
 	9350 3650 9500 3650
@@ -880,68 +845,16 @@ Wire Wire Line
 Connection ~ 9350 3250
 Text GLabel 9200 3250 0    50   Input ~ 0
 SERVO-VCC
-Wire Wire Line
-	8400 5200 8400 5600
-Wire Wire Line
-	8400 4900 8600 4900
-Connection ~ 8400 4900
 $Comp
 L power:GND #PWR019
 U 1 1 61E3C644
-P 8850 6150
-F 0 "#PWR019" H 8850 5900 50  0001 C CNN
-F 1 "GND" H 8855 5977 50  0000 C CNN
-F 2 "" H 8850 6150 50  0001 C CNN
-F 3 "" H 8850 6150 50  0001 C CNN
-	1    8850 6150
+P 8850 6200
+F 0 "#PWR019" H 8850 5950 50  0001 C CNN
+F 1 "GND" H 8855 6027 50  0000 C CNN
+F 2 "" H 8850 6200 50  0001 C CNN
+F 3 "" H 8850 6200 50  0001 C CNN
+	1    8850 6200
 	1    0    0    -1  
-$EndComp
-Connection ~ 8400 5600
-Wire Wire Line
-	8400 5700 8400 5600
-$Comp
-L Diode:BZX84Cxx D7
-U 1 1 61E03A23
-P 9300 5850
-F 0 "D7" V 9150 5750 50  0000 L CNN
-F 1 "BZX84Cxx" H 9400 5900 50  0000 L CNN
-F 2 "Diode_SMD:D_SOT-23_ANK" H 9300 5675 50  0001 C CNN
-F 3 "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" H 9300 5850 50  0001 C CNN
-	1    9300 5850
-	0    1    1    0   
-$EndComp
-$Comp
-L Diode:BZX84Cxx D6
-U 1 1 61E035BE
-P 9000 5850
-F 0 "D6" V 8850 5750 50  0000 L CNN
-F 1 "BZX84Cxx" H 9100 5900 50  0000 L CNN
-F 2 "Diode_SMD:D_SOT-23_ANK" H 9000 5675 50  0001 C CNN
-F 3 "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" H 9000 5850 50  0001 C CNN
-	1    9000 5850
-	0    1    1    0   
-$EndComp
-$Comp
-L Diode:BZX84Cxx D5
-U 1 1 61E02D96
-P 8700 5850
-F 0 "D5" V 8550 5750 50  0000 L CNN
-F 1 "BZX84Cxx" H 8800 5800 50  0000 L CNN
-F 2 "Diode_SMD:D_SOT-23_ANK" H 8700 5675 50  0001 C CNN
-F 3 "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" H 8700 5850 50  0001 C CNN
-	1    8700 5850
-	0    1    1    0   
-$EndComp
-$Comp
-L Diode:BZX84Cxx D4
-U 1 1 61E00B4D
-P 8400 5850
-F 0 "D4" V 8250 5750 50  0000 L CNN
-F 1 "BZX84Cxx" H 8500 5800 50  0000 L CNN
-F 2 "Diode_SMD:D_SOT-23_ANK" H 8400 5675 50  0001 C CNN
-F 3 "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" H 8400 5850 50  0001 C CNN
-	1    8400 5850
-	0    1    1    0   
 $EndComp
 Text GLabel 9500 5600 2    50   Input ~ 0
 RESET
@@ -965,24 +878,9 @@ $EndComp
 Wire Wire Line
 	8600 4900 8600 4800
 Wire Wire Line
-	8200 4900 8400 4900
-Wire Wire Line
 	7800 4900 7900 4900
 Wire Wire Line
 	7800 5000 7800 4900
-Wire Wire Line
-	8300 5600 8400 5600
-$Comp
-L Connector:AVR-ISP-6 J3
-U 1 1 61D93AFA
-P 7900 5500
-F 0 "J3" H 7571 5596 50  0000 R CNN
-F 1 "AVR-ISP-6" H 7571 5505 50  0000 R CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x03_P2.54mm_Vertical" V 7650 5550 50  0001 C CNN
-F 3 " ~" H 6625 4950 50  0001 C CNN
-	1    7900 5500
-	1    0    0    -1  
-$EndComp
 $Comp
 L power:VCC #PWR012
 U 1 1 61EF81EA
@@ -1008,41 +906,23 @@ $EndComp
 $Comp
 L Device:R R7
 U 1 1 61CF35F4
-P 8400 5050
-F 0 "R7" H 8470 5096 50  0000 L CNN
-F 1 "10k" H 8470 5005 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 8330 5050 50  0001 C CNN
-F 3 "~" H 8400 5050 50  0001 C CNN
-	1    8400 5050
+P 8500 5100
+F 0 "R7" H 8570 5146 50  0000 L CNN
+F 1 "10k" H 8570 5055 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 8430 5100 50  0001 C CNN
+F 3 "~" H 8500 5100 50  0001 C CNN
+	1    8500 5100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8400 5600 9500 5600
-Wire Wire Line
-	8400 6000 8700 6000
-Connection ~ 8700 6000
-Wire Wire Line
-	8700 6000 8850 6000
-Connection ~ 9000 6000
-Wire Wire Line
-	9000 6000 9300 6000
-Wire Wire Line
-	8850 6000 8850 6150
-Connection ~ 8850 6000
-Wire Wire Line
-	8850 6000 9000 6000
-Wire Wire Line
-	9300 5700 9300 5300
-Connection ~ 9300 5300
-Wire Wire Line
-	9300 5300 9500 5300
+	9200 5700 9200 5300
 Wire Wire Line
 	9000 5700 9000 5400
 Connection ~ 9000 5400
 Wire Wire Line
 	9000 5400 9500 5400
 Wire Wire Line
-	8300 5300 9300 5300
+	8300 5300 9200 5300
 Wire Wire Line
 	8300 5400 9000 5400
 Wire Wire Line
@@ -1171,4 +1051,84 @@ Connection ~ 4750 1550
 Text GLabel 4850 1550 2    50   Input ~ 0
 SERVO-VCC
 NoConn ~ 8500 1800
+$Comp
+L Power_Protection:SP0502BAHT D4
+U 1 1 61B21F34
+P 8600 5900
+F 0 "D4" H 8350 5700 50  0000 L CNN
+F 1 "SM05" H 8300 5600 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 8825 5850 50  0001 L CNN
+F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 8725 6025 50  0001 C CNN
+F 4 "C521980" H 8600 5900 50  0001 C CNN "LCSC"
+	1    8600 5900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Power_Protection:SP0502BAHT D5
+U 1 1 61B2BEEB
+P 9100 5900
+F 0 "D5" H 9200 5700 50  0000 L CNN
+F 1 "SM05" H 9150 5600 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 9325 5850 50  0001 L CNN
+F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 9225 6025 50  0001 C CNN
+F 4 "C521980" H 9100 5900 50  0001 C CNN "LCSC"
+	1    9100 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8600 6100 8850 6100
+Wire Wire Line
+	8850 6100 8850 6200
+Connection ~ 8850 6100
+Wire Wire Line
+	8850 6100 9100 6100
+Connection ~ 9200 5300
+Wire Wire Line
+	9200 5300 9500 5300
+$Comp
+L Connector:AVR-ISP-6 J3
+U 1 1 61D93AFA
+P 7900 5500
+F 0 "J3" H 7571 5596 50  0000 R CNN
+F 1 "AVR-ISP-6" H 7571 5505 50  0000 R CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x03_P2.54mm_Vertical" V 7650 5550 50  0001 C CNN
+F 3 " ~" H 6625 4950 50  0001 C CNN
+	1    7900 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8300 5600 8500 5600
+Wire Wire Line
+	8500 5700 8500 5600
+Connection ~ 8500 5600
+Wire Wire Line
+	8500 5600 9500 5600
+Connection ~ 8500 4900
+Wire Wire Line
+	8500 4900 8600 4900
+Wire Wire Line
+	8200 4900 8500 4900
+$Comp
+L Power_Protection:SP0502BAHT D6
+U 1 1 61B85A53
+P 5100 6900
+F 0 "D6" H 5305 6946 50  0000 L CNN
+F 1 "SM05" H 5305 6855 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5325 6850 50  0001 L CNN
+F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 5225 7025 50  0001 C CNN
+	1    5100 6900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9350 3600 9350 3650
+Wire Wire Line
+	9350 3300 9350 3250
+Wire Wire Line
+	8500 5250 8500 5600
+Wire Wire Line
+	8500 4950 8500 4900
+Text Notes 9350 5950 0    50   ~ 0
+TVS
+Text Notes 4750 6950 0    50   ~ 0
+TVS
 $EndSCHEMATC
