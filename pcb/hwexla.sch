@@ -233,18 +233,13 @@ Connection ~ 1800 4000
 Wire Wire Line
 	1800 4000 1800 3950
 Connection ~ 1800 4350
-Wire Wire Line
-	2500 3850 2500 4350
 Connection ~ 1700 3850
 Wire Wire Line
-	2400 4250 2400 4500
+	2200 4250 2200 4500
 Connection ~ 1700 4250
-Wire Wire Line
-	1700 4650 2900 4650
-Connection ~ 1700 4650
 Text Label 1900 3750 0    50   ~ 0
 RELA+
-Text Label 1900 3850 0    50   ~ 0
+Text Label 1900 4650 0    50   ~ 0
 RELB+
 Text Label 1900 4000 0    50   ~ 0
 RELA0
@@ -253,13 +248,9 @@ RELA-
 Wire Wire Line
 	1800 3750 2600 3750
 Wire Wire Line
-	2500 4350 2900 4350
-Wire Wire Line
 	1700 3850 2500 3850
 Wire Wire Line
-	2400 4500 2900 4500
-Wire Wire Line
-	1700 4250 2400 4250
+	1700 4250 2200 4250
 Wire Wire Line
 	2300 4350 2300 4150
 Wire Wire Line
@@ -268,7 +259,7 @@ Wire Wire Line
 	2300 4150 2900 4150
 Text Label 1900 4250 0    50   ~ 0
 RELB0
-Text Label 1900 4650 0    50   ~ 0
+Text Label 1900 3850 0    50   ~ 0
 RELB-
 $Comp
 L power:+12V #PWR02
@@ -1131,4 +1122,17 @@ Wire Wire Line
 	2900 2250 1600 2250
 Wire Wire Line
 	2900 2450 1600 2450
+Wire Wire Line
+	2500 4650 2900 4650
+Wire Wire Line
+	2500 3850 2500 4650
+Wire Wire Line
+	2200 4500 2900 4500
+Wire Wire Line
+	1700 4650 2400 4650
+Wire Wire Line
+	2400 4650 2400 4350
+Wire Wire Line
+	2400 4350 2900 4350
+Connection ~ 1700 4650
 $EndSCHEMATC
