@@ -81,9 +81,9 @@ F 3 "~" H 8750 1200 50  0001 C CNN
 	1    8750 1200
 	-1   0    0    1   
 $EndComp
-Text Label 2150 2250 0    50   ~ 0
-IN+
 Text Label 2150 2450 0    50   ~ 0
+IN+
+Text Label 2150 2250 0    50   ~ 0
 IN-
 Text Label 2150 2650 0    50   ~ 0
 SLAVE
@@ -102,12 +102,12 @@ F0 "io" 50
 F1 "io.sch" 50
 F2 "BTN+" B L 2900 3250 50 
 F3 "BTN-" B L 2900 3450 50 
-F4 "IN+" I L 2900 2250 50 
-F5 "IN-" I L 2900 2450 50 
+F4 "IN+" I L 2900 2450 50 
+F5 "IN-" I L 2900 2250 50 
 F6 "OUT+" O L 2900 2850 50 
 F7 "OUT-" O L 2900 3050 50 
-F8 "L-IN+" O R 4400 2250 50 
-F9 "L-IN-" O R 4400 2450 50 
+F8 "L-IN+" O R 4400 2450 50 
+F9 "L-IN-" O R 4400 2250 50 
 F10 "L-BTN+OUT" I R 4400 3250 50 
 F11 "L-BTN+IN" O R 4400 3150 50 
 F12 "L-BTN-OUT" I R 4400 3450 50 
@@ -117,10 +117,6 @@ F15 "L-OUT-" I R 4400 3050 50
 F16 "SLAVE" I L 2900 2650 50 
 F17 "L-SLAVE" O R 4400 2650 50 
 $EndSheet
-Wire Wire Line
-	1600 2250 2900 2250
-Wire Wire Line
-	1600 2450 2900 2450
 Wire Wire Line
 	2900 2650 1600 2650
 Wire Wire Line
@@ -999,7 +995,7 @@ Wire Wire Line
 	5750 1600 5750 1400
 Wire Wire Line
 	5750 1400 4400 1400
-Text Label 7200 2200 2    50   ~ 0
+Text Label 7200 1800 2    50   ~ 0
 L-IN-
 Text Label 7200 2300 2    50   ~ 0
 L-SLAVE
@@ -1029,7 +1025,7 @@ Text Label 7200 4000 2    50   ~ 0
 LED-RED
 Text Label 7200 1600 2    50   ~ 0
 SERVO-POWER-EN
-Text Label 7200 1800 2    50   ~ 0
+Text Label 7200 2200 2    50   ~ 0
 L-IN+
 Wire Wire Line
 	6850 1700 7300 1700
@@ -1131,4 +1127,8 @@ Text Notes 9350 5950 0    50   ~ 0
 TVS
 Text Notes 4750 6950 0    50   ~ 0
 TVS
+Wire Wire Line
+	2900 2250 1600 2250
+Wire Wire Line
+	2900 2450 1600 2450
 $EndSCHEMATC
