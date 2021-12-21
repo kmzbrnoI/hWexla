@@ -1135,4 +1135,48 @@ Wire Wire Line
 Wire Wire Line
 	2400 4350 2900 4350
 Connection ~ 1700 4650
+$Comp
+L Mechanical:MountingHole_Pad H?
+U 1 1 61C39558
+P 10000 4200
+F 0 "H?" H 10100 4249 50  0000 L CNN
+F 1 "MountingHole_Pad" H 10100 4158 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_Pad_Via" H 10000 4200 50  0001 C CNN
+F 3 "~" H 10000 4200 50  0001 C CNN
+	1    10000 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole_Pad H?
+U 1 1 61C397FD
+P 9050 4200
+F 0 "H?" H 9150 4249 50  0000 L CNN
+F 1 "MountingHole_Pad" H 9150 4158 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_Pad_Via" H 9050 4200 50  0001 C CNN
+F 3 "~" H 9050 4200 50  0001 C CNN
+	1    9050 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 61C3AB52
+P 9050 4300
+F 0 "#PWR?" H 9050 4050 50  0001 C CNN
+F 1 "GND" H 9055 4127 50  0000 C CNN
+F 2 "" H 9050 4300 50  0001 C CNN
+F 3 "" H 9050 4300 50  0001 C CNN
+	1    9050 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 61C3AE25
+P 10000 4300
+F 0 "#PWR?" H 10000 4050 50  0001 C CNN
+F 1 "GND" H 10005 4127 50  0000 C CNN
+F 2 "" H 10000 4300 50  0001 C CNN
+F 3 "" H 10000 4300 50  0001 C CNN
+	1    10000 4300
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
