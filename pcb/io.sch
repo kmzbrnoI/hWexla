@@ -217,72 +217,6 @@ F 3 "http://www.diodes.com/_files/datasheets/ds11005.pdf" H 3520 5600 50  0001 C
 	1    3600 5600
 	0    -1   -1   0   
 $EndComp
-$Comp
-L Device:R_Pack04_SIP_Split RN1
-U 1 1 61B2FD42
-P 4600 1950
-F 0 "RN1" H 4900 2000 50  0000 R CNN
-F 1 "10k" H 4850 1900 50  0000 R CNN
-F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 4520 1950 50  0001 C CNN
-F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 4600 1950 50  0001 C CNN
-	1    4600 1950
-	-1   0    0    -1  
-$EndComp
-$Comp
-L Device:R_Pack04_SIP_Split RN1
-U 2 1 61B2FD48
-P 5100 1950
-F 0 "RN1" H 5188 1996 50  0000 L CNN
-F 1 "10k" H 5188 1905 50  0000 L CNN
-F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 5020 1950 50  0001 C CNN
-F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 5100 1950 50  0001 C CNN
-	2    5100 1950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R_Pack04_SIP_Split RN1
-U 3 1 61B2FD4E
-P 4600 3450
-F 0 "RN1" H 4300 3500 50  0000 L CNN
-F 1 "10k" H 4350 3400 50  0000 L CNN
-F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 4520 3450 50  0001 C CNN
-F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 4600 3450 50  0001 C CNN
-	3    4600 3450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R_Pack04_SIP_Split RN1
-U 4 1 61B2FD54
-P 5100 3450
-F 0 "RN1" H 5188 3496 50  0000 L CNN
-F 1 "10k" H 5188 3405 50  0000 L CNN
-F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 5020 3450 50  0001 C CNN
-F 3 "http://www.vishay.com/docs/31509/csc.pdf" H 5100 3450 50  0001 C CNN
-	4    5100 3450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R14
-U 1 1 61B428D5
-P 8100 2300
-F 0 "R14" V 7893 2300 50  0000 C CNN
-F 1 "2k2" V 7984 2300 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 8030 2300 50  0001 C CNN
-F 3 "~" H 8100 2300 50  0001 C CNN
-	1    8100 2300
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R15
-U 1 1 61B43498
-P 8100 2900
-F 0 "R15" V 7893 2900 50  0000 C CNN
-F 1 "2k2" V 7984 2900 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 8030 2900 50  0001 C CNN
-F 3 "~" H 8100 2900 50  0001 C CNN
-	1    8100 2900
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	2600 2300 2350 2300
 Wire Wire Line
@@ -585,56 +519,6 @@ Wire Wire Line
 	7500 4400 7650 4400
 Wire Wire Line
 	5100 4400 6950 4400
-$Comp
-L Device:R R17
-U 1 1 61C044E0
-P 7650 4250
-F 0 "R17" H 7720 4296 50  0000 L CNN
-F 1 "10k" H 7720 4205 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 7580 4250 50  0001 C CNN
-F 3 "~" H 7650 4250 50  0001 C CNN
-	1    7650 4250
-	1    0    0    -1  
-$EndComp
-Connection ~ 7650 4400
-$Comp
-L Device:R R19
-U 1 1 61C07737
-P 7650 5750
-F 0 "R19" H 7720 5796 50  0000 L CNN
-F 1 "10k" H 7720 5705 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 7580 5750 50  0001 C CNN
-F 3 "~" H 7650 5750 50  0001 C CNN
-	1    7650 5750
-	1    0    0    -1  
-$EndComp
-Connection ~ 7650 5900
-$Comp
-L Device:R R18
-U 1 1 61C096D3
-P 6650 5150
-F 0 "R18" H 6720 5196 50  0000 L CNN
-F 1 "10k" H 6720 5105 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 6580 5150 50  0001 C CNN
-F 3 "~" H 6650 5150 50  0001 C CNN
-	1    6650 5150
-	1    0    0    -1  
-$EndComp
-Connection ~ 6650 5300
-$Comp
-L Device:R R16
-U 1 1 61C0AA94
-P 6650 3650
-F 0 "R16" H 6720 3696 50  0000 L CNN
-F 1 "10k" H 6720 3605 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 6580 3650 50  0001 C CNN
-F 3 "~" H 6650 3650 50  0001 C CNN
-	1    6650 3650
-	1    0    0    -1  
-$EndComp
-Connection ~ 6650 3800
-Wire Wire Line
-	6300 3500 6650 3500
 Text HLabel 9050 3500 2    50   Input ~ 0
 L-BTN+OUT
 Wire Wire Line
@@ -644,8 +528,6 @@ Wire Wire Line
 	6000 3800 6100 3800
 Text HLabel 9050 3400 2    50   Output ~ 0
 L-BTN+IN
-Wire Wire Line
-	7300 4100 7650 4100
 Text HLabel 9050 4100 2    50   Input ~ 0
 L-BTN-OUT
 Wire Wire Line
@@ -655,24 +537,12 @@ Wire Wire Line
 	6950 4400 7100 4400
 Text HLabel 9050 4000 2    50   Output ~ 0
 L-BTN-IN
-Wire Wire Line
-	6300 5000 6650 5000
 Text HLabel 9050 5000 2    50   Input ~ 0
 L-OUT+
-Wire Wire Line
-	7300 5600 7650 5600
 Text HLabel 9050 5600 2    50   Input ~ 0
 L-OUT-
 Wire Wire Line
-	7650 5600 9050 5600
-Connection ~ 7650 5600
-Connection ~ 6650 5000
-Wire Wire Line
-	7650 4100 9050 4100
-Connection ~ 7650 4100
-Wire Wire Line
 	6950 4000 7950 4000
-Connection ~ 6650 3500
 Wire Wire Line
 	2350 1450 2600 1450
 $Comp
@@ -726,17 +596,6 @@ Wire Wire Line
 Wire Wire Line
 	4550 1450 4550 1300
 Connection ~ 3550 1450
-$Comp
-L Device:R R13
-U 1 1 61D3122D
-P 8100 1450
-F 0 "R13" V 7893 1450 50  0000 C CNN
-F 1 "2k2" V 7984 1450 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 8030 1450 50  0001 C CNN
-F 3 "~" H 8100 1450 50  0001 C CNN
-	1    8100 1450
-	0    1    1    0   
-$EndComp
 Connection ~ 4550 1450
 Text HLabel 9050 1450 2    50   Output ~ 0
 L-SLAVE
@@ -790,30 +649,8 @@ Wire Wire Line
 	5600 6300 5250 6300
 Wire Wire Line
 	5250 6300 5250 6750
-$Comp
-L Device:R R22
-U 1 1 61D17311
-P 8100 3400
-F 0 "R22" V 7893 3400 50  0000 C CNN
-F 1 "2k2" V 7984 3400 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 8030 3400 50  0001 C CNN
-F 3 "~" H 8100 3400 50  0001 C CNN
-	1    8100 3400
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	8250 3400 9050 3400
-$Comp
-L Device:R R23
-U 1 1 61D17FA7
-P 8100 4000
-F 0 "R23" V 7893 4000 50  0000 C CNN
-F 1 "2k2" V 7984 4000 50  0000 C CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 8030 4000 50  0001 C CNN
-F 3 "~" H 8100 4000 50  0001 C CNN
-	1    8100 4000
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	8250 4000 9050 4000
 Wire Wire Line
@@ -837,9 +674,172 @@ Wire Wire Line
 Wire Wire Line
 	2900 5300 3600 5300
 Wire Wire Line
-	6650 5000 9050 5000
-Wire Wire Line
 	6000 3400 7950 3400
+$Comp
+L Device:R_Pack04_Split RN1
+U 1 1 61D96A6C
+P 4600 1950
+F 0 "RN1" H 4688 1996 50  0000 L CNN
+F 1 "10k" H 4688 1905 50  0000 L CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 4520 1950 50  0001 C CNN
+F 3 "~" H 4600 1950 50  0001 C CNN
+	1    4600 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN1
+U 3 1 61D9AFCF
+P 4600 3450
+F 0 "RN1" H 4688 3496 50  0000 L CNN
+F 1 "10k" H 4688 3405 50  0000 L CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 4520 3450 50  0001 C CNN
+F 3 "~" H 4600 3450 50  0001 C CNN
+	3    4600 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN1
+U 4 1 61D9BF43
+P 5100 3450
+F 0 "RN1" H 5188 3496 50  0000 L CNN
+F 1 "10k" H 5188 3405 50  0000 L CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 5020 3450 50  0001 C CNN
+F 3 "~" H 5100 3450 50  0001 C CNN
+	4    5100 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN1
+U 2 1 61D9CA0D
+P 5100 1950
+F 0 "RN1" H 5188 1996 50  0000 L CNN
+F 1 "10k" H 5188 1905 50  0000 L CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 5020 1950 50  0001 C CNN
+F 3 "~" H 5100 1950 50  0001 C CNN
+	2    5100 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN2
+U 1 1 61E4CA97
+P 8100 2900
+F 0 "RN2" V 7893 2900 50  0000 C CNN
+F 1 "2k2" V 7984 2900 50  0000 C CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 8020 2900 50  0001 C CNN
+F 3 "~" H 8100 2900 50  0001 C CNN
+	1    8100 2900
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN2
+U 2 1 61E4D1BE
+P 8100 2300
+F 0 "RN2" V 7893 2300 50  0000 C CNN
+F 1 "2k2" V 7984 2300 50  0000 C CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 8020 2300 50  0001 C CNN
+F 3 "~" H 8100 2300 50  0001 C CNN
+	2    8100 2300
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN2
+U 3 1 61E4D92B
+P 8100 4000
+F 0 "RN2" V 7893 4000 50  0000 C CNN
+F 1 "2k2" V 7984 4000 50  0000 C CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 8020 4000 50  0001 C CNN
+F 3 "~" H 8100 4000 50  0001 C CNN
+	3    8100 4000
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN2
+U 4 1 61E4E152
+P 8100 3400
+F 0 "RN2" V 7893 3400 50  0000 C CNN
+F 1 "2k2" V 7984 3400 50  0000 C CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 8020 3400 50  0001 C CNN
+F 3 "~" H 8100 3400 50  0001 C CNN
+	4    8100 3400
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R13
+U 1 1 61D3122D
+P 8100 1450
+F 0 "R13" V 7893 1450 50  0000 C CNN
+F 1 "2k2" V 7984 1450 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" V 8030 1450 50  0001 C CNN
+F 3 "~" H 8100 1450 50  0001 C CNN
+	1    8100 1450
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN3
+U 1 1 61E6A767
+P 6650 3650
+F 0 "RN3" H 6738 3696 50  0000 L CNN
+F 1 "10k" H 6738 3605 50  0000 L CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 6570 3650 50  0001 C CNN
+F 3 "~" H 6650 3650 50  0001 C CNN
+	1    6650 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN3
+U 3 1 61E6C884
+P 7650 5750
+F 0 "RN3" H 7738 5796 50  0000 L CNN
+F 1 "10k" H 7738 5705 50  0000 L CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 7570 5750 50  0001 C CNN
+F 3 "~" H 7650 5750 50  0001 C CNN
+	3    7650 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN3
+U 4 1 61E6DD2A
+P 6650 5150
+F 0 "RN3" H 6738 5196 50  0000 L CNN
+F 1 "10k" H 6738 5105 50  0000 L CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 6570 5150 50  0001 C CNN
+F 3 "~" H 6650 5150 50  0001 C CNN
+	4    6650 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6300 3500 6650 3500
+Wire Wire Line
+	7300 4100 7650 4100
+Wire Wire Line
+	7300 5600 7650 5600
+Connection ~ 6650 3800
+Connection ~ 6650 3500
 Wire Wire Line
 	6650 3500 9050 3500
+Wire Wire Line
+	6300 5000 6650 5000
+$Comp
+L Device:R_Pack04_Split RN3
+U 2 1 61E6BA91
+P 7650 4250
+F 0 "RN3" H 7738 4296 50  0000 L CNN
+F 1 "10k" H 7738 4205 50  0000 L CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 7570 4250 50  0001 C CNN
+F 3 "~" H 7650 4250 50  0001 C CNN
+	2    7650 4250
+	1    0    0    -1  
+$EndComp
+Connection ~ 7650 4400
+Connection ~ 7650 4100
+Wire Wire Line
+	7650 4100 9050 4100
+Connection ~ 6650 5300
+Connection ~ 6650 5000
+Wire Wire Line
+	6650 5000 9050 5000
+Connection ~ 7650 5900
+Connection ~ 7650 5600
+Wire Wire Line
+	7650 5600 9050 5600
 $EndSCHEMATC

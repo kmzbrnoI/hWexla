@@ -265,18 +265,6 @@ Wire Wire Line
 Connection ~ 5700 4650
 Wire Wire Line
 	7300 4650 9750 4650
-$Comp
-L Diode:1N4148 D12
-U 1 1 623292D9
-P 4850 4650
-F 0 "D12" H 4850 4433 50  0000 C CNN
-F 1 "1N4148" H 4850 4524 50  0000 C CNN
-F 2 "Diode_SMD:D_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4850 4475 50  0001 C CNN
-F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 4850 4650 50  0001 C CNN
-F 4 "C64898" H 4850 4650 50  0001 C CNN "LCSC"
-	1    4850 4650
-	-1   0    0    1   
-$EndComp
 Wire Wire Line
 	5000 4650 5700 4650
 $Comp
@@ -392,4 +380,15 @@ Wire Wire Line
 	2000 3250 2350 3250
 Wire Wire Line
 	2000 2350 2350 2350
+$Comp
+L Diode:1N4007 D7
+U 1 1 61D76032
+P 4850 4650
+F 0 "D7" H 4850 4433 50  0000 C CNN
+F 1 "1N4007" H 4850 4524 50  0000 C CNN
+F 2 "Diode_SMD:D_SOD-123" H 4850 4475 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 4850 4650 50  0001 C CNN
+	1    4850 4650
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC
