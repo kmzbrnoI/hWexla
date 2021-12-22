@@ -204,7 +204,7 @@ F 1 "BAT54C" V 3555 2688 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 3675 2725 50  0001 L CNN
 F 3 "http://www.diodes.com/_files/datasheets/ds11005.pdf" H 3520 2600 50  0001 C CNN
 	1    3600 2600
-	0    -1   -1   0   
+	0    -1   1    0   
 $EndComp
 $Comp
 L Diode:BAT54C D17
@@ -235,14 +235,6 @@ Wire Wire Line
 	2900 4400 3600 4400
 Wire Wire Line
 	3600 3800 2900 3800
-Wire Wire Line
-	2900 2900 3600 2900
-Wire Wire Line
-	3600 2300 2900 2300
-Wire Wire Line
-	3600 2300 4600 2300
-Connection ~ 3600 2300
-Connection ~ 3600 2900
 Wire Wire Line
 	5100 2100 5100 2900
 Connection ~ 5100 2900
@@ -298,8 +290,6 @@ $EndComp
 Wire Wire Line
 	3600 4400 5100 4400
 Wire Wire Line
-	3600 2900 5100 2900
-Wire Wire Line
 	4600 2100 4600 2300
 Connection ~ 4600 2300
 Wire Wire Line
@@ -314,8 +304,6 @@ Wire Wire Line
 Wire Wire Line
 	4100 4100 4100 6300
 Connection ~ 4100 6300
-Wire Wire Line
-	3800 2600 4100 2600
 Wire Wire Line
 	4100 2600 4100 4100
 Connection ~ 4100 4100
@@ -842,4 +830,16 @@ Connection ~ 7650 5900
 Connection ~ 7650 5600
 Wire Wire Line
 	7650 5600 9050 5600
+Wire Wire Line
+	2900 2900 3600 2900
+Wire Wire Line
+	2900 2300 3600 2300
+Connection ~ 3600 2300
+Wire Wire Line
+	3600 2300 4600 2300
+Connection ~ 3600 2900
+Wire Wire Line
+	3600 2900 5100 2900
+Wire Wire Line
+	3800 2600 4100 2600
 $EndSCHEMATC
