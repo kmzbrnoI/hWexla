@@ -659,17 +659,9 @@ $EndComp
 Wire Wire Line
 	4100 6500 4350 6500
 Wire Wire Line
-	5200 6700 5200 6400
-Wire Wire Line
-	5200 6400 5800 6400
-Wire Wire Line
 	4650 6500 5800 6500
 Wire Wire Line
 	5800 6700 5800 6800
-Wire Wire Line
-	5000 6700 5000 6300
-Wire Wire Line
-	5000 6300 5800 6300
 $Comp
 L power:GND #PWR025
 U 1 1 6206C78F
@@ -681,12 +673,6 @@ F 3 "" H 5100 7100 50  0001 C CNN
 	1    5100 7100
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4900 6400 5200 6400
-Connection ~ 5200 6400
-Wire Wire Line
-	5000 6300 4900 6300
-Connection ~ 5000 6300
 $Comp
 L power:PWR_FLAG #FLG02
 U 1 1 62334011
@@ -902,17 +888,6 @@ F 3 "~" H 8500 5100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9200 5700 9200 5300
-Wire Wire Line
-	9000 5700 9000 5400
-Connection ~ 9000 5400
-Wire Wire Line
-	9000 5400 9500 5400
-Wire Wire Line
-	8300 5300 9200 5300
-Wire Wire Line
-	8300 5400 9000 5400
-Wire Wire Line
 	8300 5500 8700 5500
 Wire Wire Line
 	8700 5700 8700 5500
@@ -1042,36 +1017,17 @@ $Comp
 L Power_Protection:SP0502BAHT D4
 U 1 1 61B21F34
 P 8600 5900
-F 0 "D4" H 8350 5700 50  0000 L CNN
-F 1 "SM05" H 8300 5600 50  0000 L CNN
+F 0 "D4" H 8650 5700 50  0000 L CNN
+F 1 "SM05" H 8600 5600 50  0000 L CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 8825 5850 50  0001 L CNN
 F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 8725 6025 50  0001 C CNN
 F 4 "C521980" H 8600 5900 50  0001 C CNN "LCSC"
 	1    8600 5900
-	1    0    0    -1  
+	-1   0    0    -1  
 $EndComp
-$Comp
-L Power_Protection:SP0502BAHT D5
-U 1 1 61B2BEEB
-P 9100 5900
-F 0 "D5" H 9200 5700 50  0000 L CNN
-F 1 "SM05" H 9150 5600 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 9325 5850 50  0001 L CNN
-F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 9225 6025 50  0001 C CNN
-F 4 "C521980" H 9100 5900 50  0001 C CNN "LCSC"
-	1    9100 5900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8600 6100 8850 6100
 Wire Wire Line
 	8850 6100 8850 6200
 Connection ~ 8850 6100
-Wire Wire Line
-	8850 6100 9100 6100
-Connection ~ 9200 5300
-Wire Wire Line
-	9200 5300 9500 5300
 $Comp
 L Connector:AVR-ISP-6 J3
 U 1 1 61D93AFA
@@ -1095,17 +1051,6 @@ Wire Wire Line
 	8500 4900 8600 4900
 Wire Wire Line
 	8200 4900 8500 4900
-$Comp
-L Power_Protection:SP0502BAHT D6
-U 1 1 61B85A53
-P 5100 6900
-F 0 "D6" H 5305 6946 50  0000 L CNN
-F 1 "SM05" H 5305 6855 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 5325 6850 50  0001 L CNN
-F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 5225 7025 50  0001 C CNN
-	1    5100 6900
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	9350 3600 9350 3650
 Wire Wire Line
@@ -1179,4 +1124,84 @@ F 3 "" H 10000 4300 50  0001 C CNN
 	1    10000 4300
 	1    0    0    -1  
 $EndComp
+$Comp
+L Device:C C13
+U 1 1 62057D9B
+P 9200 1200
+F 0 "C13" H 9085 1154 50  0000 R CNN
+F 1 "100n" H 9085 1245 50  0000 R CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 9238 1050 50  0001 C CNN
+F 3 "~" H 9200 1200 50  0001 C CNN
+	1    9200 1200
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8750 1050 9200 1050
+Connection ~ 8750 1050
+$Comp
+L power:GND #PWR047
+U 1 1 6205FAC8
+P 9200 1350
+F 0 "#PWR047" H 9200 1100 50  0001 C CNN
+F 1 "GND" H 9205 1177 50  0000 C CNN
+F 2 "" H 9200 1350 50  0001 C CNN
+F 3 "" H 9200 1350 50  0001 C CNN
+	1    9200 1350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9200 5300 9500 5300
+Wire Wire Line
+	8300 5300 9200 5300
+Connection ~ 9200 5300
+Wire Wire Line
+	9200 5700 9200 5300
+$Comp
+L Power_Protection:SP0502BAHT D5
+U 1 1 61B2BEEB
+P 9100 5900
+F 0 "D5" H 8900 5700 50  0000 L CNN
+F 1 "SM05" H 8850 5600 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 9325 5850 50  0001 L CNN
+F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 9225 6025 50  0001 C CNN
+F 4 "C521980" H 9100 5900 50  0001 C CNN "LCSC"
+	1    9100 5900
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	8300 5400 9000 5400
+Wire Wire Line
+	9000 5400 9500 5400
+Connection ~ 9000 5400
+Wire Wire Line
+	9000 5700 9000 5400
+Wire Wire Line
+	8850 6100 9100 6100
+Wire Wire Line
+	4900 6300 5000 6300
+Wire Wire Line
+	4900 6400 5200 6400
+$Comp
+L Power_Protection:SP0502BAHT D6
+U 1 1 61B85A53
+P 5100 6900
+F 0 "D6" H 5305 6946 50  0000 L CNN
+F 1 "SM05" H 5305 6855 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5325 6850 50  0001 L CNN
+F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 5225 7025 50  0001 C CNN
+	1    5100 6900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5000 6700 5000 6300
+Connection ~ 5000 6300
+Wire Wire Line
+	5000 6300 5800 6300
+Wire Wire Line
+	5200 6400 5200 6700
+Connection ~ 5200 6400
+Wire Wire Line
+	5200 6400 5800 6400
+Wire Wire Line
+	8600 6100 8850 6100
 $EndSCHEMATC

@@ -666,45 +666,45 @@ Wire Wire Line
 $Comp
 L Device:R_Pack04_Split RN1
 U 1 1 61D96A6C
-P 4600 1950
-F 0 "RN1" H 4688 1996 50  0000 L CNN
-F 1 "10k" H 4688 1905 50  0000 L CNN
-F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 4520 1950 50  0001 C CNN
-F 3 "~" H 4600 1950 50  0001 C CNN
-	1    4600 1950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R_Pack04_Split RN1
-U 3 1 61D9AFCF
 P 4600 3450
 F 0 "RN1" H 4688 3496 50  0000 L CNN
 F 1 "10k" H 4688 3405 50  0000 L CNN
 F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 4520 3450 50  0001 C CNN
 F 3 "~" H 4600 3450 50  0001 C CNN
-	3    4600 3450
+	1    4600 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN1
+U 3 1 61D9AFCF
+P 4600 1950
+F 0 "RN1" H 4688 1996 50  0000 L CNN
+F 1 "10k" H 4688 1905 50  0000 L CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 4520 1950 50  0001 C CNN
+F 3 "~" H 4600 1950 50  0001 C CNN
+	3    4600 1950
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R_Pack04_Split RN1
 U 4 1 61D9BF43
-P 5100 3450
-F 0 "RN1" H 5188 3496 50  0000 L CNN
-F 1 "10k" H 5188 3405 50  0000 L CNN
-F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 5020 3450 50  0001 C CNN
-F 3 "~" H 5100 3450 50  0001 C CNN
-	4    5100 3450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R_Pack04_Split RN1
-U 2 1 61D9CA0D
 P 5100 1950
 F 0 "RN1" H 5188 1996 50  0000 L CNN
 F 1 "10k" H 5188 1905 50  0000 L CNN
 F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 5020 1950 50  0001 C CNN
 F 3 "~" H 5100 1950 50  0001 C CNN
-	2    5100 1950
+	4    5100 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN1
+U 2 1 61D9CA0D
+P 5100 3450
+F 0 "RN1" H 5188 3496 50  0000 L CNN
+F 1 "10k" H 5188 3405 50  0000 L CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 5020 3450 50  0001 C CNN
+F 3 "~" H 5100 3450 50  0001 C CNN
+	2    5100 3450
 	1    0    0    -1  
 $EndComp
 $Comp
