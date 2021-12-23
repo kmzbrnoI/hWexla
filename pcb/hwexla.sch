@@ -740,17 +740,6 @@ Wire Wire Line
 	7900 1050 7900 1300
 Connection ~ 7900 1050
 Connection ~ 7900 1300
-$Comp
-L MCU_Microchip_ATmega:ATmega328P-AU U1
-U 1 1 61AED7D8
-P 7900 2800
-F 0 "U1" H 8050 1300 50  0000 C CNN
-F 1 "ATmega328P-AU" H 8300 1200 50  0000 C CNN
-F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 7900 2800 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 7900 2800 50  0001 C CNN
-	1    7900 2800
-	-1   0    0    -1  
-$EndComp
 Text GLabel 6850 1900 0    50   Input ~ 0
 MOSI
 Text GLabel 6850 2000 0    50   Input ~ 0
@@ -899,45 +888,15 @@ Wire Wire Line
 Wire Wire Line
 	4400 3450 4950 3450
 Wire Wire Line
-	4950 3450 4950 3600
-Wire Wire Line
-	4950 3600 7300 3600
-Wire Wire Line
-	4400 3350 5050 3350
-Wire Wire Line
-	5050 3350 5050 3500
-Wire Wire Line
-	5050 3500 7300 3500
-Wire Wire Line
 	4400 3250 5800 3250
-Wire Wire Line
-	5800 3250 5800 3000
-Wire Wire Line
-	5800 3000 7300 3000
-Wire Wire Line
-	7300 2900 5700 2900
-Wire Wire Line
-	5700 2900 5700 3150
 Wire Wire Line
 	5700 3150 4400 3150
 Wire Wire Line
 	4400 3050 5600 3050
 Wire Wire Line
-	5600 3050 5600 2800
-Wire Wire Line
-	5600 2800 7300 2800
-Wire Wire Line
-	7300 2700 5500 2700
-Wire Wire Line
-	5500 2700 5500 2850
-Wire Wire Line
 	5500 2850 4400 2850
 Wire Wire Line
 	4400 2650 5400 2650
-Wire Wire Line
-	4400 2450 5300 2450
-Wire Wire Line
-	4400 2250 5200 2250
 Wire Wire Line
 	7300 2500 4750 2500
 Connection ~ 4750 2500
@@ -948,39 +907,21 @@ Wire Wire Line
 Wire Wire Line
 	5400 2300 5400 2650
 Wire Wire Line
-	5300 2200 7300 2200
-Wire Wire Line
-	5300 2200 5300 2450
-Wire Wire Line
-	5200 1800 7300 1800
-Wire Wire Line
-	5200 1800 5200 2250
-Wire Wire Line
 	7300 1600 5750 1600
 Wire Wire Line
 	5750 1600 5750 1400
 Wire Wire Line
 	5750 1400 4400 1400
-Text Label 7200 1800 2    50   ~ 0
-L-IN-
 Text Label 7200 2300 2    50   ~ 0
 L-SLAVE
 Text Label 7200 2500 2    50   ~ 0
 SERVO-VCC
 Text Label 7200 2600 2    50   ~ 0
 BTN
-Text Label 7200 2700 2    50   ~ 0
-L-OUT+
-Text Label 7200 2800 2    50   ~ 0
-L-OUT-
-Text Label 7200 2900 2    50   ~ 0
-L-BTN+IN
 Text Label 7200 3000 2    50   ~ 0
-L-BTN+OUT
-Text Label 7200 3500 2    50   ~ 0
+L-BTN+IN
+Text Label 7200 2900 2    50   ~ 0
 L-BTN-IN
-Text Label 7200 3600 2    50   ~ 0
-L-BTN-OUT
 Text Label 7200 3700 2    50   ~ 0
 REL-CONTROL
 Text Label 7200 3800 2    50   ~ 0
@@ -991,8 +932,6 @@ Text Label 7200 4000 2    50   ~ 0
 LED-RED
 Text Label 7200 1600 2    50   ~ 0
 SERVO-POWER-EN
-Text Label 7200 2200 2    50   ~ 0
-L-IN+
 Wire Wire Line
 	6850 1700 7300 1700
 Wire Wire Line
@@ -1204,4 +1143,57 @@ Wire Wire Line
 	5200 6400 5800 6400
 Wire Wire Line
 	8600 6100 8850 6100
+Wire Wire Line
+	6150 2250 6150 2700
+Wire Wire Line
+	6150 2700 7300 2700
+Wire Wire Line
+	4400 2250 6150 2250
+Wire Wire Line
+	6050 2450 6050 2800
+Wire Wire Line
+	6050 2800 7300 2800
+Wire Wire Line
+	4400 2450 6050 2450
+Text Label 7200 2700 2    50   ~ 0
+L-IN-
+Text Label 7200 2800 2    50   ~ 0
+L-IN+
+Wire Wire Line
+	6050 3350 6050 2900
+Wire Wire Line
+	6050 2900 7300 2900
+Wire Wire Line
+	4400 3350 6050 3350
+$Comp
+L MCU_Microchip_ATmega:ATmega328P-AU U1
+U 1 1 61AED7D8
+P 7900 2800
+F 0 "U1" H 8050 1300 50  0000 C CNN
+F 1 "ATmega328P-AU" H 8300 1200 50  0000 C CNN
+F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 7900 2800 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 7900 2800 50  0001 C CNN
+	1    7900 2800
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	7300 3000 5700 3000
+Wire Wire Line
+	5700 3000 5700 3150
+Wire Wire Line
+	5500 1800 5500 2850
+Wire Wire Line
+	5600 2200 5600 3050
+Wire Wire Line
+	5500 1800 7300 1800
+Wire Wire Line
+	5600 2200 7300 2200
+Wire Wire Line
+	7300 3600 5800 3600
+Wire Wire Line
+	5800 3250 5800 3600
+Wire Wire Line
+	4950 3450 4950 3500
+Wire Wire Line
+	4950 3500 7300 3500
 $EndSCHEMATC
