@@ -1196,4 +1196,12 @@ Wire Wire Line
 	4950 3450 4950 3500
 Wire Wire Line
 	4950 3500 7300 3500
+Text Label 7200 2200 2    50   ~ 0
+L-OUT-
+Text Label 7200 1800 2    50   ~ 0
+L-OUT+
+Text Label 7200 3600 2    50   ~ 0
+L-BTN+OUT
+Text Label 7200 3500 2    50   ~ 0
+L-BTN-OUT
 $EndSCHEMATC
