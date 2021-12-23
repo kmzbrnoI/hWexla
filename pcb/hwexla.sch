@@ -679,12 +679,12 @@ Wire Wire Line
 $Comp
 L power:GND #PWR025
 U 1 1 6206C78F
-P 5100 7100
-F 0 "#PWR025" H 5100 6850 50  0001 C CNN
-F 1 "GND" H 5105 6927 50  0000 C CNN
-F 2 "" H 5100 7100 50  0001 C CNN
-F 3 "" H 5100 7100 50  0001 C CNN
-	1    5100 7100
+P 5250 7000
+F 0 "#PWR025" H 5250 6750 50  0001 C CNN
+F 1 "GND" H 5255 6827 50  0000 C CNN
+F 2 "" H 5250 7000 50  0001 C CNN
+F 3 "" H 5250 7000 50  0001 C CNN
+	1    5250 7000
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -824,12 +824,12 @@ SERVO-VCC
 $Comp
 L power:GND #PWR019
 U 1 1 61E3C644
-P 8850 6200
-F 0 "#PWR019" H 8850 5950 50  0001 C CNN
-F 1 "GND" H 8855 6027 50  0000 C CNN
-F 2 "" H 8850 6200 50  0001 C CNN
-F 3 "" H 8850 6200 50  0001 C CNN
-	1    8850 6200
+P 8850 6100
+F 0 "#PWR019" H 8850 5850 50  0001 C CNN
+F 1 "GND" H 8855 5927 50  0000 C CNN
+F 2 "" H 8850 6100 50  0001 C CNN
+F 3 "" H 8850 6100 50  0001 C CNN
+	1    8850 6100
 	1    0    0    -1  
 $EndComp
 Text GLabel 9500 5600 2    50   Input ~ 0
@@ -891,13 +891,6 @@ F 4 "C17414" H 8500 5100 50  0001 C CNN "LCSC"
 	1    8500 5100
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	8300 5500 8700 5500
-Wire Wire Line
-	8700 5700 8700 5500
-Connection ~ 8700 5500
-Wire Wire Line
-	8700 5500 9500 5500
 Wire Wire Line
 	4950 4250 4400 4250
 Wire Wire Line
@@ -968,21 +961,6 @@ Text GLabel 4850 1550 2    50   Input ~ 0
 SERVO-VCC
 NoConn ~ 8500 1800
 $Comp
-L Power_Protection:SP0502BAHT D4
-U 1 1 61B21F34
-P 8600 5900
-F 0 "D4" H 8650 5700 50  0000 L CNN
-F 1 "SP0502" H 8600 5600 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 8825 5850 50  0001 L CNN
-F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 8725 6025 50  0001 C CNN
-F 4 "C207261" H 8600 5900 50  0001 C CNN "LCSC"
-	1    8600 5900
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	8850 6100 8850 6200
-Connection ~ 8850 6100
-$Comp
 L Connector:AVR-ISP-6 J3
 U 1 1 61D93AFA
 P 7900 5500
@@ -995,11 +973,7 @@ F 3 " ~" H 6625 4950 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	8300 5600 8500 5600
-Wire Wire Line
-	8500 5700 8500 5600
 Connection ~ 8500 5600
-Wire Wire Line
-	8500 5600 9500 5600
 Connection ~ 8500 4900
 Wire Wire Line
 	8500 4900 8600 4900
@@ -1013,10 +987,6 @@ Wire Wire Line
 	8500 5250 8500 5600
 Wire Wire Line
 	8500 4950 8500 4900
-Text Notes 9350 5950 0    50   ~ 0
-TVS
-Text Notes 4750 6950 0    50   ~ 0
-TVS
 Wire Wire Line
 	2900 2250 1600 2250
 Wire Wire Line
@@ -1105,62 +1075,6 @@ F 3 "" H 9200 1350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9200 5300 9500 5300
-Wire Wire Line
-	8300 5300 9200 5300
-Connection ~ 9200 5300
-Wire Wire Line
-	9200 5700 9200 5300
-$Comp
-L Power_Protection:SP0502BAHT D5
-U 1 1 61B2BEEB
-P 9100 5900
-F 0 "D5" H 8900 5700 50  0000 L CNN
-F 1 "SP0502" H 8850 5600 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 9325 5850 50  0001 L CNN
-F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 9225 6025 50  0001 C CNN
-F 4 "C207261" H 9100 5900 50  0001 C CNN "LCSC"
-	1    9100 5900
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	8300 5400 9000 5400
-Wire Wire Line
-	9000 5400 9500 5400
-Connection ~ 9000 5400
-Wire Wire Line
-	9000 5700 9000 5400
-Wire Wire Line
-	8850 6100 9100 6100
-Wire Wire Line
-	4900 6300 5000 6300
-Wire Wire Line
-	4900 6400 5200 6400
-$Comp
-L Power_Protection:SP0502BAHT D6
-U 1 1 61B85A53
-P 5100 6900
-F 0 "D6" H 5305 6946 50  0000 L CNN
-F 1 "SP0502" H 5305 6855 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 5325 6850 50  0001 L CNN
-F 3 "http://www.littelfuse.com/~/media/files/littelfuse/technical%20resources/documents/data%20sheets/sp05xxba.pdf" H 5225 7025 50  0001 C CNN
-F 4 "C207261" H 5100 6900 50  0001 C CNN "LCSC"
-	1    5100 6900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5000 6700 5000 6300
-Connection ~ 5000 6300
-Wire Wire Line
-	5000 6300 5800 6300
-Wire Wire Line
-	5200 6400 5200 6700
-Connection ~ 5200 6400
-Wire Wire Line
-	5200 6400 5800 6400
-Wire Wire Line
-	8600 6100 8850 6100
-Wire Wire Line
 	6150 2250 6150 2700
 Wire Wire Line
 	6150 2700 7300 2700
@@ -1220,7 +1134,78 @@ F 1 "ATmega8A-AU" H 8300 1200 50  0000 C CNN
 F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 7900 2800 50  0001 C CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 7900 2800 50  0001 C CNN
 F 4 "C16190" H 7900 2800 50  0001 C CNN "LCSC"
+F 5 "0;0;-90" H 7900 2800 50  0001 C CNN "JLCPCB_CORRECTION"
 	1    7900 2800
 	-1   0    0    -1  
 $EndComp
+Wire Wire Line
+	8300 5300 8850 5300
+Wire Wire Line
+	8300 5400 8950 5400
+Wire Wire Line
+	8300 5500 9050 5500
+$Comp
+L Power_Protection:SP0505BAJT D4
+U 1 1 6238AAFD
+P 8850 5900
+F 0 "D4" H 9155 5946 50  0000 L CNN
+F 1 "SMF05" H 9155 5855 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-363_SC-70-6" H 9150 5850 50  0001 L CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810311712_onsemi-SMF05CT1G_C15879.pdf" H 8975 6025 50  0001 C CNN
+F 4 "C15879" H 8850 5900 50  0001 C CNN "LCSC"
+	1    8850 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8500 5600 8650 5600
+Wire Wire Line
+	8650 5700 8650 5600
+Connection ~ 8650 5600
+Wire Wire Line
+	8650 5600 9500 5600
+Wire Wire Line
+	9050 5700 9050 5500
+Connection ~ 9050 5500
+Wire Wire Line
+	9050 5500 9500 5500
+Wire Wire Line
+	8950 5700 8950 5400
+Connection ~ 8950 5400
+Wire Wire Line
+	8950 5400 9500 5400
+Wire Wire Line
+	8850 5700 8850 5300
+Connection ~ 8850 5300
+Wire Wire Line
+	8850 5300 9500 5300
+NoConn ~ 8750 5700
+Wire Wire Line
+	4900 6400 5050 6400
+Wire Wire Line
+	4900 6300 5250 6300
+$Comp
+L Power_Protection:SP0505BAJT D5
+U 1 1 62414A26
+P 5250 6800
+F 0 "D5" H 4945 6846 50  0000 R CNN
+F 1 "SMF05" H 5150 6600 50  0000 R CNN
+F 2 "Package_TO_SOT_SMD:SOT-363_SC-70-6" H 5550 6750 50  0001 L CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810311712_onsemi-SMF05CT1G_C15879.pdf" H 5375 6925 50  0001 C CNN
+F 4 "C15879" H 5250 6800 50  0001 C CNN "LCSC"
+	1    5250 6800
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	5250 6600 5250 6300
+Connection ~ 5250 6300
+Wire Wire Line
+	5250 6300 5800 6300
+Wire Wire Line
+	5050 6600 5050 6400
+Connection ~ 5050 6400
+Wire Wire Line
+	5050 6400 5800 6400
+NoConn ~ 5450 6600
+NoConn ~ 5350 6600
+NoConn ~ 5150 6600
 $EndSCHEMATC
