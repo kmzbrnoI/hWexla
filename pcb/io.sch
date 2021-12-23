@@ -4,14 +4,14 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 4 4
-Title "hWexla - IO protection"
+Title "hWexla - IO (& protection)"
 Date "2021-12-04"
 Rev ""
-Comp ""
-Comment1 ""
-Comment2 ""
-Comment3 ""
-Comment4 ""
+Comp "Model Railroader Club Brno I – KMŽ Brno I – https://kmz-brno.cz/"
+Comment1 "Jan Horáček"
+Comment2 "https://github.com/kmzbrnoI/hwexla"
+Comment3 "https://creativecommons.org/licenses/by-sa/4.0/"
+Comment4 "Released under the Creative Commons Attribution-ShareAlike 4.0 License"
 $EndDescr
 $Comp
 L Device:R R?

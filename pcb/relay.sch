@@ -7,11 +7,11 @@ Sheet 3 4
 Title "hWexla - relay"
 Date ""
 Rev ""
-Comp ""
-Comment1 ""
-Comment2 ""
-Comment3 ""
-Comment4 ""
+Comp "Model Railroader Club Brno I – KMŽ Brno I – https://kmz-brno.cz/"
+Comment1 "Jan Horáček"
+Comment2 "https://github.com/kmzbrnoI/hwexla"
+Comment3 "https://creativecommons.org/licenses/by-sa/4.0/"
+Comment4 "Released under the Creative Commons Attribution-ShareAlike 4.0 License"
 $EndDescr
 Text HLabel 5400 3000 0    50   BiDi ~ 0
 RELA+

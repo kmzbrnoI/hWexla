@@ -4,14 +4,14 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 2 4
-Title "hWexla - Power"
+Title "hWexla - power"
 Date ""
 Rev ""
-Comp ""
-Comment1 ""
-Comment2 ""
-Comment3 ""
-Comment4 ""
+Comp "Model Railroader Club Brno I – KMŽ Brno I – https://kmz-brno.cz/"
+Comment1 "Jan Horáček"
+Comment2 "https://github.com/kmzbrnoI/hwexla"
+Comment3 "https://creativecommons.org/licenses/by-sa/4.0/"
+Comment4 "Released under the Creative Commons Attribution-ShareAlike 4.0 License"
 $EndDescr
 $Comp
 L Device:R R9
@@ -401,6 +401,10 @@ F 4 "C64898" H 4850 4650 50  0001 C CNN "LCSC"
 $EndComp
 Text Notes 6150 1450 0    50   ~ 0
 External stepdown
-Text Notes 6350 1550 0    50   ~ 0
-5-18 V
+Text Notes 6150 1550 0    50   ~ 0
+5-18 V, min 1 A
+Text Notes 5900 4250 0    100  ~ 0
+Power for logic
+Text Notes 5600 1300 0    100  ~ 0
+Power for servo & relay
 $EndSCHEMATC
