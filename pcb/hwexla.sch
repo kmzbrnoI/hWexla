@@ -1244,4 +1244,26 @@ F 3 "" H 10200 1650 50  0001 C CNN
 	1    10200 1650
 	1    0    0    -1  
 $EndComp
+$Comp
+L Graphic:Logo_Open_Hardware_Small #LOGO1
+U 1 1 61D6A205
+P 1050 7400
+F 0 "#LOGO1" H 1050 7675 50  0001 C CNN
+F 1 "Logo_Open_Hardware_Small" H 1050 7175 50  0001 C CNN
+F 2 "" H 1050 7400 50  0001 C CNN
+F 3 "~" H 1050 7400 50  0001 C CNN
+	1    1050 7400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Graphic:SYM_Earth_Protective_Small #SYM1
+U 1 1 61D6E7E0
+P 9950 1600
+F 0 "#SYM1" H 9950 1750 50  0001 C CNN
+F 1 "SYM_Earth_Protective_Small" H 9950 1450 50  0001 C CNN
+F 2 "" H 9950 1650 50  0001 C CNN
+F 3 "~" H 9950 1650 50  0001 C CNN
+	1    9950 1600
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
