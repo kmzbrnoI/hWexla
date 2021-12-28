@@ -1222,4 +1222,26 @@ F 3 "~" H 9050 1800 50  0001 C CNN
 	1    8850 1800
 	1    0    0    -1  
 $EndComp
+$Comp
+L Connector:TestPoint TP2
+U 1 1 61D60F98
+P 10200 1650
+F 0 "TP2" H 10258 1768 50  0000 L CNN
+F 1 "TestPoint" H 10258 1677 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Loop_D3.50mm_Drill1.4mm_Beaded" H 10400 1650 50  0001 C CNN
+F 3 "~" H 10400 1650 50  0001 C CNN
+	1    10200 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR048
+U 1 1 61D6232B
+P 10200 1650
+F 0 "#PWR048" H 10200 1400 50  0001 C CNN
+F 1 "GND" H 10205 1477 50  0000 C CNN
+F 2 "" H 10200 1650 50  0001 C CNN
+F 3 "" H 10200 1650 50  0001 C CNN
+	1    10200 1650
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
