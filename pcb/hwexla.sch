@@ -959,7 +959,6 @@ Wire Wire Line
 Connection ~ 4750 1550
 Text GLabel 4850 1550 2    50   Input ~ 0
 SERVO-VCC
-NoConn ~ 8500 1800
 $Comp
 L Connector:AVR-ISP-6 J3
 U 1 1 61D93AFA
@@ -1208,4 +1207,19 @@ Wire Wire Line
 NoConn ~ 5450 6600
 NoConn ~ 5350 6600
 NoConn ~ 5150 6600
+Text Notes 8550 3000 0    50   ~ 0
+Variants:\nATmega328p, ATmega328pb
+Wire Wire Line
+	8500 1800 8850 1800
+$Comp
+L Connector:TestPoint TP1
+U 1 1 61D44F93
+P 8850 1800
+F 0 "TP1" H 8908 1918 50  0000 L CNN
+F 1 "TestPoint" H 8908 1827 50  0000 L CNN
+F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 9050 1800 50  0001 C CNN
+F 3 "~" H 9050 1800 50  0001 C CNN
+	1    8850 1800
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
