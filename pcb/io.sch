@@ -852,7 +852,7 @@ Wire Wire Line
 Connection ~ 6650 3800
 Connection ~ 6650 3500
 Wire Wire Line
-	6650 3500 9050 3500
+	6650 3500 8550 3500
 Wire Wire Line
 	6300 5000 6650 5000
 $Comp
@@ -870,15 +870,15 @@ $EndComp
 Connection ~ 7650 4400
 Connection ~ 7650 4100
 Wire Wire Line
-	7650 4100 9050 4100
+	7650 4100 8550 4100
 Connection ~ 6650 5300
 Connection ~ 6650 5000
 Wire Wire Line
-	6650 5000 9050 5000
+	6650 5000 8550 5000
 Connection ~ 7650 5900
 Connection ~ 7650 5600
 Wire Wire Line
-	7650 5600 9050 5600
+	7650 5600 8550 5600
 Wire Wire Line
 	2900 2900 3600 2900
 Wire Wire Line
@@ -891,4 +891,56 @@ Wire Wire Line
 	3600 2900 5100 2900
 Wire Wire Line
 	3800 2600 4100 2600
+$Comp
+L Device:R_Pack04_Split RN4
+U 4 1 61CD3D1D
+P 8700 5000
+F 0 "RN4" V 8800 5000 50  0000 C CNN
+F 1 "250R" V 8900 5000 50  0000 C CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 8620 5000 50  0001 C CNN
+F 3 "~" H 8700 5000 50  0001 C CNN
+	4    8700 5000
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN4
+U 3 1 61CD4D04
+P 8700 5600
+F 0 "RN4" V 8800 5600 50  0000 C CNN
+F 1 "250R" V 8900 5600 50  0000 C CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 8620 5600 50  0001 C CNN
+F 3 "~" H 8700 5600 50  0001 C CNN
+	3    8700 5600
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN4
+U 2 1 61CD5B8D
+P 8700 4100
+F 0 "RN4" V 8800 4100 50  0000 C CNN
+F 1 "250R" V 8900 4100 50  0000 C CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 8620 4100 50  0001 C CNN
+F 3 "~" H 8700 4100 50  0001 C CNN
+	2    8700 4100
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Pack04_Split RN4
+U 1 1 61CD6B58
+P 8700 3500
+F 0 "RN4" V 8500 3500 50  0000 C CNN
+F 1 "250R" V 8600 3500 50  0000 C CNN
+F 2 "Resistor_SMD:R_Array_Concave_4x0603" V 8620 3500 50  0001 C CNN
+F 3 "~" H 8700 3500 50  0001 C CNN
+	1    8700 3500
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	8850 4100 9050 4100
+Wire Wire Line
+	8850 3500 9050 3500
+Wire Wire Line
+	8850 5000 9050 5000
+Wire Wire Line
+	8850 5600 9050 5600
 $EndSCHEMATC
