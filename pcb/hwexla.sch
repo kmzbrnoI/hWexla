@@ -507,7 +507,7 @@ U 1 1 61EB90D4
 P 6000 6400
 F 0 "J4" H 6080 6392 50  0000 L CNN
 F 1 "Conn_01x06" H 6080 6301 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 6000 6400 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x06_P2.54mm_Vertical" H 6000 6400 50  0001 C CNN
 F 3 "~" H 6000 6400 50  0001 C CNN
 	1    6000 6400
 	1    0    0    -1  
