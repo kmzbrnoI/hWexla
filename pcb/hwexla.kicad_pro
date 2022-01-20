@@ -45,11 +45,20 @@
         "silk_text_upright": false,
         "zones": {
           "45_degree_only": false,
-          "min_clearance": 0.3
+          "min_clearance": 0.19999999999999998
         }
       },
       "diff_pair_dimensions": [],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "copper_edge_clearance|183634000|71556000|00000000-0000-0000-0000-000061c97ddf|2ce087fc-8fe2-4bce-b111-54c11feabd07",
+        "copper_edge_clearance|183634000|71556000|00000000-0000-0000-0000-000061c97ddf|fde234b9-bbe6-4d1b-89ae-5cd0c0795704",
+        "copper_edge_clearance|183634000|95056000|00000000-0000-0000-0000-000061c97e0f|1bcf6f07-20e2-4f90-ad91-835d8b709c84",
+        "copper_edge_clearance|183634000|95056000|00000000-0000-0000-0000-000061c97e0f|eaf5629c-c2fb-4e0f-89d4-8c374ab49882",
+        "silk_over_copper|161662667|56388000|ccb2238a-f09f-4c1d-b776-92bc63fbf61e|073c8287-235c-4712-a9a0-60a07a1119d5",
+        "silk_over_copper|161662667|56515000|ccb2238a-f09f-4c1d-b776-92bc63fbf61e|19264aae-fe9e-4afc-84ac-56ec33a3b20d",
+        "silk_over_copper|168973000|57976000|49c25abf-d43b-4c66-b84b-82269c86c148|d3dd0ba2-2496-4e95-8d54-12ee57bcbce2",
+        "silk_over_copper|174053000|57976000|49c25abf-d43b-4c66-b84b-82269c86c148|acfcaba7-a8b8-4c21-a793-d3e0373f34dc"
+      ],
       "meta": {
         "filename": "board_design_settings.json",
         "version": 2

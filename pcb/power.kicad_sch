@@ -953,10 +953,6 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid dfba7148-cad3-4f40-9835-b1394bd30a2c)
   )
-  (label "EN" (at 161.29 46.99 270)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid fab985e9-e679-4dd8-a59c-e3195d08506a)
-  )
 
   (hierarchical_label "+12V" (shape input) (at 36.83 59.69 180)
     (effects (font (size 1.27 1.27)) (justify right))

@@ -707,7 +707,7 @@
     (property "Footprint" "hwexla:HFD2" (id 2) (at 148.59 88.9 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (id 3) (at 148.59 88.9 0)
+    (property "Datasheet" "https://content.kemet.com/datasheets/KEM_R7002_EC2_EE2.pdf" (id 3) (at 148.59 88.9 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 06fdbcb6-8344-4d9b-a49a-8b5ffb4a9489))
