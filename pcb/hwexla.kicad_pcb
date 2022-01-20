@@ -285,7 +285,7 @@
     (property "Sheetname" "")
     (path "/00000000-0000-0000-0000-000061c397fd")
     (attr exclude_from_pos_files)
-    (fp_text reference "H1" (at 0 -3.2) (layer "F.SilkS")
+    (fp_text reference "H1" (at 0 -3.2) (layer "F.SilkS") hide
       (effects (font (size 1 1) (thickness 0.15)))
       (tstamp 09a22941-b09a-42e1-abae-0f42b9e7450f)
     )
@@ -637,7 +637,7 @@
     (property "Sheetname" "")
     (path "/00000000-0000-0000-0000-000061c39558")
     (attr exclude_from_pos_files)
-    (fp_text reference "H2" (at 0 -3.2) (layer "F.SilkS")
+    (fp_text reference "H2" (at 0 -3.2) (layer "F.SilkS") hide
       (effects (font (size 1 1) (thickness 0.15)))
       (tstamp 041306b4-07f1-49d1-8f4e-1000c8715d52)
     )
