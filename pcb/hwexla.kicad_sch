@@ -3671,7 +3671,7 @@
     (property "Value" "Logo_Open_Hardware_Small" (id 1) (at 26.67 193.675 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Footprint" "" (id 2) (at 26.67 187.96 0)
+    (property "Footprint" "Symbol:OSHW-Logo_11.4x12mm_SilkScreen" (id 2) (at 26.67 187.96 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 26.67 187.96 0)
@@ -4742,7 +4742,7 @@
       (reference "#FLG04") (unit 1) (value "PWR_FLAG") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061d6a205"
-      (reference "#LOGO1") (unit 1) (value "Logo_Open_Hardware_Small") (footprint "")
+      (reference "#LOGO1") (unit 1) (value "Logo_Open_Hardware_Small") (footprint "Symbol:OSHW-Logo_11.4x12mm_SilkScreen")
     )
     (path "/00000000-0000-0000-0000-000061cef176"
       (reference "#PWR01") (unit 1) (value "VCC") (footprint "")
