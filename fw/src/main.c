@@ -11,6 +11,7 @@
 #include <avr/boot.h>
 
 #include "io.h"
+#include "pwm_servo_gen.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -25,9 +26,11 @@ int main() {
 	while (true) {
 		// problem with PIN_IN_MINUS, PIN_BTN_PLUS_IN, PIN_BTN_MINUS_IN
 		//set_output(PIN_OUT_PLUS, !get_input(PIN_BTN_PLUS_IN));
-		set_output(PIN_LED_RED, !get_input(PIN_IN_MINUS));
-		set_output(PIN_LED_YELLOW, !get_input(PIN_IN_PLUS));
-		set_output(PIN_RELAY_CONTROL, !get_input(PIN_BTN_IN));
+		//set_output(PIN_LED_RED, !get_input(PIN_IN_MINUS));
+		//set_output(PIN_LED_YELLOW, !get_input(PIN_IN_PLUS));
+		//set_output(PIN_RELAY_CONTROL, !get_input(PIN_BTN_IN));
+
+		pwm_servo_gen(250);
 
 		_delay_ms(1);
 		wdt_reset();
@@ -36,12 +39,15 @@ int main() {
 
 static inline void init() {
 	ACSR |= ACD;  // analog comparator disable
+	TIMSK = 0;
+
 	io_init();
+	pwm_servo_init();
 
 	// Timer 2 @ 1 kHz (1 ms)
 	TCCR2 = (1 << WGM21) | (1 << CS21) | (1 << CS20); // CTC; prescaler 32×
 	OCR2 = 248; // 1 ms
-	TIMSK = (1 << OCIE2);
+	TIMSK |= (1 << OCIE2);
 
 	set_output(PIN_LED_RED, true);
 	set_output(PIN_LED_YELLOW, true);
@@ -60,9 +66,6 @@ static inline void init() {
 ///////////////////////////////////////////////////////////////////////////////
 
 ISR(TIMER2_COMP_vect) {
-	set_output(PIN_OUT_PLUS, true);
-	_delay_us(10);
-	set_output(PIN_OUT_PLUS, false);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

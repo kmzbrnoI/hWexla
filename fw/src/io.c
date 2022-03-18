@@ -69,6 +69,7 @@ void io_init() {
 	pin_mode(PIN_BTN_MINUS_OUT, OUTPUT);
 
 	pin_mode(PIN_SERVO_POWER_EN, OUTPUT);
+	pin_mode(PIN_SERVO_PWM, OUTPUT);
 	pin_mode(PIN_BTN_IN, INPUT);
 	pin_mode(PIN_RELAY_CONTROL, OUTPUT);
 
