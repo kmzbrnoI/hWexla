@@ -23,8 +23,9 @@ void pwm_servo_init() {
 	// Setup 16-bit timer 1 for hardware PWM generation
 	TCCR1A = (1 << COM1A1) | (1 << COM1A0); // OC1A on Compare Match high level
 	TCCR1B = (1 << WGM13); // Phase&freq correct PWM TOP=ICR1
-	TIMSK |= (1 << OCIE1A);
+	TIMSK |= (1 << OCIE1A) | (1 << OCIE1B);
 	ICR1 = 10000;
+	OCR1B = 0;
 }
 
 void pwm_servo_gen(int16_t angle) {
@@ -49,15 +50,14 @@ bool pwm_servo_generating() {
 }
 
 ISR(TIMER1_COMPA_vect) {
-	// Timer 1 for servo control
-
-	if (!_pwm_output_pin_state()) { // trailing edge
-		/*static volatile bool state = false;
-		state = !state;
-		set_output(PIN_OUT_PLUS, state);*/
-
-		OCR1A = _angle+9000;
+	if (!_pwm_output_pin_state()) {
+		// On trailing edge → possibly stop PWM
 		if (!_should_generate)
 			_pwm_servo_stop();
 	}
+}
+
+ISR(TIMER1_COMPB_vect) {
+	// Interrupt after full period → update pwm width
+	OCR1A = _angle+9000;
 }
