@@ -11,6 +11,7 @@ uint8_t _inputs[DEB_COUNT] = {
 	PIN_BTN_PLUS_IN,
 	PIN_BTN_MINUS_IN,
 	PIN_BTN_IN,
+	PIN_SLAVE,
 };
 
 void _button_update_1ms(uint8_t i) {

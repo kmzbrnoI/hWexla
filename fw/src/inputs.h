@@ -16,6 +16,7 @@ enum DebouncedButton {
 	DEB_BTN_PLUS,
 	DEB_BTN_MINUS,
 	DEB_BTN,
+	DEB_SLAVE,
 	DEB_COUNT
 };
 

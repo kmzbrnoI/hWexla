@@ -83,6 +83,7 @@ void io_init() {
 	pin_mode(PIN_SERVO_PWM, OUTPUT);
 	pin_mode(PIN_BTN_IN, INPUT);
 	pin_mode(PIN_RELAY_CONTROL, OUTPUT);
+	pin_mode(PIN_SLAVE, OUTPUT);
 
 	pin_mode(PIN_LED_RED, OUTPUT);
 	pin_mode(PIN_LED_YELLOW, OUTPUT);
