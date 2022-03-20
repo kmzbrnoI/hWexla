@@ -14,6 +14,7 @@
 #include "pwm_servo_gen.h"
 #include "switch.h"
 #include "inputs.h"
+#include "eeprom.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -45,6 +46,7 @@ static inline void init() {
 	TIMSK = 0;
 
 	io_init();
+	ee_load();
 	pwm_servo_init();
 
 	// Timer 2 @ 1 kHz (1 ms)

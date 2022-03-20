@@ -2,8 +2,12 @@
 #define _COMMON_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /* Definition of common types */
+
+#define CONFIG_FW_MAJOR 1
+#define CONFIG_FW_MINOR 0
 
 typedef enum {
 	tpPlus = 0,
