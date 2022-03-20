@@ -19,10 +19,13 @@
 
 int main();
 static inline void init();
+void set_outputs();
 
 ///////////////////////////////////////////////////////////////////////////////
 
 volatile Turnout turnout;
+volatile bool btn_flick = false;
+#define BTN_FLICK_PERIOD 250 // ms (max uint8_t)
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -30,6 +33,8 @@ int main() {
 	init();
 
 	while (true) {
+		set_outputs();
+
 		_delay_ms(1);
 		wdt_reset();
 	}
@@ -73,6 +78,13 @@ ISR(TIMER2_COMP_vect) {
 		switch_update();
 	}
 
+	static volatile uint8_t flick_counter = 0;
+	flick_counter++;
+	if (flick_counter >= BTN_FLICK_PERIOD) {
+		btn_flick = !btn_flick;
+		flick_counter = 0;
+	}
+
 	buttons_update_1ms();
 }
 
@@ -96,6 +108,15 @@ void on_btn_pressed(uint8_t button) {
 	case DEB_BTN:
 		break;
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void set_outputs() {
+	set_output(PIN_OUT_PLUS, (turnout.position == tpPlus) && (get_input(PIN_SLAVE) || !in_debounced[DEB_IN_PLUS]));
+	set_output(PIN_OUT_MINUS, (turnout.position == tpMinus) && (get_input(PIN_SLAVE) || !in_debounced[DEB_IN_MINUS]));
+	set_output(PIN_BTN_PLUS_OUT, turnout.position == tpPlus || (turnout.position == tpMovingToPlus && btn_flick));
+	set_output(PIN_BTN_MINUS_OUT, turnout.position == tpMinus || (turnout.position == tpMovingToMinus && btn_flick));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
