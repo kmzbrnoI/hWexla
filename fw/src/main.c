@@ -30,8 +30,6 @@ int main() {
 	init();
 
 	while (true) {
-		pwm_servo_gen(250);
-
 		_delay_ms(1);
 		wdt_reset();
 	}
@@ -84,9 +82,20 @@ void on_switch_done() {
 }
 
 void on_btn_pressed(uint8_t button) {
-	static bool state = true;
-	set_output(PIN_LED_YELLOW, state);
-	state = !state;
+	switch (button) {
+	case DEB_IN_PLUS:
+		switch_turnout(tpPlus);
+		break;
+	case DEB_IN_MINUS:
+		switch_turnout(tpMinus);
+		break;
+	case DEB_BTN_PLUS:
+		break;
+	case DEB_BTN_MINUS:
+		break;
+	case DEB_BTN:
+		break;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

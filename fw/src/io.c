@@ -31,6 +31,17 @@ bool get_input(uint8_t pin) {
 	return false;
 }
 
+bool get_output(uint8_t pin) {
+	if (pin >= IO_PINB0 && pin <= IO_PINB7)
+		return (PORTB >> (pin-IO_PINB0)) & 1;
+	if (pin >= IO_PINC0 && pin <= IO_PINC6)
+		return (PORTC >> (pin-IO_PINC0)) & 1;
+	if (pin >= IO_PIND0 && pin <= IO_PIND7)
+		return (PORTD >> (pin-IO_PIND0)) & 1;
+
+	return false;
+}
+
 void pin_mode(uint8_t pin, uint8_t mode) {
 	if (mode == OUTPUT) {
 		if (pin >= IO_PINB0 && pin <= IO_PINB7) {

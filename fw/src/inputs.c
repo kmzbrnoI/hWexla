@@ -32,6 +32,14 @@ void _button_update_1ms(uint8_t i) {
 }
 
 void buttons_update_1ms() {
+	bool btn_plus = get_output(PIN_BTN_PLUS_OUT);
+	bool btn_minus = get_output(PIN_BTN_MINUS_OUT);
+	set_output(PIN_BTN_PLUS_OUT, false);
+	set_output(PIN_BTN_MINUS_OUT, false);
+
 	for (size_t i = 0; i < DEB_COUNT; i++)
 		_button_update_1ms(i);
+
+	set_output(PIN_BTN_PLUS_OUT, btn_plus);
+	set_output(PIN_BTN_MINUS_OUT, btn_minus);
 }

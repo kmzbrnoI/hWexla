@@ -59,6 +59,7 @@
 
 void set_output(uint8_t pin, bool state);
 bool get_input(uint8_t pin);
+bool get_output(uint8_t pin);
 void pin_mode(uint8_t pin, uint8_t mode);
 void io_init();
 
