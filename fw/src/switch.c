@@ -54,7 +54,7 @@ void switch_update() {
 		((_target_pos == tpMinus && turnout.angle == turnout.angle_minus))) {
 		end_remain_counter++;
 		if (end_remain_counter >= END_REMAIN) {
-			turnout.position = tpPlus;
+			turnout.position = _target_pos;
 			switch_stop();
 			return;
 		}
