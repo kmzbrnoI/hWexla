@@ -13,6 +13,7 @@
 #include "io.h"
 #include "pwm_servo_gen.h"
 #include "switch.h"
+#include "inputs.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -29,12 +30,6 @@ int main() {
 	init();
 
 	while (true) {
-		// problem with PIN_IN_MINUS, PIN_BTN_PLUS_IN, PIN_BTN_MINUS_IN
-		//set_output(PIN_OUT_PLUS, !get_input(PIN_BTN_PLUS_IN));
-		//set_output(PIN_LED_RED, !get_input(PIN_IN_MINUS));
-		//set_output(PIN_LED_YELLOW, !get_input(PIN_IN_PLUS));
-		//set_output(PIN_RELAY_CONTROL, !get_input(PIN_BTN_IN));
-
 		pwm_servo_gen(250);
 
 		_delay_ms(1);
@@ -71,17 +66,27 @@ static inline void init() {
 ///////////////////////////////////////////////////////////////////////////////
 
 ISR(TIMER2_COMP_vect) {
+	// Timer 2 @ 1 kHz (1 ms)
+
 	static volatile uint8_t counter_20ms = 0;
 	counter_20ms++;
 	if (counter_20ms >= 20) {
 		counter_20ms = 0;
 		switch_update();
 	}
+
+	buttons_update_1ms();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void on_switch_done() {
+}
+
+void on_btn_pressed(uint8_t button) {
+	static bool state = true;
+	set_output(PIN_LED_YELLOW, state);
+	state = !state;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
