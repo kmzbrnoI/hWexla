@@ -7,9 +7,14 @@
 #define EEPROM_ADDR_POS_PLUS               ((uint16_t*)0x10)
 #define EEPROM_ADDR_POS_MINUS              ((uint16_t*)0x12)
 
+// TODO: this needs to be split on multiple bytes
+// TODO: save position only
+#define EEPROM_ADDR_ANGLE                  ((uint16_t*)0x14)
+
 void _ee_default_config() {
 	turnout.angle_plus = 150;
 	turnout.angle_minus = 350;
+	turnout.angle = 250;
 }
 
 void ee_load() {
@@ -26,10 +31,14 @@ void ee_load() {
 	turnout.angle_minus = eeprom_read_word(EEPROM_ADDR_POS_MINUS);
 	if (turnout.angle_minus > PWM_ANGLE_MAX)
 		turnout.angle_minus = PWM_ANGLE_MAX;
+	turnout.angle = eeprom_read_word(EEPROM_ADDR_POS_MINUS);
+	if (turnout.angle > PWM_ANGLE_MAX)
+		turnout.angle = PWM_ANGLE_MAX;
 }
 
 void ee_save() {
 	eeprom_update_byte(EEPROM_ADDR_VERSION, 1);
 	eeprom_update_word(EEPROM_ADDR_POS_PLUS, turnout.angle_plus);
 	eeprom_update_word(EEPROM_ADDR_POS_MINUS, turnout.angle_minus);
+	eeprom_update_word(EEPROM_ADDR_ANGLE, turnout.angle);
 }
