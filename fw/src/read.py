@@ -11,7 +11,6 @@ assert len(sys.argv) >= 2
 ser = serial.Serial(port=sys.argv[1], baudrate=19200)
 
 while True:
-    chars = ser.read(1)
-    if not chars:
-        continue
-    print(chr(chars[0]), end='')
+    line = ser.readline()
+    print(f'[{datetime.datetime.now().time()}]', end=' ')
+    print(line.decode('utf-8'), end='')
