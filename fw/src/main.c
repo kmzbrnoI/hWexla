@@ -15,6 +15,7 @@
 #include "switch.h"
 #include "inputs.h"
 #include "eeprom.h"
+#include "usart_printf.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -36,6 +37,14 @@ int main() {
 	while (true) {
 		set_outputs();
 
+		static uint16_t counter = 0;
+		counter++;
+		if (counter >= 500) {
+			set_output(PIN_LED_YELLOW, !get_output(PIN_LED_YELLOW));
+			printf("hello world!\n");
+			counter = 0;
+		}
+
 		_delay_ms(1);
 		wdt_reset();
 	}
@@ -44,10 +53,12 @@ int main() {
 static inline void init() {
 	ACSR |= ACD;  // analog comparator disable
 	TIMSK = 0;
+	stdout = &uart_output;
 
 	io_init();
 	ee_load();
 	pwm_servo_init();
+	usart_initialize();
 
 	// Timer 2 @ 1 kHz (1 ms)
 	TCCR2 = (1 << WGM21) | (1 << CS21) | (1 << CS20); // CTC; prescaler 32×
