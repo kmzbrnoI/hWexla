@@ -1,5 +1,9 @@
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include "io.h"
+
+volatile uint16_t mag_value = 0;
+volatile bool mag_available = false;
 
 void set_output(uint8_t pin, bool state) {
 	if (pin >= IO_PINB0 && pin <= IO_PINB7) {
@@ -88,4 +92,21 @@ void io_init() {
 	pin_mode(PIN_LED_RED, OUTPUT);
 	pin_mode(PIN_LED_YELLOW, OUTPUT);
 	pin_mode(PIN_LED_GREEN, OUTPUT);
+
+	// ADC init
+	ADMUX = (1 << REFS0) | 0x7; // reference = AVcc (5V), use ADC7
+	ADCSRA = (1 << ADEN) | (1 << ADIE) | 0x5; // enable ADC, enable interrupt, prescaler 32×
+}
+
+void mag_start_measure() {
+	mag_available = false;
+	ADCSRA |= (1 << ADSC);
+}
+
+ISR(ADC_vect) {
+	uint16_t value = ADCL;
+	value |= (ADCH << 8);
+
+	mag_value = value;
+	mag_available = true;
 }

@@ -39,9 +39,12 @@ int main() {
 
 		static uint16_t counter = 0;
 		counter++;
-		if (counter >= 500) {
-			set_output(PIN_LED_YELLOW, !get_output(PIN_LED_YELLOW));
-			printf("hello world!\n");
+		if (counter >= 200) {
+			set_output(PIN_LED_YELLOW, true);
+			mag_start_measure();
+			while (!mag_available);
+			set_output(PIN_LED_YELLOW, false);
+			printf("Magnet: %d\n", mag_value);
 			counter = 0;
 		}
 
