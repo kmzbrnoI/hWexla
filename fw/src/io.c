@@ -25,6 +25,12 @@ void set_output(uint8_t pin, bool state) {
 }
 
 bool get_input(uint8_t pin) {
+	// buttons on active LEDs are considered as inacive
+	if (pin == PIN_BTN_PLUS_IN && get_output(PIN_BTN_PLUS_OUT))
+		return false;
+	if (pin == PIN_BTN_MINUS_IN && get_output(PIN_BTN_MINUS_OUT))
+		return false;
+
 	if (pin >= IO_PINB0 && pin <= IO_PINB7)
 		return (PINB >> (pin-IO_PINB0)) & 1;
 	if (pin >= IO_PINC0 && pin <= IO_PINC6)
@@ -99,7 +105,6 @@ void io_init() {
 }
 
 void mag_start_measure() {
-	mag_available = false;
 	ADCSRA |= (1 << ADSC);
 }
 
@@ -110,7 +115,8 @@ void mag_poll() {
 		uint16_t value = ADCL;
 		value |= (ADCH << 8);
 
-		mag_value = value;
+		mag_available = false;
+		mag_value = value; // WARN: could be interrupted in half of writing
 		mag_available = true;
 	}
 }

@@ -165,6 +165,9 @@ void programming_enter() {
 }
 
 void programming_leave() {
+	if (!mag_available)
+		return;
+
 	mode = mRun;
 
 	if (turnout.position == tpPlus) {
