@@ -2,8 +2,22 @@
 #include <avr/interrupt.h>
 #include "io.h"
 
+typedef enum {
+	adcNone = 0,
+	adcMagnet = 1,
+	adcServoVcc = 2,
+} AdcCurrent;
+
 volatile uint16_t mag_value = 0;
-volatile bool mag_available = false;
+volatile uint16_t servo_vcc_value = 0;
+volatile AdcCurrent adcCurrent = adcNone;
+
+///////////////////////////////////////////////////////////////////////////////
+
+static inline void mag_start_measure();
+static inline void servo_vcc_start_measure();
+
+///////////////////////////////////////////////////////////////////////////////
 
 void set_output(uint8_t pin, bool state) {
 	if (pin >= IO_PINB0 && pin <= IO_PINB7) {
@@ -100,23 +114,41 @@ void io_init() {
 	pin_mode(PIN_LED_GREEN, OUTPUT);
 
 	// ADC init
-	ADMUX = (1 << REFS0) | 0x7; // reference = AVcc (5V), use ADC7
 	ADCSRA = (1 << ADEN) | 0x5; // enable ADC, prescaler 32×
 }
 
-void mag_start_measure() {
-	ADCSRA |= (1 << ADSC);
+void adc_start_measure() {
+	mag_start_measure();
 }
 
-void mag_poll() {
+void mag_start_measure() {
+	ADMUX = (1 << REFS0) | 0x7; // reference = AVcc (5V), use ADC7
+	ADCSRA |= (1 << ADSC); // start
+}
+
+void servo_vcc_start_measure() {
+	ADMUX = (1 << REFS0); // reference = AVcc (5V), use ADC0
+	ADCSRA |= (1 << ADSC); // start
+}
+
+void adc_poll() {
 	if (ADCSRA & (1 << ADIF)) {
 		ADCSRA |= (1 << ADIF); // clear flag
 
 		uint16_t value = ADCL;
 		value |= (ADCH << 8);
 
-		mag_available = false;
-		mag_value = value; // WARN: could be interrupted in half of writing
-		mag_available = true;
+		AdcCurrent old = adcCurrent;
+		adcCurrent = adcNone;
+		switch (old) {
+		case adcMagnet:
+			mag_value = value; // WARN: could be interrupted in half of writing
+			servo_vcc_start_measure();
+			break;
+		case adcServoVcc:
+			servo_vcc_value = value; // WARN: could be interrupted in half of writing
+			break;
+		};
+
 	}
 }

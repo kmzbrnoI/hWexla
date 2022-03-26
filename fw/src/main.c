@@ -45,7 +45,7 @@ int main() {
 	while (true) {
 		inputs_poll();
 		set_outputs();
-		mag_poll();
+		adc_poll();
 
 		if (ee_to_save) {
 			ee_save();
@@ -111,7 +111,7 @@ ISR(TIMER2_COMP_vect) {
 	static volatile uint16_t counter_50ms = 0;
 	counter_50ms++;
 	if (counter_50ms >= 50) {
-		mag_start_measure();
+		adc_start_measure();
 		counter_50ms = 0;
 	}
 
@@ -217,9 +217,6 @@ void programming_enter() {
 }
 
 void programming_leave() {
-	if (!mag_available)
-		return;
-
 	mode = mRun;
 	pwm_servo_stop();
 
