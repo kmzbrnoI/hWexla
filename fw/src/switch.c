@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include "switch.h"
 #include "pwm_servo_gen.h"
+#include "eeprom.h"
 
 bool _switching = false;
 volatile uint8_t switch_move_per_tick = 5;
@@ -23,10 +24,13 @@ void switch_turnout(TurnoutPos pos) {
 	begin_remain_counter = 0;
 	end_remain_counter = 0;
 
-	if (pos == tpPlus)
+	if (pos == tpPlus) {
 		turnout.position = tpMovingToPlus;
-	else
+		ee_incr_moved_plus();
+	} else {
 		turnout.position = tpMovingToMinus;
+		ee_incr_moved_minus();
+	}
 
 	pwm_servo_gen(turnout.angle);
 }
