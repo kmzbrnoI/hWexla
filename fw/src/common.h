@@ -10,7 +10,7 @@
 #define CONFIG_FW_MINOR 0
 
 #define EEPROM_POSITION_COUNT 16
-#define EEPROM_MOVED_COUNT    16
+#define EEPROM_MOVED_COUNT    8
 
 typedef enum {
 	tpPlus = 0,
@@ -31,6 +31,7 @@ typedef struct {
 	uint32_t moved_plus;
 	uint32_t moved_minus;
 	uint8_t ee_positions[EEPROM_POSITION_COUNT];
+	bool ee_positions_parity; // false = even
 	uint16_t ee_moved_plus[EEPROM_MOVED_COUNT];
 	uint16_t ee_moved_minus[EEPROM_MOVED_COUNT];
 	uint8_t ee_moved_plus_mini; // index of minimum in ee_moved_plus
@@ -44,5 +45,6 @@ typedef enum {
 
 extern volatile Turnout turnout;
 extern volatile Mode mode;
+extern volatile uint8_t pseudorand;
 
 #endif

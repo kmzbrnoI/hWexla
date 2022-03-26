@@ -35,6 +35,7 @@ volatile bool btn_flick = false;
 #define BTN_FLICK_PERIOD 150 // ms (max uint8_t)
 volatile uint8_t prog_btn_counter_ms = 0;
 #define PROG_BTN_MAX 20 // ms
+volatile uint8_t pseudorand = 0;
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -50,6 +51,14 @@ int main() {
 			ee_save();
 			ee_to_save = false;
 		}
+		if (ee_to_store_pos_plus) {
+			ee_store_pos_plus();
+			ee_to_store_pos_plus = false;
+		}
+		if (ee_to_store_pos_minus) {
+			ee_store_pos_minus();
+			ee_to_store_pos_minus = false;
+		}
 
 		wdt_reset();
 		_delay_ms(1);
@@ -63,6 +72,10 @@ static inline void init() {
 	mode = mRun;
 
 	io_init();
+	set_output(PIN_LED_RED, true);
+	set_output(PIN_LED_YELLOW, true);
+	set_output(PIN_LED_GREEN, true);
+
 	ee_load();
 	pwm_servo_init();
 	usart_initialize();
@@ -72,9 +85,6 @@ static inline void init() {
 	OCR2 = 248; // 1 ms
 	TIMSK |= (1 << OCIE2);
 
-	set_output(PIN_LED_RED, true);
-	set_output(PIN_LED_YELLOW, true);
-	set_output(PIN_LED_GREEN, true);
 	_delay_ms(250);
 	set_output(PIN_LED_RED, false);
 	set_output(PIN_LED_YELLOW, false);
@@ -117,11 +127,16 @@ ISR(TIMER2_COMP_vect) {
 
 	buttons_update_1ms();
 	led_yellow_update_1ms();
+	pseudorand++;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void on_switch_done() {
+	if (turnout.position == tpPlus)
+		ee_to_store_pos_plus = true;
+	else
+		ee_to_store_pos_minus = true;
 }
 
 void on_btn_pressed(uint8_t button) {
