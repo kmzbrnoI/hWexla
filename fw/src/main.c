@@ -21,17 +21,18 @@
 
 int main();
 static inline void init();
-void set_outputs();
-void programming_enter();
-void programming_leave();
-void led_yellow_update_1ms();
+static inline void set_outputs();
+static inline void programming_enter();
+static inline void programming_leave();
+static inline void led_yellow_update_1ms();
+static inline void inputs_poll();
 
 ///////////////////////////////////////////////////////////////////////////////
 
 volatile Turnout turnout;
 volatile Mode mode;
 volatile bool btn_flick = false;
-#define BTN_FLICK_PERIOD 250 // ms (max uint8_t)
+#define BTN_FLICK_PERIOD 150 // ms (max uint8_t)
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -39,6 +40,7 @@ int main() {
 	init();
 
 	while (true) {
+		inputs_poll();
 		set_outputs();
 		mag_poll();
 
@@ -119,16 +121,6 @@ void on_switch_done() {
 
 void on_btn_pressed(uint8_t button) {
 	switch (button) {
-	case DEB_IN_PLUS:
-		switch_turnout(tpPlus);
-		break;
-	case DEB_IN_MINUS:
-		switch_turnout(tpMinus);
-		break;
-	case DEB_BTN_PLUS:
-		break;
-	case DEB_BTN_MINUS:
-		break;
 	case DEB_BTN:
 		if (mode == mRun)
 			programming_enter();
@@ -140,12 +132,28 @@ void on_btn_pressed(uint8_t button) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+void inputs_poll() {
+	if (mode == mRun) {
+		if ((in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS]))
+			switch_turnout(tpPlus);
+		if ((in_debounced[DEB_IN_MINUS]) && (!in_debounced[DEB_IN_PLUS]))
+			switch_turnout(tpMinus);
+
+		if ((!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS])) {
+			if ((in_debounced[DEB_BTN_PLUS]) && (!in_debounced[DEB_BTN_MINUS]))
+				switch_turnout(tpPlus);
+			if ((in_debounced[DEB_BTN_MINUS]) && (!in_debounced[DEB_BTN_PLUS]))
+				switch_turnout(tpMinus);
+		}
+	}
+}
+
 void set_outputs() {
 	if (mode == mRun) {
 		set_output(PIN_OUT_PLUS, (turnout.position == tpPlus) &&
-		           (get_input(PIN_SLAVE) || !in_debounced[DEB_IN_PLUS]));
+		           (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS]));
 		set_output(PIN_OUT_MINUS, (turnout.position == tpMinus) &&
-		           (get_input(PIN_SLAVE) || !in_debounced[DEB_IN_MINUS]));
+		           (get_input(PIN_SLAVE) || in_debounced[DEB_IN_MINUS]));
 	} else {
 		set_output(PIN_OUT_PLUS, false);
 		set_output(PIN_OUT_MINUS, false);

@@ -27,9 +27,9 @@ void set_output(uint8_t pin, bool state) {
 bool get_input(uint8_t pin) {
 	// buttons on active LEDs are considered as inacive
 	if (pin == PIN_BTN_PLUS_IN && get_output(PIN_BTN_PLUS_OUT))
-		return false;
+		return true;
 	if (pin == PIN_BTN_MINUS_IN && get_output(PIN_BTN_MINUS_OUT))
-		return false;
+		return true;
 
 	if (pin >= IO_PINB0 && pin <= IO_PINB7)
 		return (PINB >> (pin-IO_PINB0)) & 1;
@@ -93,7 +93,7 @@ void io_init() {
 	pin_mode(PIN_SERVO_PWM, OUTPUT);
 	pin_mode(PIN_BTN_IN, INPUT);
 	pin_mode(PIN_RELAY_CONTROL, OUTPUT);
-	pin_mode(PIN_SLAVE, OUTPUT);
+	pin_mode(PIN_SLAVE, INPUT);
 
 	pin_mode(PIN_LED_RED, OUTPUT);
 	pin_mode(PIN_LED_YELLOW, OUTPUT);

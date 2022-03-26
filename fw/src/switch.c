@@ -13,6 +13,11 @@ volatile uint8_t begin_remain_counter;
 #define END_REMAIN 10 // send 200 ms stable signal at end of switching
 
 void switch_turnout(TurnoutPos pos) {
+	if ((pos == tpPlus) && ((turnout.position == tpPlus) || (turnout.position == tpMovingToPlus)))
+		return;
+	if ((pos == tpMinus) && ((turnout.position == tpMinus) || (turnout.position == tpMovingToMinus)))
+		return;
+
 	_switching = true;
 	_target_pos = pos;
 	begin_remain_counter = 0;
