@@ -11,7 +11,9 @@
 
 // TODO: this needs to be split on multiple bytes
 // TODO: save position only
-#define EEPROM_ADDR_ANGLE                  ((uint16_t*)0x14)
+#define EEPROM_ADDR_ANGLE                  ((uint16_t*)0x20)
+
+volatile bool ee_to_save = false;
 
 void _ee_default_config() {
 	turnout.angle_plus = 150;

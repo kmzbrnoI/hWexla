@@ -1,4 +1,4 @@
-/* Main source file of Servocontroller ATmega CPU.
+/* Main source file of hWexla ATmega CPU.
  */
 
 #include <stdint.h>
@@ -40,20 +40,15 @@ int main() {
 
 	while (true) {
 		set_outputs();
+		mag_poll();
 
-		static uint16_t counter = 0;
-		counter++;
-		if (counter >= 100) {
-			//set_output(PIN_LED_YELLOW, true);
-			mag_start_measure();
-			while (!mag_available);
-			//set_output(PIN_LED_YELLOW, false);
-			//printf("Magnet: %d\n", mag_value);
-			counter = 0;
+		if (ee_to_save) {
+			ee_save();
+			ee_to_save = false;
 		}
 
-		_delay_ms(1);
 		wdt_reset();
+		_delay_ms(1);
 	}
 }
 
@@ -97,6 +92,13 @@ ISR(TIMER2_COMP_vect) {
 	if (counter_20ms >= 20) {
 		counter_20ms = 0;
 		switch_update();
+	}
+
+	static volatile uint16_t counter_50ms = 0;
+	counter_50ms++;
+	if (counter_50ms >= 50) {
+		mag_start_measure();
+		counter_50ms = 0;
 	}
 
 	static volatile uint8_t flick_counter = 0;
@@ -156,11 +158,24 @@ void set_outputs() {
 ///////////////////////////////////////////////////////////////////////////////
 
 void programming_enter() {
+	if ((turnout.position != tpPlus) && (turnout.position != tpMinus))
+		return; // allow programming entry only when not moving
+
 	mode = mProgramming;
 }
 
 void programming_leave() {
 	mode = mRun;
+
+	if (turnout.position == tpPlus) {
+		turnout.angle_plus = turnout.angle;
+		turnout.sensor_plus = mag_value;
+	} else if (turnout.position == tpMinus) {
+		turnout.angle_minus = turnout.angle;
+		turnout.sensor_minus = mag_value;
+	}
+
+	ee_to_save = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

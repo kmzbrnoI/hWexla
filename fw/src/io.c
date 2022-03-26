@@ -95,7 +95,7 @@ void io_init() {
 
 	// ADC init
 	ADMUX = (1 << REFS0) | 0x7; // reference = AVcc (5V), use ADC7
-	ADCSRA = (1 << ADEN) | (1 << ADIE) | 0x5; // enable ADC, enable interrupt, prescaler 32×
+	ADCSRA = (1 << ADEN) | 0x5; // enable ADC, prescaler 32×
 }
 
 void mag_start_measure() {
@@ -103,10 +103,14 @@ void mag_start_measure() {
 	ADCSRA |= (1 << ADSC);
 }
 
-ISR(ADC_vect) {
-	uint16_t value = ADCL;
-	value |= (ADCH << 8);
+void mag_poll() {
+	if (ADCSRA & (1 << ADIF)) {
+		ADCSRA |= (1 << ADIF); // clear flag
 
-	mag_value = value;
-	mag_available = true;
+		uint16_t value = ADCL;
+		value |= (ADCH << 8);
+
+		mag_value = value;
+		mag_available = true;
+	}
 }
