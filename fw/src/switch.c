@@ -4,7 +4,7 @@
 #include "pwm_servo_gen.h"
 
 bool _switching = false;
-volatile uint16_t switch_move_per_tick = 10;
+volatile uint8_t switch_move_per_tick = 5;
 volatile TurnoutPos _target_pos;
 volatile uint8_t end_remain_counter;
 volatile uint8_t begin_remain_counter;

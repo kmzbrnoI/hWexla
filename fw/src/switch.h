@@ -12,6 +12,6 @@ bool is_switching();
 void switch_update();
 void on_switch_done();
 
-extern volatile uint16_t switch_move_per_tick;
+extern volatile uint8_t switch_move_per_tick;
 
 #endif

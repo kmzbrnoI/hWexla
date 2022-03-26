@@ -33,6 +33,8 @@ volatile Turnout turnout;
 volatile Mode mode;
 volatile bool btn_flick = false;
 #define BTN_FLICK_PERIOD 150 // ms (max uint8_t)
+volatile uint8_t prog_btn_counter_ms = 0;
+#define PROG_BTN_MAX 20 // ms
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -110,6 +112,9 @@ ISR(TIMER2_COMP_vect) {
 		flick_counter = 0;
 	}
 
+	if (prog_btn_counter_ms < 0xFF)
+		prog_btn_counter_ms++;
+
 	buttons_update_1ms();
 	led_yellow_update_1ms();
 }
@@ -145,6 +150,26 @@ void inputs_poll() {
 			if ((in_debounced[DEB_BTN_MINUS]) && (!in_debounced[DEB_BTN_PLUS]))
 				switch_turnout(tpMinus);
 		}
+
+	} else if (mode == mProgramming) {
+		if (prog_btn_counter_ms < PROG_BTN_MAX)
+			return;
+
+		if ((in_debounced[DEB_BTN_PLUS]) && (!in_debounced[DEB_BTN_MINUS])) {
+			if (turnout.angle < PWM_ANGLE_MAX) {
+				prog_btn_counter_ms = 0;
+				turnout.angle += 1;
+				pwm_servo_gen(turnout.angle);
+			}
+		}
+		if ((in_debounced[DEB_BTN_MINUS]) && (!in_debounced[DEB_BTN_PLUS])) {
+			if (turnout.angle > PWM_ANGLE_MIN) {
+				prog_btn_counter_ms = 0;
+				turnout.angle -= 1;
+				pwm_servo_gen(turnout.angle);
+			}
+		}
+
 	}
 }
 
@@ -154,13 +179,16 @@ void set_outputs() {
 		           (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS]));
 		set_output(PIN_OUT_MINUS, (turnout.position == tpMinus) &&
 		           (get_input(PIN_SLAVE) || in_debounced[DEB_IN_MINUS]));
+		set_output(PIN_BTN_PLUS_OUT, turnout.position == tpPlus || (turnout.position == tpMovingToPlus && btn_flick));
+		set_output(PIN_BTN_MINUS_OUT, turnout.position == tpMinus || (turnout.position == tpMovingToMinus && btn_flick));
 	} else {
 		set_output(PIN_OUT_PLUS, false);
 		set_output(PIN_OUT_MINUS, false);
+		set_output(PIN_BTN_PLUS_OUT, false); // needs to be false to read both buttons
+		set_output(PIN_BTN_MINUS_OUT, false); // needs to be false to read both buttons
 	}
 
-	set_output(PIN_BTN_PLUS_OUT, turnout.position == tpPlus || (turnout.position == tpMovingToPlus && btn_flick));
-	set_output(PIN_BTN_MINUS_OUT, turnout.position == tpMinus || (turnout.position == tpMovingToMinus && btn_flick));
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -170,6 +198,7 @@ void programming_enter() {
 		return; // allow programming entry only when not moving
 
 	mode = mProgramming;
+	pwm_servo_gen(turnout.angle);
 }
 
 void programming_leave() {
@@ -177,6 +206,7 @@ void programming_leave() {
 		return;
 
 	mode = mRun;
+	pwm_servo_stop();
 
 	if (turnout.position == tpPlus) {
 		turnout.angle_plus = turnout.angle;
@@ -195,7 +225,7 @@ void led_yellow_update_1ms() {
 	const uint8_t FLICK_PERIOD = 250;
 
 	if (mode == mProgramming) {
-		static counter = 0;
+		static uint8_t counter = 0;
 
 		counter++;
 		if (counter >= FLICK_PERIOD) {
