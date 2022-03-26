@@ -41,6 +41,8 @@ typedef struct {
 typedef enum {
 	mRun = 0,
 	mProgramming = 1,
+	mInitializing = 2,
+	mFail = 3,
 } Mode;
 
 extern volatile Turnout turnout;

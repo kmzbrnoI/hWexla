@@ -122,11 +122,13 @@ void adc_start_measure() {
 }
 
 void mag_start_measure() {
+	adcCurrent = adcMagnet;
 	ADMUX = (1 << REFS0) | 0x7; // reference = AVcc (5V), use ADC7
 	ADCSRA |= (1 << ADSC); // start
 }
 
 void servo_vcc_start_measure() {
+	adcCurrent = adcServoVcc;
 	ADMUX = (1 << REFS0); // reference = AVcc (5V), use ADC0
 	ADCSRA |= (1 << ADSC); // start
 }
@@ -147,6 +149,7 @@ void adc_poll() {
 			break;
 		case adcServoVcc:
 			servo_vcc_value = value; // WARN: could be interrupted in half of writing
+			on_adc_done();
 			break;
 		};
 

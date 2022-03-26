@@ -59,6 +59,7 @@
 #define PIN_LED_GREEN IO_PIND5
 
 #define MAG_MAX_VALUE 1023
+#define SERVO_VCC_MIN  921 // 4.5 V (= 921/1024 * 5.0)
 
 void set_output(uint8_t pin, bool state);
 bool get_input(uint8_t pin);
@@ -68,6 +69,7 @@ void io_init();
 
 void adc_start_measure();
 void adc_poll();
+void on_adc_done();
 extern volatile uint16_t mag_value;
 extern volatile uint16_t servo_vcc_value;
 

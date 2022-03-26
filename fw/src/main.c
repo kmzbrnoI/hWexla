@@ -24,8 +24,11 @@ static inline void init();
 static inline void set_outputs();
 static inline void programming_enter();
 static inline void programming_leave();
+static inline void init_done();
 static inline void led_yellow_update_1ms();
+static inline void led_red_update_1ms();
 static inline void inputs_poll();
+void fail();
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -36,6 +39,9 @@ volatile bool btn_flick = false;
 volatile uint8_t prog_btn_counter_ms = 0;
 #define PROG_BTN_MAX 20 // ms
 volatile uint8_t pseudorand = 0;
+volatile uint8_t init_adc_vcc_ok_count = 0;
+volatile uint8_t init_adc_vcc_nok_count = 0;
+#define INIT_ADC_VCC_LIMIT 5 // cca 250 ms
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -69,12 +75,11 @@ static inline void init() {
 	ACSR |= ACD;  // analog comparator disable
 	TIMSK = 0;
 	stdout = &uart_output;
-	mode = mRun;
+	mode = mInitializing;
 
 	io_init();
 	set_output(PIN_LED_RED, true);
 	set_output(PIN_LED_YELLOW, true);
-	set_output(PIN_LED_GREEN, true);
 
 	ee_load();
 	pwm_servo_init();
@@ -85,12 +90,9 @@ static inline void init() {
 	OCR2 = 248; // 1 ms
 	TIMSK |= (1 << OCIE2);
 
-	_delay_ms(250);
-	set_output(PIN_LED_RED, false);
-	set_output(PIN_LED_YELLOW, false);
-
-	set_output(PIN_LED_GREEN, true);
+	// TODO: maybe delay turning on
 	set_output(PIN_SERVO_POWER_EN, true);
+	pwm_servo_gen(turnout.angle);
 
 	sei(); // enable interrupts globally
 	wdt_enable(WDTO_250MS);
@@ -127,6 +129,7 @@ ISR(TIMER2_COMP_vect) {
 
 	buttons_update_1ms();
 	led_yellow_update_1ms();
+	led_red_update_1ms();
 	pseudorand++;
 }
 
@@ -231,6 +234,21 @@ void programming_leave() {
 	ee_to_save = true;
 }
 
+void init_done() {
+	pwm_servo_stop();
+
+	set_output(PIN_LED_GREEN, true);
+	set_output(PIN_LED_RED, false);
+	set_output(PIN_LED_YELLOW, false);
+	mode = mRun;
+}
+
+void fail() {
+	set_output(PIN_LED_GREEN, false);
+	set_output(PIN_LED_YELLOW, false);
+	mode = mFail;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 void led_yellow_update_1ms() {
@@ -244,8 +262,45 @@ void led_yellow_update_1ms() {
 			set_output(PIN_LED_YELLOW, !get_output(PIN_LED_YELLOW));
 			counter = 0;
 		}
-	} else {
+	} else if (mode == mRun) {
 		set_output(PIN_LED_YELLOW, false);
+	}
+}
+
+void led_red_update_1ms() {
+	const uint8_t FLICK_PERIOD = 250;
+
+	if (mode == mFail) {
+		static uint8_t counter = 0;
+
+		counter++;
+		if (counter >= FLICK_PERIOD) {
+			set_output(PIN_LED_RED, !get_output(PIN_LED_RED));
+			counter = 0;
+		}
+	} else if (mode == mRun) {
+		set_output(PIN_LED_RED, false);
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void on_adc_done() {
+	if (mode == mInitializing) {
+		if (servo_vcc_value >= SERVO_VCC_MIN) {
+			init_adc_vcc_ok_count++;
+			if (init_adc_vcc_ok_count >= INIT_ADC_VCC_LIMIT)
+				init_done();
+		} else {
+			init_adc_vcc_ok_count = 0;
+			init_adc_vcc_nok_count++;
+			if (init_adc_vcc_nok_count >= INIT_ADC_VCC_LIMIT)
+				fail();
+		}
+
+	} else if (mode != mFail) {
+		if (servo_vcc_value < SERVO_VCC_MIN)
+			fail();
 	}
 }
 
