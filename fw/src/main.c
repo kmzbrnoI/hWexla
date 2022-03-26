@@ -246,6 +246,7 @@ void init_done() {
 void fail() {
 	set_output(PIN_LED_GREEN, false);
 	set_output(PIN_LED_YELLOW, false);
+	set_output(PIN_SERVO_POWER_EN, false);
 	mode = mFail;
 }
 
