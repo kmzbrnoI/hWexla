@@ -58,6 +58,8 @@
 #define PIN_LED_YELLOW IO_PIND6
 #define PIN_LED_GREEN IO_PIND5
 
+#define MAG_MAX_VALUE 1023
+
 void set_output(uint8_t pin, bool state);
 bool get_input(uint8_t pin);
 bool get_output(uint8_t pin);

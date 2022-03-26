@@ -6,6 +6,8 @@
 #define EEPROM_ADDR_VERSION                ((uint8_t*)0x00)
 #define EEPROM_ADDR_POS_PLUS               ((uint16_t*)0x10)
 #define EEPROM_ADDR_POS_MINUS              ((uint16_t*)0x12)
+#define EEPROM_ADDR_SENS_PLUS              ((uint16_t*)0x14)
+#define EEPROM_ADDR_SENS_MINUS             ((uint16_t*)0x16)
 
 // TODO: this needs to be split on multiple bytes
 // TODO: save position only
@@ -15,6 +17,8 @@ void _ee_default_config() {
 	turnout.angle_plus = 150;
 	turnout.angle_minus = 350;
 	turnout.angle = 250;
+	turnout.sensor_plus = 250;
+	turnout.sensor_minus = 750;
 }
 
 void ee_load() {
@@ -34,6 +38,9 @@ void ee_load() {
 	turnout.angle = eeprom_read_word(EEPROM_ADDR_POS_MINUS);
 	if (turnout.angle > PWM_ANGLE_MAX)
 		turnout.angle = PWM_ANGLE_MAX;
+
+	turnout.sensor_plus = eeprom_read_word(EEPROM_ADDR_SENS_PLUS);
+	turnout.sensor_minus = eeprom_read_word(EEPROM_ADDR_SENS_MINUS);
 }
 
 void ee_save() {
@@ -41,4 +48,6 @@ void ee_save() {
 	eeprom_update_word(EEPROM_ADDR_POS_PLUS, turnout.angle_plus);
 	eeprom_update_word(EEPROM_ADDR_POS_MINUS, turnout.angle_minus);
 	eeprom_update_word(EEPROM_ADDR_ANGLE, turnout.angle);
+	eeprom_update_word(EEPROM_ADDR_SENS_PLUS, turnout.sensor_plus);
+	eeprom_update_word(EEPROM_ADDR_SENS_MINUS, turnout.sensor_minus);
 }

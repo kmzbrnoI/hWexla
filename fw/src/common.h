@@ -21,6 +21,8 @@ typedef struct {
 	uint16_t angle;
 	uint16_t angle_plus;
 	uint16_t angle_minus;
+	uint16_t sensor_plus;
+	uint16_t sensor_minus;
 	bool save_pos;
 } Turnout;
 
