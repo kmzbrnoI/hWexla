@@ -22,10 +22,14 @@
 int main();
 static inline void init();
 void set_outputs();
+void programming_enter();
+void programming_leave();
+void led_yellow_update_1ms();
 
 ///////////////////////////////////////////////////////////////////////////////
 
 volatile Turnout turnout;
+volatile Mode mode;
 volatile bool btn_flick = false;
 #define BTN_FLICK_PERIOD 250 // ms (max uint8_t)
 
@@ -40,10 +44,10 @@ int main() {
 		static uint16_t counter = 0;
 		counter++;
 		if (counter >= 100) {
-			set_output(PIN_LED_YELLOW, true);
+			//set_output(PIN_LED_YELLOW, true);
 			mag_start_measure();
 			while (!mag_available);
-			set_output(PIN_LED_YELLOW, false);
+			//set_output(PIN_LED_YELLOW, false);
 			//printf("Magnet: %d\n", mag_value);
 			counter = 0;
 		}
@@ -57,6 +61,7 @@ static inline void init() {
 	ACSR |= ACD;  // analog comparator disable
 	TIMSK = 0;
 	stdout = &uart_output;
+	mode = mRun;
 
 	io_init();
 	ee_load();
@@ -102,6 +107,7 @@ ISR(TIMER2_COMP_vect) {
 	}
 
 	buttons_update_1ms();
+	led_yellow_update_1ms();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -122,6 +128,10 @@ void on_btn_pressed(uint8_t button) {
 	case DEB_BTN_MINUS:
 		break;
 	case DEB_BTN:
+		if (mode == mRun)
+			programming_enter();
+		else if (mode == mProgramming)
+			programming_leave();
 		break;
 	}
 }
@@ -129,10 +139,46 @@ void on_btn_pressed(uint8_t button) {
 ///////////////////////////////////////////////////////////////////////////////
 
 void set_outputs() {
-	set_output(PIN_OUT_PLUS, (turnout.position == tpPlus) && (get_input(PIN_SLAVE) || !in_debounced[DEB_IN_PLUS]));
-	set_output(PIN_OUT_MINUS, (turnout.position == tpMinus) && (get_input(PIN_SLAVE) || !in_debounced[DEB_IN_MINUS]));
+	if (mode == mRun) {
+		set_output(PIN_OUT_PLUS, (turnout.position == tpPlus) &&
+		           (get_input(PIN_SLAVE) || !in_debounced[DEB_IN_PLUS]));
+		set_output(PIN_OUT_MINUS, (turnout.position == tpMinus) &&
+		           (get_input(PIN_SLAVE) || !in_debounced[DEB_IN_MINUS]));
+	} else {
+		set_output(PIN_OUT_PLUS, false);
+		set_output(PIN_OUT_MINUS, false);
+	}
+
 	set_output(PIN_BTN_PLUS_OUT, turnout.position == tpPlus || (turnout.position == tpMovingToPlus && btn_flick));
 	set_output(PIN_BTN_MINUS_OUT, turnout.position == tpMinus || (turnout.position == tpMovingToMinus && btn_flick));
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void programming_enter() {
+	mode = mProgramming;
+}
+
+void programming_leave() {
+	mode = mRun;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void led_yellow_update_1ms() {
+	const uint8_t FLICK_PERIOD = 250;
+
+	if (mode == mProgramming) {
+		static counter = 0;
+
+		counter++;
+		if (counter >= FLICK_PERIOD) {
+			set_output(PIN_LED_YELLOW, !get_output(PIN_LED_YELLOW));
+			counter = 0;
+		}
+	} else {
+		set_output(PIN_LED_YELLOW, false);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -26,6 +26,12 @@ typedef struct {
 	bool save_pos;
 } Turnout;
 
+typedef enum {
+	mRun = 0,
+	mProgramming = 1,
+} Mode;
+
 extern volatile Turnout turnout;
+extern volatile Mode mode;
 
 #endif
