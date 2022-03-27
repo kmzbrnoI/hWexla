@@ -3,12 +3,15 @@
 #include "switch.h"
 #include "pwm_servo_gen.h"
 #include "eeprom.h"
+#include "io.h"
 
 bool _switching = false;
 volatile uint8_t switch_move_per_tick = 5;
 volatile TurnoutPos _target_pos;
 volatile uint8_t end_remain_counter;
 volatile uint8_t begin_remain_counter;
+volatile bool _relay_switched;
+volatile uint16_t _middle;
 
 #define BEGIN_REMAIN 5 // send 100 ms stable signal at end of switching
 #define END_REMAIN 10 // send 200 ms stable signal at end of switching
@@ -23,6 +26,13 @@ void switch_turnout(TurnoutPos pos) {
 	_target_pos = pos;
 	begin_remain_counter = 0;
 	end_remain_counter = 0;
+	_relay_switched = false;
+
+	if (turnout.angle_plus > turnout.angle_minus) {
+		_middle = ((turnout.angle_plus - turnout.angle_minus) / 2) + turnout.angle_minus;
+	} else {
+		_middle = ((turnout.angle_minus - turnout.angle_plus) / 2) + turnout.angle_plus;
+	}
 
 	if (pos == tpPlus) {
 		turnout.position = tpMovingToPlus;
@@ -69,7 +79,8 @@ void switch_update() {
 		}
 
 	} else {
-		if (_dir(_target_pos)) {
+		bool direction = _dir(_target_pos);
+		if (direction) {
 			turnout.angle += switch_move_per_tick;
 
 			if (_target_pos == tpPlus) {
@@ -92,5 +103,18 @@ void switch_update() {
 		}
 
 		pwm_servo_gen(turnout.angle);
+
+		if (direction) {
+			if ((turnout.angle > _middle) && (!_relay_switched)) {
+				_relay_switched = true;
+				set_output(PIN_RELAY_CONTROL, !RELAY_STATE_PLUS);
+			}
+		} else {
+			if ((turnout.angle < _middle) && (!_relay_switched)) {
+				_relay_switched = true;
+				set_output(PIN_RELAY_CONTROL, RELAY_STATE_PLUS);
+			}
+		}
+
 	}
 }

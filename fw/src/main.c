@@ -206,7 +206,11 @@ void set_outputs() {
 		set_output(PIN_BTN_MINUS_OUT, false); // needs to be false to read both buttons
 	}
 
-
+	// TODO: change to magnet sensor endposition
+	if (turnout.position == tpPlus)
+		set_output(PIN_RELAY_CONTROL, RELAY_STATE_PLUS);
+	else if (turnout.position == tpMinus)
+		set_output(PIN_RELAY_CONTROL, !RELAY_STATE_PLUS);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -12,6 +12,8 @@
 #define EEPROM_POSITION_COUNT 16
 #define EEPROM_MOVED_COUNT    8
 
+#define RELAY_STATE_PLUS true
+
 typedef enum {
 	tpPlus = 0,
 	tpMinus = 1,
