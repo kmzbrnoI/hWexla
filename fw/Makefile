@@ -7,7 +7,7 @@ BUILDDIR = build
 TARGET = $(BUILDDIR)/hwexla
 OBJDIR = obj
 SRC = $(wildcard src/*.c) $(wildcard lib/*.c)
-OPT = 2
+OPT = s
 CSTANDARD = c99
 DEBUG = dwarf-2
 
