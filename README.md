@@ -22,6 +22,10 @@ contains all data.
   only connector. Stepdowns like [RB0005](https://github.com/RoboticsBrno/RB0005-UniversalStepDown)
   are expected to be used.
 
+## [Requirements](requirements.md)
+
+In czech only
+
 ## Authors
 
 hWexla was designed in [Model Railroaders Club
