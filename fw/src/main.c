@@ -56,6 +56,7 @@ int main() {
 		set_outputs();
 		adc_poll();
 		usart_q_poll();
+		browser_read();
 
 		if (ee_to_save) {
 			ee_save();

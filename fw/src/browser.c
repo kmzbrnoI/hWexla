@@ -1,5 +1,7 @@
+#include <stdlib.h>
 #include "browser.h"
 #include "common.h"
+#include "switch.h"
 #include "usart_printf.h"
 
 void browser_print() {
@@ -24,7 +26,7 @@ void browser_print() {
 	}
 
 	puts("\n  .angle=");
-	itoa(turnout.angle, buf);
+	itoa(turnout.angle, buf, 10);
 	puts(buf);
 	puts("\n");
 
@@ -34,4 +36,26 @@ void browser_print() {
 	puts("  .sensor_minus=%d\n", turnout.sensor_minus);
 	puts("  .moved_plus=%d\n", turnout.moved_plus);
 	puts("  .moved_minus=%d\n", turnout.moved_minus);*/
+
+	puts("switch_move_per_tick");
+	itoa(switch_move_per_tick, buf, 10);
+	puts(buf);
+	puts("\n");
+
+	puts("\033[2J"); // clrscr
+}
+
+void browser_read() {
+	if (!is_stdin_data())
+		return;
+	char c = getc(stdin);
+	
+	switch (c) {
+	case '+':
+		switch_move_per_tick++;
+		break;
+	case '-':
+		switch_move_per_tick--;
+		break;
+	}
 }
