@@ -90,7 +90,12 @@ static inline void init() {
 	OCR2 = 248; // 1 ms
 	TIMSK |= (1 << OCIE2);
 
-	// TODO: maybe delay turning on
+	// Delay turning-on servo power for pseudorandom time
+	uint8_t delay = turnout.moved_plus % 10; // 0-500 ms; step=50 ms
+	for (size_t i = 0; i < delay; i++)
+		_delay_ms(50);
+	set_output(PIN_LED_GREEN, true);
+
 	set_output(PIN_SERVO_POWER_EN, true);
 	pwm_servo_gen(turnout.angle);
 
