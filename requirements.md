@@ -1,7 +1,7 @@
 Požadavky na přestavník hWexla
 ==============================
 
-# Vstupy/výstupy
+## Vstupy/výstupy
 
 1. Přestavník má
  * 2 vstupy na nastavení polohy (z MTB),
