@@ -26,6 +26,7 @@ Požadavky na přestavník hWexla
 6. Stabilizace napájení pro servo je řešená pomocí externího modulu. Očekávaný
    je pulzní stepdown. Vyčlenění stabilizace z hlavní DPS umožňuje její snadné
    nahrazení například v případě nedostupných součástek.
+7. Garantovaný proud přes relé je 3 A.
 
 ## Software
 
@@ -38,3 +39,5 @@ Požadavky na přestavník hWexla
 5. Přestavník indikuje svůj stav pomocí LED.
 6. Z přestavníku je možné číst diagnostická data pomocí USART rozhraní.
 7. Pomocí testovací krabičky je možné nastavit obě koncové polohy.
+8. Při startu přestavník zapne napájení serva až po pseudo-náhodné době, aby
+   se rozložila proudová zátěž při zapínání kolejiště s mnoha přestavníky.
