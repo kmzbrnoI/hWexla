@@ -16,6 +16,7 @@
 #include "inputs.h"
 #include "eeprom.h"
 #include "usart_printf.h"
+#include "browser.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -42,6 +43,8 @@ volatile uint8_t pseudorand = 0;
 volatile uint8_t init_adc_vcc_ok_count = 0;
 volatile uint8_t init_adc_vcc_nok_count = 0;
 #define INIT_ADC_VCC_LIMIT 5 // cca 250 ms
+volatile uint8_t browser_counter = 0;
+#define BROWSER_REFRESH_PERIOD 100 // 100 ms
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -52,6 +55,7 @@ int main() {
 		inputs_poll();
 		set_outputs();
 		adc_poll();
+		usart_q_poll();
 
 		if (ee_to_save) {
 			ee_save();
@@ -66,6 +70,11 @@ int main() {
 			ee_to_store_pos_minus = false;
 		}
 
+		if (browser_counter >= BROWSER_REFRESH_PERIOD) {
+			browser_print();
+			browser_counter = 0;
+		}
+
 		wdt_reset();
 		_delay_ms(1);
 	}
@@ -74,7 +83,9 @@ int main() {
 static inline void init() {
 	ACSR |= ACD;  // analog comparator disable
 	TIMSK = 0;
+	stdin = &uart_input;
 	stdout = &uart_output;
+	stderr = &uart_output;
 	mode = mInitializing;
 
 	io_init();
@@ -131,6 +142,9 @@ ISR(TIMER2_COMP_vect) {
 
 	if (prog_btn_counter_ms < 0xFF)
 		prog_btn_counter_ms++;
+
+	if (browser_counter < BROWSER_REFRESH_PERIOD)
+		browser_counter++;
 
 	buttons_update_1ms();
 	led_yellow_update_1ms();

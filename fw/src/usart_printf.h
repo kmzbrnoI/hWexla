@@ -2,12 +2,15 @@
 #define USART_PRINTF_H
 
 #include <stdio.h>
+#include <stdbool.h>
 
+void usart_initialize(void);
 void usart_send_byte(char byte, FILE *stream);
 char usart_get_byte(FILE *stream);
-void usart_initialize(void);
+bool is_stdin_data();
+void usart_q_poll();
 
-FILE uart_output = FDEV_SETUP_STREAM(usart_send_byte, NULL, _FDEV_SETUP_WRITE);
-FILE uart_input = FDEV_SETUP_STREAM(NULL, usart_get_byte, _FDEV_SETUP_READ);
+extern FILE uart_output;
+extern FILE uart_input;
 
 #endif
