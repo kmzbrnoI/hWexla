@@ -1,5 +1,6 @@
 MCU = atmega8
-FUSES = -U lfuse:w:0x14:m -U hfuse:w:0xD9:m -U lock:w:0xFF:m
+# Preserve EEPROM during chip-erase cycle
+FUSES = -U lfuse:w:0x14:m -U hfuse:w:0xD1:m -U lock:w:0xFF:m
 F_CPU = 8000000
 FORMAT = ihex
 BUILDDIR = build
