@@ -30,6 +30,8 @@ static inline void init_done();
 static inline void led_yellow_update_1ms();
 static inline void led_red_update_1ms();
 static inline void inputs_poll();
+bool magnet_isclose(uint16_t value, uint8_t threshold);
+bool magnet_iswarn();
 void fail();
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -212,14 +214,24 @@ void inputs_poll() {
 	}
 }
 
-bool magnet_isclose(uint16_t value) {
+bool magnet_isclose(uint16_t value, uint8_t threshold) {
 	// Tolerance: +- 3 % (1024*0.02=30)
-	return abs((int16_t)mag_value-(int16_t)value) < 30;
+	return abs((int16_t)mag_value-(int16_t)value) < threshold;
+}
+
+bool magnet_iswarn() {
+	if (turnout.position == tpPlus) {
+		return !magnet_isclose(turnout.sensor_plus, 20);
+	}
+	if (turnout.position == tpMinus) {
+		return !magnet_isclose(turnout.sensor_minus, 20);
+	}
+	return false;
 }
 
 void set_outputs() {
-	bool my_plus = (turnout.position == tpPlus) && (magnet_isclose(turnout.sensor_plus));
-	bool my_minus = (turnout.position == tpMinus) && (magnet_isclose(turnout.sensor_minus));
+	bool my_plus = (turnout.position == tpPlus) && (magnet_isclose(turnout.sensor_plus, 30));
+	bool my_minus = (turnout.position == tpMinus) && (magnet_isclose(turnout.sensor_minus, 30));
 
 	if (mode == mRun) {
 		set_output(PIN_OUT_PLUS, my_plus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS]));
@@ -286,7 +298,7 @@ void fail() {
 void led_yellow_update_1ms() {
 	const uint8_t FLICK_PERIOD = 250;
 
-	if (mode == mProgramming) {
+	if ((mode == mProgramming) || ((mode == mRun) && (magnet_iswarn()))) {
 		static uint8_t counter = 0;
 
 		counter++;
