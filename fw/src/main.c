@@ -9,6 +9,7 @@
 #include <avr/wdt.h>
 #include <avr/eeprom.h>
 #include <avr/boot.h>
+#include <stdlib.h>
 
 #include "io.h"
 #include "pwm_servo_gen.h"
@@ -211,14 +212,20 @@ void inputs_poll() {
 	}
 }
 
+bool magnet_isclose(uint16_t value) {
+	// Tolerance: +- 3 % (1024*0.02=30)
+	return abs((int16_t)mag_value-(int16_t)value) < 30;
+}
+
 void set_outputs() {
+	bool my_plus = (turnout.position == tpPlus) && (magnet_isclose(turnout.sensor_plus));
+	bool my_minus = (turnout.position == tpMinus) && (magnet_isclose(turnout.sensor_minus));
+
 	if (mode == mRun) {
-		set_output(PIN_OUT_PLUS, (turnout.position == tpPlus) &&
-		           (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS]));
-		set_output(PIN_OUT_MINUS, (turnout.position == tpMinus) &&
-		           (get_input(PIN_SLAVE) || in_debounced[DEB_IN_MINUS]));
-		set_output(PIN_BTN_PLUS_OUT, turnout.position == tpPlus || (turnout.position == tpMovingToPlus && btn_flick));
-		set_output(PIN_BTN_MINUS_OUT, turnout.position == tpMinus || (turnout.position == tpMovingToMinus && btn_flick));
+		set_output(PIN_OUT_PLUS, my_plus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS]));
+		set_output(PIN_OUT_MINUS, my_minus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_MINUS]));
+		set_output(PIN_BTN_PLUS_OUT, my_plus || (turnout.position == tpMovingToPlus && btn_flick));
+		set_output(PIN_BTN_MINUS_OUT, my_minus || (turnout.position == tpMovingToMinus && btn_flick));
 	} else {
 		set_output(PIN_OUT_PLUS, false);
 		set_output(PIN_OUT_MINUS, false);
@@ -226,7 +233,7 @@ void set_outputs() {
 		set_output(PIN_BTN_MINUS_OUT, false); // needs to be false to read both buttons
 	}
 
-	// TODO: change to magnet sensor endposition
+	// Do not use sensor value to allow relay switching without physical servo
 	if (turnout.position == tpPlus)
 		set_output(PIN_RELAY_CONTROL, RELAY_STATE_PLUS);
 	else if (turnout.position == tpMinus)
