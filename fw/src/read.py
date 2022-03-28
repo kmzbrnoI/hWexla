@@ -8,7 +8,7 @@ import datetime
 
 assert len(sys.argv) >= 2
 
-ser = serial.Serial(port=sys.argv[1], baudrate=19200)
+ser = serial.Serial(port=sys.argv[1], baudrate=38400)
 
 while True:
     line = ser.readline()

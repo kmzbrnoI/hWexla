@@ -17,7 +17,7 @@ void usart_initialize(void) {
 	rq_init(&outq);
 	rq_init(&inq);
 
-	UBRRL = 25; // 19200 Baud (F_CPU/16/BAUD_RATE-1)
+	UBRRL = 12; // 38400 Baud (F_CPU/16/BAUD_RATE-1)
 	UBRRH = 0;
 	UCSRB = _BV(TXEN) | _BV(RXEN) | _BV(RXCIE) | _BV(TXCIE);
 	UCSRC = _BV(URSEL) | _BV(UCSZ1) | _BV(UCSZ0); // async operation, no parity, 1 stop-bit, 8-bit

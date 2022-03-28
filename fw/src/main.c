@@ -44,7 +44,7 @@ volatile uint8_t init_adc_vcc_ok_count = 0;
 volatile uint8_t init_adc_vcc_nok_count = 0;
 #define INIT_ADC_VCC_LIMIT 5 // cca 250 ms
 volatile uint8_t browser_counter = 0;
-#define BROWSER_REFRESH_PERIOD 100 // 100 ms
+#define BROWSER_UPDATE_PERIOD 10 // 10 ms
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -71,7 +71,7 @@ int main() {
 			ee_to_store_pos_minus = false;
 		}
 
-		if (browser_counter >= BROWSER_REFRESH_PERIOD) {
+		if (browser_counter >= BROWSER_UPDATE_PERIOD) {
 			browser_print();
 			browser_counter = 0;
 		}
@@ -144,7 +144,7 @@ ISR(TIMER2_COMP_vect) {
 	if (prog_btn_counter_ms < 0xFF)
 		prog_btn_counter_ms++;
 
-	if (browser_counter < BROWSER_REFRESH_PERIOD)
+	if (browser_counter < BROWSER_UPDATE_PERIOD)
 		browser_counter++;
 
 	buttons_update_1ms();
