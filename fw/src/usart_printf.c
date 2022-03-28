@@ -53,8 +53,13 @@ char usart_get_byte(FILE *stream) {
 }
 
 ISR(USART_RXC_vect) {
-	if (UCSRA & ((1<<FE)|(1<<DOR)|(1<<PE)))
+	uint8_t received;
+	if (UCSRA & ((1<<FE)|(1<<DOR)|(1<<PE))) {
+		received = UDR; // even bad data must be read
+		(void)received;
 		return; // return on error
+	}
+	received = UDR;
 
 	if (!rq_full(&inq))
 		rq_enqueue(&inq, UDR);
