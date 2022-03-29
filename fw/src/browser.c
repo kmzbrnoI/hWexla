@@ -46,7 +46,7 @@ void _browser_print(uint8_t part) {
 	switch (part) {
 	case 0:
 		//fputs("\033[2J", stdout); // clrscr
-		fputs("\033[13A", stdout); // go n lines above
+		fputs("\033[14A", stdout); // go n lines above
 
 		fputs("Mode=", stdout);
 		switch (mode) {
@@ -83,6 +83,11 @@ void _browser_print(uint8_t part) {
 		put_ui8("switch_move_per_tick=", switch_move_per_tick);
 		put_ui16("mag_value=", mag_value);
 		put_ui16("servo_vcc_value=", servo_vcc_value);
+		break;
+
+	case 6:
+		fputs("fail_msg=", stdout);
+		puts(fail_msg);
 		break;
 	}
 }

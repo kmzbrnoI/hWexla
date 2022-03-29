@@ -50,5 +50,8 @@ typedef enum {
 extern volatile Turnout turnout;
 extern volatile Mode mode;
 extern volatile uint8_t pseudorand;
+extern char fail_msg[16];
+
+void fail(const char* msg);
 
 #endif

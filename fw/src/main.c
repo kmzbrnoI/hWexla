@@ -10,6 +10,7 @@
 #include <avr/eeprom.h>
 #include <avr/boot.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "io.h"
 #include "pwm_servo_gen.h"
@@ -32,7 +33,7 @@ static inline void led_red_update_1ms();
 static inline void inputs_poll();
 bool magnet_isclose(uint16_t value, uint8_t threshold);
 bool magnet_iswarn();
-void fail();
+void fail(const char* msg);
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -48,6 +49,7 @@ volatile uint8_t init_adc_vcc_nok_count = 0;
 #define INIT_ADC_VCC_LIMIT 5 // cca 250 ms
 volatile uint8_t browser_counter = 0;
 #define BROWSER_UPDATE_PERIOD 10 // 10 ms
+char fail_msg[16];
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -91,6 +93,7 @@ static inline void init() {
 	stdout = &uart_output;
 	stderr = &uart_output;
 	mode = mInitializing;
+	fail_msg[0] = 0;
 
 	io_init();
 	set_output(PIN_LED_RED, true);
@@ -116,6 +119,10 @@ static inline void init() {
 
 	sei(); // enable interrupts globally
 	wdt_enable(WDTO_250MS);
+}
+
+ISR(BADISR_vect) {
+	fail("BADISR");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -286,10 +293,11 @@ void init_done() {
 	mode = mRun;
 }
 
-void fail() {
+void fail(const char* msg) {
 	set_output(PIN_LED_GREEN, false);
 	set_output(PIN_LED_YELLOW, false);
 	set_output(PIN_SERVO_POWER_EN, false);
+	strcpy(fail_msg, msg);
 	mode = mFail;
 }
 
@@ -339,12 +347,12 @@ void on_adc_done() {
 			init_adc_vcc_ok_count = 0;
 			init_adc_vcc_nok_count++;
 			if (init_adc_vcc_nok_count >= INIT_ADC_VCC_LIMIT)
-				fail();
+				fail("INIT SERVO VCC NOK");
 		}
 
 	} else if (mode != mFail) {
 		if (servo_vcc_value < SERVO_VCC_MIN)
-			fail();
+			fail("SERVO VCC NOK");
 	}
 }
 
