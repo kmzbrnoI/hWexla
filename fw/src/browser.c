@@ -103,9 +103,11 @@ void browser_print() {
 
 void browser_read() {
 	// Do not use getc to save space
-	if (rq_empty(&usart_inq))
+	if (usart_in == 0)
 		return;
-	char c = rq_dequeue(&usart_inq);
+
+	char c = usart_in;
+	usart_in = 0;
 
 	switch (c) {
 	case '+':

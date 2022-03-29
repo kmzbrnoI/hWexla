@@ -7,13 +7,11 @@
 
 void usart_initialize(void);
 void usart_send_byte(char byte, FILE *stream);
-char usart_get_byte(FILE *stream);
 void usart_q_poll();
 
 extern FILE uart_output;
-extern FILE uart_input;
 
 extern volatile RingQueue usart_outq;
-extern volatile RingQueue usart_inq;
+extern volatile char usart_in; // input is 1-byte bufferred
 
 #endif

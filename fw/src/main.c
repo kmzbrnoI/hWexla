@@ -91,7 +91,6 @@ int main() {
 static inline void init() {
 	ACSR |= ACD;  // analog comparator disable
 	TIMSK = 0;
-	stdin = &uart_input;
 	stdout = &uart_output;
 	stderr = &uart_output;
 	mode = mInitializing;

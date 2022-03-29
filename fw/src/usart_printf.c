@@ -5,16 +5,15 @@
 #include "usart_printf.h"
 
 FILE uart_output = FDEV_SETUP_STREAM(usart_send_byte, NULL, _FDEV_SETUP_WRITE);
-FILE uart_input = FDEV_SETUP_STREAM(NULL, usart_get_byte, _FDEV_SETUP_READ);
 
 volatile RingQueue usart_outq;
-volatile RingQueue usart_inq;
+volatile char usart_in; // input is 1-byte bufferred
 volatile bool _sending = false;
 volatile bool _outq_overflow = false;
 
 void usart_initialize(void) {
 	rq_init(&usart_outq);
-	rq_init(&usart_inq);
+	usart_in = 0;
 
 	UBRRL = 12; // 38400 Baud (F_CPU/16/BAUD_RATE-1)
 	UBRRH = 0;
@@ -45,12 +44,6 @@ void usart_q_poll() {
 	}
 }
 
-char usart_get_byte(FILE *stream) {
-	if (rq_empty(&usart_inq))
-		return 0;
-	return rq_dequeue(&usart_inq);
-}
-
 ISR(USART_RXC_vect) {
 	uint8_t received;
 	if (UCSRA & ((1<<FE)|(1<<DOR)|(1<<PE))) {
@@ -60,8 +53,8 @@ ISR(USART_RXC_vect) {
 	}
 	received = UDR;
 
-	if (!rq_full(&usart_inq))
-		rq_enqueue(&usart_inq, UDR);
+	if (usart_in == 0)
+		usart_in = received;
 }
 
 ISR(USART_TXC_vect) {
