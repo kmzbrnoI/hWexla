@@ -1,5 +1,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/atomic.h>
 #include "io.h"
 
 typedef enum {
@@ -144,11 +145,15 @@ void adc_poll() {
 		adcCurrent = adcNone;
 		switch (old) {
 		case adcMagnet:
-			mag_value = value; // WARN: could be interrupted in half of writing
+			ATOMIC_BLOCK(ATOMIC_FORCEON) {
+				mag_value = value; // WARN: could be interrupted in half of writing
+			}
 			servo_vcc_start_measure();
 			break;
 		case adcServoVcc:
-			servo_vcc_value = value; // WARN: could be interrupted in half of writing
+			ATOMIC_BLOCK(ATOMIC_FORCEON) {
+				servo_vcc_value = value; // WARN: could be interrupted in half of writing
+			}
 			on_adc_done();
 			break;
 		};
