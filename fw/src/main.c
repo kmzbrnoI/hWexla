@@ -49,7 +49,8 @@ volatile uint8_t init_adc_vcc_nok_count = 0;
 #define INIT_ADC_VCC_LIMIT 5 // cca 250 ms
 volatile uint8_t browser_counter = 0;
 #define BROWSER_UPDATE_PERIOD 10 // 10 ms
-char fail_msg[16];
+#define FAIL_MSG_MAX_LEN 16
+char fail_msg[FAIL_MSG_MAX_LEN];
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -297,7 +298,8 @@ void fail(const char* msg) {
 	set_output(PIN_LED_GREEN, false);
 	set_output(PIN_LED_YELLOW, false);
 	set_output(PIN_SERVO_POWER_EN, false);
-	strcpy(fail_msg, msg);
+	strncpy(fail_msg, msg, FAIL_MSG_MAX_LEN-1);
+	fail_msg[FAIL_MSG_MAX_LEN-1] = 0;
 	mode = mFail;
 }
 
@@ -352,7 +354,7 @@ void on_adc_done() {
 
 	} else if (mode != mFail) {
 		if (servo_vcc_value < SERVO_VCC_MIN)
-			fail("SERVO VCC NOK");
+			fail("SERVO VCC NOK");
 	}
 }
 
