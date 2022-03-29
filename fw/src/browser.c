@@ -102,10 +102,11 @@ void browser_print() {
 }
 
 void browser_read() {
-	if (!is_stdin_data())
+	// Do not use getc to save space
+	if (rq_empty(&usart_inq))
 		return;
-	char c = getc(stdin);
-	
+	char c = rq_dequeue(&usart_inq);
+
 	switch (c) {
 	case '+':
 		switch_move_per_tick++;

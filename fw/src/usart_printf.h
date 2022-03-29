@@ -3,14 +3,17 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include "ring_queue.h"
 
 void usart_initialize(void);
 void usart_send_byte(char byte, FILE *stream);
 char usart_get_byte(FILE *stream);
-bool is_stdin_data();
 void usart_q_poll();
 
 extern FILE uart_output;
 extern FILE uart_input;
+
+extern volatile RingQueue usart_outq;
+extern volatile RingQueue usart_inq;
 
 #endif
