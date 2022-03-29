@@ -28,6 +28,7 @@ static inline void set_outputs();
 static inline void programming_enter();
 static inline void programming_leave();
 static inline void init_done();
+static inline void led_green_update_1ms();
 static inline void led_yellow_update_1ms();
 static inline void led_red_update_1ms();
 static inline void inputs_poll();
@@ -159,6 +160,7 @@ ISR(TIMER2_COMP_vect) {
 		browser_counter++;
 
 	buttons_update_1ms();
+	led_green_update_1ms();
 	led_yellow_update_1ms();
 	led_red_update_1ms();
 	pseudorand++;
@@ -305,10 +307,26 @@ void fail(const char* msg) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
+void led_green_update_1ms() {
+	const uint8_t FLICK_PERIOD = 250;
+
+	if (mode == mProgramming) {
+		static uint8_t counter = 0;
+
+		counter++;
+		if (counter >= FLICK_PERIOD) {
+			set_output(PIN_LED_GREEN, !get_output(PIN_LED_GREEN));
+			counter = 0;
+		}
+	} else {
+		set_output(PIN_LED_GREEN, (mode == mRun));
+	}
+}
+
 void led_yellow_update_1ms() {
 	const uint8_t FLICK_PERIOD = 250;
 
-	if ((mode == mProgramming) || ((mode == mRun) && (magnet_iswarn()))) {
+	if ((mode == mRun) && (magnet_iswarn())) {
 		static uint8_t counter = 0;
 
 		counter++;
@@ -316,7 +334,7 @@ void led_yellow_update_1ms() {
 			set_output(PIN_LED_YELLOW, !get_output(PIN_LED_YELLOW));
 			counter = 0;
 		}
-	} else if (mode == mRun) {
+	} else {
 		set_output(PIN_LED_YELLOW, false);
 	}
 }
