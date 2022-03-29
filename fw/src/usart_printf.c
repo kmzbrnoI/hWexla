@@ -36,7 +36,7 @@ void usart_q_poll() {
 		// Print overflow only after all data sent
 		// Maybe this should be done better (send 'OVERFLOW' as soon as there is space)
 		_outq_overflow = false;
-		printf("-- OVERFLOW --\n");
+		puts("-- OVERFLOW --");
 	}
 
 	if ((!rq_empty(&outq)) && (!_sending)) {
