@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <avr/interrupt.h>
 #include "browser.h"
 #include "common.h"
 #include "switch.h"
@@ -111,6 +112,10 @@ void browser_read() {
 		break;
 	case '-':
 		switch_move_per_tick--;
+		break;
+	case 'r': // reset
+		cli();
+		while (true);
 		break;
 	}
 }
