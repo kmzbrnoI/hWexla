@@ -28,11 +28,11 @@ void _ee_pos_change();
 
 
 void _ee_default_config() {
-	turnout.angle_plus = 150;
-	turnout.angle_minus = 350;
+	turnout.angle_plus = 350;
+	turnout.angle_minus = 150;
 	turnout.angle = 250;
-	turnout.sensor_plus = 250;
-	turnout.sensor_minus = 750;
+	turnout.sensor_plus = 750;
+	turnout.sensor_minus = 250;
 	turnout.moved_plus = 0;
 	turnout.moved_minus = 0;
 
