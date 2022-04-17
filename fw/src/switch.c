@@ -107,12 +107,14 @@ void switch_update() {
 		if (direction) {
 			if ((turnout.angle > _middle) && (!_relay_switched)) {
 				_relay_switched = true;
-				set_output(PIN_RELAY_CONTROL, !RELAY_STATE_PLUS);
+				set_output(PIN_RELAY_CONTROL,
+				           (turnout.position == tpMovingToPlus) == RELAY_STATE_PLUS);
 			}
 		} else {
 			if ((turnout.angle < _middle) && (!_relay_switched)) {
 				_relay_switched = true;
-				set_output(PIN_RELAY_CONTROL, RELAY_STATE_PLUS);
+				set_output(PIN_RELAY_CONTROL,
+				           (turnout.position == tpMovingToPlus) == RELAY_STATE_PLUS);
 			}
 		}
 
