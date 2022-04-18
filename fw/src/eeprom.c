@@ -60,9 +60,6 @@ void ee_load() {
 	turnout.angle_minus = eeprom_read_word(EEPROM_ADDR_POS_MINUS);
 	if (turnout.angle_minus > PWM_ANGLE_MAX)
 		turnout.angle_minus = PWM_ANGLE_MAX;
-	turnout.angle = eeprom_read_word(EEPROM_ADDR_POS_MINUS);
-	if (turnout.angle > PWM_ANGLE_MAX)
-		turnout.angle = PWM_ANGLE_MAX;
 
 	turnout.sensor_plus = eeprom_read_word(EEPROM_ADDR_SENS_PLUS);
 	turnout.sensor_minus = eeprom_read_word(EEPROM_ADDR_SENS_MINUS);
