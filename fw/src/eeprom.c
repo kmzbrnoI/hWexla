@@ -9,6 +9,8 @@
  */
 
 #define EEPROM_ADDR_VERSION                ((uint8_t*)0x00)
+#define EEPROM_ADDR_FW_VER_MAJOR           ((uint8_t*)0x01)
+#define EEPROM_ADDR_FW_VER_MINOR           ((uint8_t*)0x02)
 #define EEPROM_ADDR_POS_PLUS               ((uint16_t*)0x10)
 #define EEPROM_ADDR_POS_MINUS              ((uint16_t*)0x12)
 #define EEPROM_ADDR_SENS_PLUS              ((uint16_t*)0x14)
@@ -94,6 +96,8 @@ void ee_load() {
 
 void ee_save() {
 	eeprom_update_byte(EEPROM_ADDR_VERSION, 1);
+	eeprom_update_byte(EEPROM_ADDR_FW_VER_MAJOR, CONFIG_FW_MAJOR);
+	eeprom_update_byte(EEPROM_ADDR_FW_VER_MINOR, CONFIG_FW_MINOR);
 	eeprom_update_word(EEPROM_ADDR_POS_PLUS, turnout.angle_plus);
 	eeprom_update_word(EEPROM_ADDR_POS_MINUS, turnout.angle_minus);
 	eeprom_update_word(EEPROM_ADDR_SENS_PLUS, turnout.sensor_plus);
