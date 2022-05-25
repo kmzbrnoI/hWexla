@@ -72,6 +72,9 @@ void _browser_print(uint8_t part) {
 		put_ui16("  .angle=", turnout.angle);
 		put_ui16("  .angle_plus=", turnout.angle_plus);
 		put_ui16("  .angle_minus=", turnout.angle_minus);
+		break;
+
+	case 2:
 		put_ui16("  .sensor_plus=", turnout.sensor_plus);
 		put_ui16("  .sensor_minus=", turnout.sensor_minus);
 		break;
