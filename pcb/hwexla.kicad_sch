@@ -6,8 +6,8 @@
 
   (title_block
     (title "hWexla - turnout controller")
-    (date "2021-12-02")
-    (rev "1.1")
+    (date "2022-05-29")
+    (rev "1.2")
     (company "Model Railroader Club Brno I – KMŽ Brno I – https://kmz-brno.cz/")
     (comment 1 "Jan Horáček")
     (comment 2 "https://github.com/kmzbrnoI/hwexla")
@@ -4573,7 +4573,7 @@
   (symbol (lib_id "power:VCC") (at 115.57 97.79 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 63183de5-2468-46f3-bb84-63dadb2b103e)
-    (property "Reference" "#PWR?" (id 0) (at 115.57 101.6 0)
+    (property "Reference" "#PWR049" (id 0) (at 115.57 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VCC" (id 1) (at 115.951 93.3958 0))
@@ -4902,7 +4902,10 @@
       (reference "#PWR048") (unit 1) (value "GND") (footprint "")
     )
     (path "/63183de5-2468-46f3-bb84-63dadb2b103e"
-      (reference "#PWR?") (unit 1) (value "VCC") (footprint "")
+      (reference "#PWR049") (unit 1) (value "VCC") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-000061aa561a/bb613f8d-4b30-4bc2-b661-b53f6f51dc94"
+      (reference "#PWR050") (unit 1) (value "GND") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061d6e7e0"
       (reference "#SYM1") (unit 1) (value "SYM_Earth_Protective_Small") (footprint "")
@@ -4945,6 +4948,9 @@
     )
     (path "/00000000-0000-0000-0000-000062057d9b"
       (reference "C13") (unit 1) (value "100n") (footprint "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder")
+    )
+    (path "/00000000-0000-0000-0000-000061aa561a/8f2e72d0-4fb4-4f40-b38f-a9a606ff8d3c"
+      (reference "C14") (unit 1) (value "22u") (footprint "Capacitor_SMD:C_0805_2012Metric")
     )
     (path "/00000000-0000-0000-0000-000061e8b43f"
       (reference "D1") (unit 1) (value "GR") (footprint "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder")
