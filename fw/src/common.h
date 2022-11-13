@@ -8,13 +8,13 @@
 
 #define CONFIG_FW_MAJOR 1
 #define CONFIG_FW_MINOR 1
+#define CONFIG_FW_MAJOR_STR "1"
+#define CONFIG_FW_MINOR_STR "1"
 
 #define EEPROM_POSITION_COUNT 16
 #define EEPROM_MOVED_COUNT    8
 
 #define RELAY_STATE_PLUS true
-
-#define STRINGIFY(s) #s
 
 typedef enum {
 	tpPlus = 0,

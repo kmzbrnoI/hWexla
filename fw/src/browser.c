@@ -49,7 +49,7 @@ void _browser_print(uint8_t part) {
 		//fputs("\033[2J", stdout); // clrscr
 		fputs("\033[15A", stdout); // go n lines above
 
-		puts("FW=" STRINGIFY(CONFIG_FW_MAJOR) "." STRINGIFY(CONFIG_FW_MINOR));
+		puts("FW=" CONFIG_FW_MAJOR_STR "." CONFIG_FW_MINOR_STR);
 		fputs("Mode=", stdout);
 		switch (mode) {
 		case mRun:          puts("mRun         "); break;
