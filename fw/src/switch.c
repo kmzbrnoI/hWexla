@@ -6,7 +6,7 @@
 #include "io.h"
 
 bool _switching = false;
-volatile uint8_t switch_move_per_tick = 5;
+volatile uint8_t switch_move_per_tick = 4;
 volatile TurnoutPos _target_pos;
 volatile uint8_t end_remain_counter;
 volatile uint8_t begin_remain_counter;
