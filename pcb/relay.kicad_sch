@@ -766,7 +766,7 @@
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-0000620e6427)
     (property "Reference" "K1" (id 0) (at 148.59 69.4182 90))
-    (property "Value" "HFD2/005" (id 1) (at 148.59 71.7296 90))
+    (property "Value" "RS-5" (id 1) (at 148.59 71.7296 90))
     (property "Footprint" "hwexla:HFD2" (id 2) (at 148.59 88.9 0)
       (effects (font (size 1.27 1.27)) hide)
     )

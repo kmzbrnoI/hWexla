@@ -5055,7 +5055,7 @@
       (reference "JP2") (unit 1) (value "SolderJumper_2_Open") (footprint "Jumper:SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm")
     )
     (path "/00000000-0000-0000-0000-000061aa561a/00000000-0000-0000-0000-0000620e6427"
-      (reference "K1") (unit 1) (value "HFD2/005") (footprint "hwexla:HFD2")
+      (reference "K1") (unit 1) (value "RS-5") (footprint "hwexla:HFD2")
     )
     (path "/00000000-0000-0000-0000-000061aa5240/00000000-0000-0000-0000-000061acf0b2"
       (reference "Q1") (unit 1) (value "BT148") (footprint "Package_TO_SOT_SMD:SOT-223")
