@@ -5027,6 +5027,12 @@
     (path "/00000000-0000-0000-0000-000061aa542b/00000000-0000-0000-0000-000061af2f0a"
       (reference "F10") (unit 1) (value "200mA/460mA") (footprint "Fuse:Fuse_1206_3216Metric_Pad1.42x1.75mm_HandSolder")
     )
+    (path "/00000000-0000-0000-0000-000061aa561a/607dd384-9696-4921-ae56-bcca536273a5"
+      (reference "F11") (unit 1) (value "2A") (footprint "Fuse:Fuse_1206_3216Metric_Pad1.42x1.75mm_HandSolder")
+    )
+    (path "/00000000-0000-0000-0000-000061aa561a/662b4bd2-6aa3-4937-9f2e-11a237c20ad2"
+      (reference "F12") (unit 1) (value "2A") (footprint "Fuse:Fuse_1206_3216Metric_Pad1.42x1.75mm_HandSolder")
+    )
     (path "/00000000-0000-0000-0000-000061c397fd"
       (reference "H1") (unit 1) (value "MountingHole_Pad") (footprint "MountingHole:MountingHole_2.2mm_M2_Pad")
     )
