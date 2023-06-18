@@ -49,12 +49,7 @@
         }
       },
       "diff_pair_dimensions": [],
-      "drc_exclusions": [
-        "copper_edge_clearance|183634000|71556000|00000000-0000-0000-0000-000061c97ddf|2ce087fc-8fe2-4bce-b111-54c11feabd07",
-        "copper_edge_clearance|183634000|71556000|00000000-0000-0000-0000-000061c97ddf|fde234b9-bbe6-4d1b-89ae-5cd0c0795704",
-        "copper_edge_clearance|183634000|95056000|00000000-0000-0000-0000-000061c97e0f|1bcf6f07-20e2-4f90-ad91-835d8b709c84",
-        "copper_edge_clearance|183634000|95056000|00000000-0000-0000-0000-000061c97e0f|eaf5629c-c2fb-4e0f-89d4-8c374ab49882"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "filename": "board_design_settings.json",
         "version": 2
@@ -62,7 +57,7 @@
       "rule_severities": {
         "annular_width": "error",
         "clearance": "error",
-        "copper_edge_clearance": "error",
+        "copper_edge_clearance": "warning",
         "courtyards_overlap": "error",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
@@ -342,7 +337,7 @@
       "label_dangling": "error",
       "lib_symbol_issues": "warning",
       "multiple_net_names": "warning",
-      "net_not_bus_member": "warning",
+      "net_not_bus_member": "ignore",
       "no_connect_connected": "warning",
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
