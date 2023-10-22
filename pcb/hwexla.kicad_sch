@@ -6,8 +6,8 @@
 
   (title_block
     (title "hWexla - turnout controller")
-    (date "2022-05-29")
-    (rev "1.2")
+    (date "2023-10-22")
+    (rev "1.3")
     (company "Model Railroader Club Brno I – KMŽ Brno I – https://kmz-brno.cz/")
     (comment 1 "Jan Horáček")
     (comment 2 "https://github.com/kmzbrnoI/hwexla")
