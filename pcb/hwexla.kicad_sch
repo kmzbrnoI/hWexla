@@ -3787,7 +3787,7 @@
     (property "Value" "TestPoint" (at 260.5532 41.2242 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "TestPoint:TestPoint_Loop_D3.50mm_Drill1.4mm_Beaded" (at 264.16 41.91 0)
+    (property "Footprint" "TestPoint:TestPoint_Loop_D1.80mm_Drill1.0mm_Beaded" (at 264.16 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 264.16 41.91 0)
