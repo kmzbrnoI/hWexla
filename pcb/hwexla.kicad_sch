@@ -4100,7 +4100,7 @@
     (property "Value" "SW_Push" (at 172.7708 129.413 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "Button_Switch_SMD:SW_Push_1P1T_NO_6x6mm_H9.5mm" (at 179.07 128.27 0)
+    (property "Footprint" "Button_Switch_SMD:SW_SPST_Omron_B3FS-100xP" (at 179.07 128.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 179.07 128.27 0)
