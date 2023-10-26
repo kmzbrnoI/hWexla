@@ -24,4 +24,8 @@ while True:
         special, line = line[:5], line[5:]
         print(special.decode('ascii'), end='')
     print(f'[{datetime.datetime.now().time()}]', end=' ')
-    print(line.decode('ascii'), end='')
+
+    try:
+        print(line.decode('ascii'), end='')
+    except UnicodeDecodeError:
+        pass
