@@ -7,7 +7,7 @@
 /* Definition of common types */
 
 #define CONFIG_FW_MAJOR 1
-#define CONFIG_FW_MINOR 1
+#define CONFIG_FW_MINOR 2
 #define CONFIG_FW_MAJOR_STR "1"
 #define CONFIG_FW_MINOR_STR "1"
 
@@ -15,6 +15,9 @@
 #define EEPROM_MOVED_COUNT    8
 
 #define RELAY_STATE_PLUS true
+
+#define MAG_THRESHOLD_WARN 30 // 3% (1024 * 3% = ~30)
+#define MAG_THRESHOLD_OK 40 // 4% (1024 * 4% = ~40)
 
 typedef enum {
 	tpPlus = 0,

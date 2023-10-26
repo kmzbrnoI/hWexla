@@ -224,23 +224,22 @@ void inputs_poll() {
 }
 
 bool magnet_isclose(uint16_t value, uint8_t threshold) {
-	// Tolerance: +- 3 % (1024*0.02=30)
 	return abs((int16_t)mag_value-(int16_t)value) < threshold;
 }
 
 bool magnet_iswarn() {
 	if (turnout.position == tpPlus) {
-		return !magnet_isclose(turnout.sensor_plus, 20);
+		return !magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_WARN);
 	}
 	if (turnout.position == tpMinus) {
-		return !magnet_isclose(turnout.sensor_minus, 20);
+		return !magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_WARN);
 	}
 	return false;
 }
 
 void set_outputs() {
-	bool my_plus = (turnout.position == tpPlus) && (magnet_isclose(turnout.sensor_plus, 30));
-	bool my_minus = (turnout.position == tpMinus) && (magnet_isclose(turnout.sensor_minus, 30));
+	bool my_plus = (turnout.position == tpPlus) && (magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_OK));
+	bool my_minus = (turnout.position == tpMinus) && (magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_OK));
 
 	if (mode == mRun) {
 		set_output(PIN_OUT_PLUS, my_plus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS]));
