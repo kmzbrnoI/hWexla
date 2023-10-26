@@ -156,6 +156,8 @@ void adc_poll(void) {
 			}
 			on_adc_done();
 			break;
+		case adcNone:
+			break;
 		};
 
 	}
