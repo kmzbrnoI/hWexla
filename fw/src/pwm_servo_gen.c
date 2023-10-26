@@ -11,15 +11,15 @@ static inline void _pwm_servo_start(uint16_t angle) {
 	TCCR1B |= (1 << CS11); // Clock source = prescaler 8×
 }
 
-static inline void _pwm_servo_stop() {
+static inline void _pwm_servo_stop(void) {
 	TCCR1B &= 0xF8; // CS10=0,CS11=0,CS12=0
 }
 
-static inline bool _pwm_output_pin_state() {
+static inline bool _pwm_output_pin_state(void) {
 	return (PINB & (1 << PB1)) > 0;
 }
 
-void pwm_servo_init() {
+void pwm_servo_init(void) {
 	// Setup 16-bit timer 1 for hardware PWM generation
 	TCCR1A = (1 << COM1A1) | (1 << COM1A0); // OC1A on Compare Match high level
 	TCCR1B = (1 << WGM13); // Phase&freq correct PWM TOP=ICR1
@@ -39,13 +39,13 @@ void pwm_servo_gen(int16_t angle) {
 	}
 }
 
-void pwm_servo_stop() {
+void pwm_servo_stop(void) {
 	_should_generate = false;
 	if (!_pwm_output_pin_state())
 		_pwm_servo_stop();
 }
 
-bool pwm_servo_generating() {
+bool pwm_servo_generating(void) {
 	return (TCCR1B & 0x07) > 0; // if any clock source is selected
 }
 

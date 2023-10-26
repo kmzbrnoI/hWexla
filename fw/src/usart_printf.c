@@ -29,7 +29,7 @@ void usart_send_byte(char byte, FILE *stream) {
 	rq_enqueue(&usart_outq, byte);
 }
 
-void usart_q_poll() {
+void usart_q_poll(void) {
 	if ((!_sending) && (_outq_overflow)) {
 		// Print overflow only after all data sent
 		// Maybe this should be done better (send 'OVERFLOW' as soon as there is space)

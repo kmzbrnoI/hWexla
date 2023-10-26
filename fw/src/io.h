@@ -67,9 +67,9 @@ bool get_output(uint8_t pin);
 void pin_mode(uint8_t pin, uint8_t mode);
 void io_init();
 
-void adc_start_measure();
-void adc_poll();
-void on_adc_done();
+void adc_start_measure(void);
+void adc_poll(void);
+void on_adc_done(void);
 extern volatile uint16_t mag_value;
 extern volatile uint16_t servo_vcc_value;
 

@@ -45,7 +45,7 @@ void switch_turnout(TurnoutPos pos) {
 	pwm_servo_gen(turnout.angle);
 }
 
-void switch_stop() {
+void switch_stop(void) {
 	if (_switching) {
 		_switching = false;
 		pwm_servo_stop();
@@ -53,7 +53,7 @@ void switch_stop() {
 	}
 }
 
-bool is_switching() {
+bool is_switching(void) {
 	return _switching;
 }
 
@@ -61,7 +61,7 @@ bool _dir(TurnoutPos dir) {
 	return ((dir == tpMovingToPlus) | (dir == tpPlus)) != (turnout.angle_plus < turnout.angle_minus);
 }
 
-void switch_update() {
+void switch_update(void) {
 	if (!_switching)
 		return;
 	if (begin_remain_counter < BEGIN_REMAIN) {

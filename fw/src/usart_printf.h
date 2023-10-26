@@ -7,7 +7,7 @@
 
 void usart_initialize(void);
 void usart_send_byte(char byte, FILE *stream);
-void usart_q_poll();
+void usart_q_poll(void);
 
 extern FILE uart_output;
 

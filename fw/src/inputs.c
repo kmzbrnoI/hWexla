@@ -32,7 +32,7 @@ void _button_update_1ms(uint8_t i) {
 	}
 }
 
-void buttons_update_1ms() {
+void buttons_update_1ms(void) {
 	for (size_t i = 0; i < DEB_COUNT; i++)
 		_button_update_1ms(i);
 }

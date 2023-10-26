@@ -24,12 +24,12 @@ volatile bool ee_to_save = false;
 volatile bool ee_to_store_pos_plus;
 volatile bool ee_to_store_pos_minus;
 
-void _ee_pos_change();
+static void _ee_pos_change(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 
 
-void _ee_default_config() {
+void _ee_default_config(void) {
 	turnout.angle_plus = 350;
 	turnout.angle_minus = 150;
 	turnout.angle = 250;
@@ -46,7 +46,7 @@ void _ee_default_config() {
 		eeprom_write_byte(EEPROM_ADDR_POSITION + i, 0);
 }
 
-void ee_load() {
+void ee_load(void) {
 	uint8_t version = eeprom_read_byte(EEPROM_ADDR_VERSION);
 	if (version == 0xFF) {
 		_ee_default_config();
@@ -91,7 +91,7 @@ void ee_load() {
 	turnout.angle = (turnout.position == tpPlus) ? turnout.angle_plus : turnout.angle_minus;
 }
 
-void ee_save() {
+void ee_save(void) {
 	eeprom_update_byte(EEPROM_ADDR_VERSION, 1);
 	eeprom_update_byte(EEPROM_ADDR_FW_VER_MAJOR, CONFIG_FW_MAJOR);
 	eeprom_update_byte(EEPROM_ADDR_FW_VER_MINOR, CONFIG_FW_MINOR);
@@ -102,7 +102,7 @@ void ee_save() {
 	eeprom_update_byte(EEPROM_ADDR_MOVE_PER_TICK, switch_move_per_tick);
 }
 
-void ee_incr_moved_plus() {
+void ee_incr_moved_plus(void) {
 	turnout.moved_plus++;
 	turnout.ee_moved_plus[turnout.ee_moved_plus_mini]++;
 	eeprom_write_word(EEPROM_ADDR_MOVED_PLUS + turnout.ee_moved_plus_mini,
@@ -110,7 +110,7 @@ void ee_incr_moved_plus() {
 	turnout.ee_moved_plus_mini = (turnout.ee_moved_plus_mini+1) % EEPROM_MOVED_COUNT;
 }
 
-void ee_incr_moved_minus() {
+void ee_incr_moved_minus(void) {
 	turnout.moved_minus++;
 	turnout.ee_moved_minus[turnout.ee_moved_minus_mini]++;
 	eeprom_write_word(EEPROM_ADDR_MOVED_MINUS + turnout.ee_moved_minus_mini,
@@ -118,21 +118,21 @@ void ee_incr_moved_minus() {
 	turnout.ee_moved_minus_mini = (turnout.ee_moved_minus_mini+1) % EEPROM_MOVED_COUNT;
 }
 
-void ee_store_pos_plus() {
+void ee_store_pos_plus(void) {
 	if (turnout.ee_positions_parity) {
 		// = currently is minus
 		_ee_pos_change();
 	}
 }
 
-void ee_store_pos_minus() {
+void ee_store_pos_minus(void) {
 	if (!turnout.ee_positions_parity) {
 		// = currently is plus
 		_ee_pos_change();
 	}
 }
 
-void _ee_pos_change() {
+void _ee_pos_change(void) {
 	uint8_t i = pseudorand % EEPROM_POSITION_COUNT;
 	turnout.ee_positions_parity = !turnout.ee_positions_parity;
 	turnout.ee_positions[i] = !turnout.ee_positions[i];

@@ -23,17 +23,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 int main();
-static inline void init();
-static inline void set_outputs();
-static inline void programming_enter();
-static inline void programming_leave();
-static inline void init_done();
-static inline void led_green_update_1ms();
-static inline void led_yellow_update_1ms();
-static inline void led_red_update_1ms();
-static inline void inputs_poll();
+static inline void init(void);
+static inline void set_outputs(void);
+static inline void programming_enter(void);
+static inline void programming_leave(void);
+static inline void init_done(void);
+static inline void led_green_update_1ms(void);
+static inline void led_yellow_update_1ms(void);
+static inline void led_red_update_1ms(void);
+static inline void inputs_poll(void);
 bool magnet_isclose(uint16_t value, uint8_t threshold);
-bool magnet_iswarn();
+bool magnet_iswarn(void);
 void fail(const char* msg);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -88,7 +88,7 @@ int main() {
 	}
 }
 
-static inline void init() {
+void init(void) {
 	ACSR |= ACD;  // analog comparator disable
 	TIMSK = 0;
 	stdout = &uart_output;
@@ -167,7 +167,7 @@ ISR(TIMER2_COMP_vect) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void on_switch_done() {
+void on_switch_done(void) {
 	if (turnout.position == tpPlus)
 		ee_to_store_pos_plus = true;
 	else
@@ -187,7 +187,7 @@ void on_btn_pressed(uint8_t button) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void inputs_poll() {
+void inputs_poll(void) {
 	if (mode == mRun) {
 		if ((in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS]))
 			switch_turnout(tpPlus);
@@ -227,7 +227,7 @@ bool magnet_isclose(uint16_t value, uint8_t threshold) {
 	return abs((int16_t)mag_value-(int16_t)value) < threshold;
 }
 
-bool magnet_iswarn() {
+bool magnet_iswarn(void) {
 	if (turnout.position == tpPlus) {
 		return !magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_WARN);
 	}
@@ -237,7 +237,7 @@ bool magnet_iswarn() {
 	return false;
 }
 
-void set_outputs() {
+void set_outputs(void) {
 	bool my_plus = (turnout.position == tpPlus) && (magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_OK));
 	bool my_minus = (turnout.position == tpMinus) && (magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_OK));
 
@@ -262,7 +262,7 @@ void set_outputs() {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void programming_enter() {
+void programming_enter(void) {
 	if ((turnout.position != tpPlus) && (turnout.position != tpMinus))
 		return; // allow programming entry only when not moving
 
@@ -270,7 +270,7 @@ void programming_enter() {
 	pwm_servo_gen(turnout.angle);
 }
 
-void programming_leave() {
+void programming_leave(void) {
 	mode = mRun;
 	pwm_servo_stop();
 
@@ -285,7 +285,7 @@ void programming_leave() {
 	ee_to_save = true;
 }
 
-void init_done() {
+void init_done(void) {
 	pwm_servo_stop();
 
 	set_output(PIN_LED_GREEN, true);
@@ -305,7 +305,7 @@ void fail(const char* msg) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void led_green_update_1ms() {
+void led_green_update_1ms(void) {
 	const uint8_t FLICK_PERIOD = 250;
 
 	if (mode == mProgramming) {
@@ -321,7 +321,7 @@ void led_green_update_1ms() {
 	}
 }
 
-void led_yellow_update_1ms() {
+void led_yellow_update_1ms(void) {
 	const uint8_t FLICK_PERIOD = 250;
 
 	if ((mode == mRun) && (magnet_iswarn())) {
@@ -337,7 +337,7 @@ void led_yellow_update_1ms() {
 	}
 }
 
-void led_red_update_1ms() {
+void led_red_update_1ms(void) {
 	const uint8_t FLICK_PERIOD = 250;
 
 	if (mode == mFail) {
@@ -355,7 +355,7 @@ void led_red_update_1ms() {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void on_adc_done() {
+void on_adc_done(void) {
 	if (mode == mInitializing) {
 		if (servo_vcc_value >= SERVO_VCC_MIN) {
 			init_adc_vcc_ok_count++;

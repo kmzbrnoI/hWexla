@@ -15,8 +15,8 @@ volatile AdcCurrent adcCurrent = adcNone;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-static inline void mag_start_measure();
-static inline void servo_vcc_start_measure();
+static inline void mag_start_measure(void);
+static inline void servo_vcc_start_measure(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -89,7 +89,7 @@ void pin_mode(uint8_t pin, uint8_t mode) {
 	}
 }
 
-void io_init() {
+void io_init(void) {
 	PORTB = 0; // reset outputs to 0
 	PORTC = 0; // reset outputs to 0
 	PORTD = 0; // reset outputs to 0
@@ -118,23 +118,23 @@ void io_init() {
 	ADCSRA = (1 << ADEN) | 0x5; // enable ADC, prescaler 32×
 }
 
-void adc_start_measure() {
+void adc_start_measure(void) {
 	mag_start_measure();
 }
 
-void mag_start_measure() {
+void mag_start_measure(void) {
 	adcCurrent = adcMagnet;
 	ADMUX = (1 << REFS0) | 0x7; // reference = AVcc (5V), use ADC7
 	ADCSRA |= (1 << ADSC); // start
 }
 
-void servo_vcc_start_measure() {
+void servo_vcc_start_measure(void) {
 	adcCurrent = adcServoVcc;
 	ADMUX = (1 << REFS0); // reference = AVcc (5V), use ADC0
 	ADCSRA |= (1 << ADSC); // start
 }
 
-void adc_poll() {
+void adc_poll(void) {
 	if (ADCSRA & (1 << ADIF)) {
 		ADCSRA |= (1 << ADIF); // clear flag
 

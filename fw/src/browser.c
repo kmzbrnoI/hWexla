@@ -97,7 +97,7 @@ void _browser_print(uint8_t part) {
 	}
 }
 
-void browser_print() {
+void browser_print(void) {
 	// Called each 10ms
 	// Prints browser per-parted so buffers are not filled in one large print
 	static uint8_t part = 0;
@@ -105,7 +105,7 @@ void browser_print() {
 	part = (part + 1) % 20;
 }
 
-void browser_read() {
+void browser_read(void) {
 	// Do not use getc to save space
 	if (usart_in == 0)
 		return;

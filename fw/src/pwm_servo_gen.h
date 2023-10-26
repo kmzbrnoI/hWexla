@@ -11,9 +11,9 @@
 #define PWM_ANGLE_MIN 0
 #define PWM_ANGLE_MAX 500
 
-void pwm_servo_init();
+void pwm_servo_init(void);
 void pwm_servo_gen(int16_t angle);
-void pwm_servo_stop();
-bool pwm_servo_generating();
+void pwm_servo_stop(void);
+bool pwm_servo_generating(void);
 
 #endif

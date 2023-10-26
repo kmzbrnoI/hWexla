@@ -7,10 +7,10 @@
 #include "common.h"
 
 void switch_turnout(TurnoutPos);
-void switch_stop();
-bool is_switching();
-void switch_update();
-void on_switch_done();
+void switch_stop(void);
+bool is_switching(void);
+void switch_update(void);
+void on_switch_done(void);
 
 extern volatile uint8_t switch_move_per_tick;
 
