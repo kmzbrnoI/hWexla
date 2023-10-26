@@ -19,6 +19,7 @@
 #include "eeprom.h"
 #include "usart_printf.h"
 #include "browser.h"
+#include "pgmown.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -365,12 +366,12 @@ void on_adc_done(void) {
 			init_adc_vcc_ok_count = 0;
 			init_adc_vcc_nok_count++;
 			if (init_adc_vcc_nok_count >= INIT_ADC_VCC_LIMIT)
-				fail("INIT SERVO VCC NOK");
+				fail(PGMSTR("INIT SERVO VCC NOK"));
 		}
 
 	} else if (mode != mFail) {
 		if (servo_vcc_value < SERVO_VCC_MIN)
-			fail("SERVO VCC NOK");
+			fail(PGMSTR("SERVO VCC NOK"));
 	}
 }
 

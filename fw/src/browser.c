@@ -6,6 +6,8 @@
 #include "switch.h"
 #include "usart_printf.h"
 #include "io.h"
+#include "inputs.h"
+#include "pgmown.h"
 
 char* add_trailing_spaces(char* str, uint8_t len) {
 	uint8_t length = strlen(str);
@@ -47,51 +49,60 @@ void _browser_print(uint8_t part) {
 	switch (part) {
 	case 0:
 		//fputs("\033[2J", stdout); // clrscr
-		fputs("\033[15A", stdout); // go n lines above
+		fputs("\033[21A", stdout); // go n lines above
 
-		puts("FW=" CONFIG_FW_MAJOR_STR "." CONFIG_FW_MINOR_STR);
-		fputs("Mode=", stdout);
+		puts(PGMSTR("FW=" CONFIG_FW_MAJOR_STR "." CONFIG_FW_MINOR_STR));
+		fputs(PGMSTR("Mode="), stdout);
 		switch (mode) {
-		case mRun:          puts("mRun         "); break;
-		case mProgramming:  puts("mProgramming "); break;
-		case mInitializing: puts("mInitializing"); break;
-		case mFail:         puts("mFail        "); break;
+		case mRun:          puts(PGMSTR("mRun         ")); break;
+		case mProgramming:  puts(PGMSTR("mProgramming ")); break;
+		case mInitializing: puts(PGMSTR("mInitializing")); break;
+		case mFail:         puts(PGMSTR("mFail        ")); break;
 		}
 
-		puts("Turnout:");
-		fputs("  .position=", stdout);
+		puts(PGMSTR("Turnout:"));
+		fputs(PGMSTR("  .position="), stdout);
 		switch (turnout.position) {
-		case tpPlus:          puts("plus         "); break;
-		case tpMinus:         puts("minus        "); break;
-		case tpMovingToPlus:  puts("movingToPlus "); break;
-		case tpMovingToMinus: puts("movingToMinus"); break;
+		case tpPlus:          puts(PGMSTR("plus         ")); break;
+		case tpMinus:         puts(PGMSTR("minus        ")); break;
+		case tpMovingToPlus:  puts(PGMSTR("movingToPlus ")); break;
+		case tpMovingToMinus: puts(PGMSTR("movingToMinus")); break;
 		}
 		break;
 
 	case 1:
-		put_ui16("  .angle=", turnout.angle);
-		put_ui16("  .angle_plus=", turnout.angle_plus);
-		put_ui16("  .angle_minus=", turnout.angle_minus);
+		put_ui16(PGMSTR("  .angle="), turnout.angle);
+		put_ui16(PGMSTR("  .angle_plus="), turnout.angle_plus);
+		put_ui16(PGMSTR("  .angle_minus="), turnout.angle_minus);
 		break;
 
 	case 2:
-		put_ui16("  .sensor_plus=", turnout.sensor_plus);
-		put_ui16("  .sensor_minus=", turnout.sensor_minus);
+		put_ui16(PGMSTR("  .sensor_plus="), turnout.sensor_plus);
+		put_ui16(PGMSTR("  .sensor_minus="), turnout.sensor_minus);
 		break;
 
 	case 4:
-		put_ui32("  .moved_plus=", turnout.moved_plus);
-		put_ui32("  .moved_minus=", turnout.moved_minus);
+		put_ui32(PGMSTR("  .moved_plus="), turnout.moved_plus);
+		put_ui32(PGMSTR("  .moved_minus="), turnout.moved_minus);
 		break;
 
 	case 5:
-		put_ui8("switch_move_per_tick=", switch_move_per_tick);
-		put_ui16("mag_value=", mag_value);
-		put_ui16("servo_vcc_value=", servo_vcc_value);
+		put_ui8(PGMSTR("switch_move_per_tick="), switch_move_per_tick);
+		put_ui16(PGMSTR("mag_value="), mag_value);
+		put_ui16(PGMSTR("servo_vcc_value="), servo_vcc_value);
 		break;
 
 	case 6:
-		fputs("fail_msg=", stdout);
+		put_ui8(PGMSTR("i_in+="), in_debounced[DEB_IN_PLUS]);
+		put_ui8(PGMSTR("i_in-="), in_debounced[DEB_IN_MINUS]);
+		put_ui8(PGMSTR("i_btn+="), in_debounced[DEB_BTN_PLUS]);
+		put_ui8(PGMSTR("i_btn-="), in_debounced[DEB_BTN_MINUS]);
+		put_ui8(PGMSTR("i_btn="), in_debounced[DEB_BTN]);
+		put_ui8(PGMSTR("i_slave="), in_debounced[DEB_SLAVE]);
+		break;
+
+	case 7:
+		fputs(PGMSTR("fail_msg="), stdout);
 		puts(fail_msg);
 		break;
 	}
