@@ -53,17 +53,17 @@ def parse(data) -> OrderedDict:
     d['magnet_warn'] = bool(data[4])
     d['mode'] = str_mode(data[5])
 
-    d['in+'] = data[6] & 1
-    d['in-'] = (data[6] >> 1) & 1
-    d['in_btn+'] = (data[6] >> 2) & 1
-    d['in_btn-'] = (data[6] >> 3) & 1
-    d['in_btn'] = (data[6] >> 4) & 1
-    d['in_slave'] = (data[6] >> 5) & 1
+    d['in+'] = bool(data[6] & 1)
+    d['in-'] = bool((data[6] >> 1) & 1)
+    d['in_btn+'] = bool((data[6] >> 2) & 1)
+    d['in_btn-'] = bool((data[6] >> 3) & 1)
+    d['in_btn'] = bool((data[6] >> 4) & 1)
+    d['in_slave'] = bool((data[6] >> 5) & 1)
 
-    d['out+'] = data[7] & 1
-    d['out-'] = (data[7] >> 1) & 1
-    d['out_relay'] = (data[7] >> 2) & 1
-    d['out_power'] = (data[7] >> 3) & 1
+    d['out+'] = bool(data[7] & 1)
+    d['out-'] = bool((data[7] >> 1) & 1)
+    d['out_relay'] = bool((data[7] >> 2) & 1)
+    d['out_power'] = bool((data[7] >> 3) & 1)
 
     d['turnout_pos'] = str_position(data[8])
     d['angle'] = parse_num(data[9:11])
