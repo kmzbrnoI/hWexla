@@ -64,7 +64,8 @@ typedef enum {
 extern FailCode fail_code;
 
 void fail(FailCode);
-
 void memcpy_v(volatile void*, volatile void*, uint8_t);
+
+bool magnet_iswarn(void);
 
 #endif

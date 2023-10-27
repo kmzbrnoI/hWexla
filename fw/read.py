@@ -50,31 +50,32 @@ def parse(data) -> OrderedDict:
     d['stream_version'] = str(data[0])
     d['fw'] = str(data[1]) + '.' + str(data[2])
     d['fail'] = str_fail_code(data[3])
-    d['mode'] = str_mode(data[4])
+    d['magnet_warn'] = bool(data[4])
+    d['mode'] = str_mode(data[5])
 
-    d['in+'] = data[5] & 1
-    d['in-'] = (data[5] >> 1) & 1
-    d['in_btn+'] = (data[5] >> 2) & 1
-    d['in_btn-'] = (data[5] >> 3) & 1
-    d['in_btn'] = (data[5] >> 4) & 1
-    d['in_slave'] = (data[5] >> 5) & 1
+    d['in+'] = data[6] & 1
+    d['in-'] = (data[6] >> 1) & 1
+    d['in_btn+'] = (data[6] >> 2) & 1
+    d['in_btn-'] = (data[6] >> 3) & 1
+    d['in_btn'] = (data[6] >> 4) & 1
+    d['in_slave'] = (data[6] >> 5) & 1
 
-    d['out+'] = data[6] & 1
-    d['out-'] = (data[6] >> 1) & 1
-    d['out_relay'] = (data[6] >> 2) & 1
-    d['out_power'] = (data[6] >> 3) & 1
+    d['out+'] = data[7] & 1
+    d['out-'] = (data[7] >> 1) & 1
+    d['out_relay'] = (data[7] >> 2) & 1
+    d['out_power'] = (data[7] >> 3) & 1
 
-    d['turnout_pos'] = str_position(data[7])
-    d['angle'] = parse_num(data[8:10])
-    d['angle_plus'] = parse_num(data[10:12])
-    d['angle_minus'] = parse_num(data[12:14])
-    d['sensor_plus'] = parse_num(data[14:16])
-    d['sensor_minus'] = parse_num(data[16:18])
-    d['moved_plus'] = parse_num(data[18:22])
-    d['moved_minus'] = parse_num(data[22:26])
-    d['move_per_tick'] = str(data[26])
-    d['mag_value'] = parse_num(data[27:29])
-    d['servo_vcc_value'] = parse_num(data[29:31])
+    d['turnout_pos'] = str_position(data[8])
+    d['angle'] = parse_num(data[9:11])
+    d['angle_plus'] = parse_num(data[11:13])
+    d['angle_minus'] = parse_num(data[13:15])
+    d['sensor_plus'] = parse_num(data[15:17])
+    d['sensor_minus'] = parse_num(data[17:19])
+    d['moved_plus'] = parse_num(data[19:23])
+    d['moved_minus'] = parse_num(data[23:27])
+    d['move_per_tick'] = str(data[27])
+    d['mag_value'] = parse_num(data[28:30])
+    d['servo_vcc_value'] = parse_num(data[30:32])
 
     return d
 

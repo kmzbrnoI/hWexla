@@ -32,7 +32,6 @@ static inline void led_yellow_update_1ms(void);
 static inline void led_red_update_1ms(void);
 static inline void inputs_poll(void);
 bool magnet_isclose(uint16_t value, uint8_t threshold);
-bool magnet_iswarn(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 
