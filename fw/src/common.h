@@ -8,8 +8,6 @@
 
 #define CONFIG_FW_MAJOR 1
 #define CONFIG_FW_MINOR 2
-#define CONFIG_FW_MAJOR_STR "1"
-#define CONFIG_FW_MINOR_STR "2"
 
 #define EEPROM_POSITION_COUNT 16
 #define EEPROM_MOVED_COUNT    8
@@ -55,8 +53,18 @@ typedef enum {
 extern volatile Turnout turnout;
 extern volatile Mode mode;
 extern volatile uint8_t pseudorand;
-extern char fail_msg[16];
 
-void fail(const char* msg);
+typedef enum {
+	fNoFail = 0,
+	fBadISR = 1,
+	fInitServoVCC = 2,
+	fServoVCC = 3,
+} FailCode;
+
+extern FailCode fail_code;
+
+void fail(FailCode);
+
+void memcpy_v(volatile void*, volatile void*, uint8_t);
 
 #endif

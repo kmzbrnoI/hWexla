@@ -4,28 +4,103 @@
 import serial
 import sys
 import datetime
-import select
+from collections import OrderedDict
+from typing import List
+
+DATA_SIZE = 31
 
 
-assert len(sys.argv) >= 2
+def str_fail_code(code: int) -> str:
+    match code:
+        case 0: return 'fNoFail'
+        case 1: return 'fBadISR'
+        case 2: return 'fInitServoVCC'
+        case 3: return 'fServoVCC'
+        case _: return 'unknown'
 
-ser = serial.Serial(port=sys.argv[1], baudrate=38400)
 
-# Wait until beginning of browser (special terminal sequence 'move n lines above')
-byte = ser.read(1)
-while byte != b'\x1B':
-    byte = ser.read(1)
+def str_mode(code: int) -> str:
+    match code:
+        case 0: return 'mRun'
+        case 1: return 'mProgramming'
+        case 2: return 'mInitializing'
+        case 3: return 'mFail'
+        case _: return 'unknown'
 
-ser.read(4) # read rest of the special sequence
 
-while True:
-    line = ser.readline()
-    if line.startswith(b'\x1B'):
-        special, line = line[:5], line[5:]
-        print(special.decode('ascii'), end='')
-    print(f'[{datetime.datetime.now().time()}]', end=' ')
+def str_position(code: int) -> str:
+    match code:
+        case 0: return 'tpPlus'
+        case 1: return 'tpMinus'
+        case 2: return 'tpMovingToPlus'
+        case 3: return 'tpMovingToMinus'
+        case _: return 'unknown'
 
-    try:
-        print(line.decode('ascii'), end='')
-    except UnicodeDecodeError:
-        pass
+
+def parse_num(data: List[int]) -> int:
+    result = 0
+    for i, item in enumerate(data):
+        result |= item << (8*i)
+    return result
+
+
+def parse(data) -> OrderedDict:
+    d = OrderedDict()
+
+    d['stream_version'] = str(data[0])
+    d['fw'] = str(data[1]) + '.' + str(data[2])
+    d['fail'] = str_fail_code(data[3])
+    d['mode'] = str_mode(data[4])
+
+    d['in+'] = data[5] & 1
+    d['in-'] = (data[5] >> 1) & 1
+    d['in_btn+'] = (data[5] >> 2) & 1
+    d['in_btn-'] = (data[5] >> 3) & 1
+    d['in_btn'] = (data[5] >> 4) & 1
+    d['in_slave'] = (data[5] >> 5) & 1
+
+    d['out+'] = data[6] & 1
+    d['out-'] = (data[6] >> 1) & 1
+    d['out_relay'] = (data[6] >> 2) & 1
+    d['out_power'] = (data[6] >> 3) & 1
+
+    d['turnout_pos'] = str_position(data[7])
+    d['angle'] = parse_num(data[8:10])
+    d['angle_plus'] = parse_num(data[10:12])
+    d['angle_minus'] = parse_num(data[12:14])
+    d['sensor_plus'] = parse_num(data[14:16])
+    d['sensor_minus'] = parse_num(data[16:18])
+    d['moved_plus'] = parse_num(data[18:22])
+    d['moved_minus'] = parse_num(data[22:26])
+    d['move_per_tick'] = str(data[26])
+    d['mag_value'] = parse_num(data[27:29])
+    d['servo_vcc_value'] = parse_num(data[29:31])
+
+    return d
+
+
+def show(d: OrderedDict):
+    print(chr(27) + "[2J")  # clrscr
+    print(str(datetime.datetime.now().time()))
+    for key, val in d.items():
+        print(f'{key}: {val}')
+
+
+def main():
+    if len(sys.argv) < 2:
+        sys.stderr.write(f'Usage: {sys.argv[0]} port\n')
+        sys.exit(1)
+
+    ser = serial.Serial(port=sys.argv[1], baudrate=38400)
+
+    while True:
+        read = ser.read(1)
+        if read[0] == 0xBE:
+            read = ser.read()
+            if read[0] == 0xEF:
+                data = parse(ser.read(DATA_SIZE))
+                show(data)
+
+
+if __name__ == '__main__':
+    main()
