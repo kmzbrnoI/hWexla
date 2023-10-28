@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
-# run with unbuffered output: ‹python3 -u read.py /dev/ttyACM0›
+
+"""
+Communication with hWexla over UART
+
+This application does 2 things:
+1. It reads hWexla's diagnostic stream and prints human-readable stream to stdout.
+2. It reads stdin and sends pressed keys to hWexla.
+"""
 
 import serial
 import sys
 import datetime
 from collections import OrderedDict
 from typing import List
+import select
+import termios
 
 DATA_SIZE = 31
 
@@ -64,7 +73,6 @@ def parse(data) -> OrderedDict:
     d['out-'] = bool((data[7] >> 1) & 1)
     d['out_relay'] = bool((data[7] >> 2) & 1)
     d['out_power'] = bool((data[7] >> 3) & 1)
-
     d['turnout_pos'] = str_position(data[8])
     d['angle'] = parse_num(data[9:11])
     d['angle_plus'] = parse_num(data[11:13])
@@ -81,10 +89,17 @@ def parse(data) -> OrderedDict:
 
 
 def show(d: OrderedDict):
-    print(chr(27) + "[2J")  # clrscr
+    print(chr(27) + '[2J')  # clrscr
     print(str(datetime.datetime.now().time()))
     for key, val in d.items():
         print(f'{key}: {val}')
+
+
+def init_stdin():
+    # get characters as typed (wuthout waiting for newline), do not write them back to terminal
+    mode = termios.tcgetattr(sys.stdin)
+    mode[3] &= ~(termios.ECHO | termios.ICANON)
+    termios.tcsetattr(sys.stdin, termios.TCSAFLUSH, mode)
 
 
 def main():
@@ -93,14 +108,19 @@ def main():
         sys.exit(1)
 
     ser = serial.Serial(port=sys.argv[1], baudrate=38400)
+    init_stdin()
 
-    while True:
-        read = ser.read(1)
-        if read[0] == 0xBE:
-            read = ser.read()
-            if read[0] == 0xEF:
-                data = parse(ser.read(DATA_SIZE))
-                show(data)
+    while selected := select.select([sys.stdin, ser], [], []):
+        read, _, _ = selected
+        if ser in read:
+            read = ser.read(1)
+            if read and read[0] == 0xBE:
+                read = ser.read(1)
+                if read and read[0] == 0xEF:
+                    data = parse(ser.read(DATA_SIZE))
+                    show(data)
+        else:
+            ser.write(sys.stdin.read(1).encode('ascii'))
 
 
 if __name__ == '__main__':
