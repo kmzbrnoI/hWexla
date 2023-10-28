@@ -11,6 +11,7 @@
 #define EEPROM_ADDR_VERSION                ((uint8_t*)0x00)
 #define EEPROM_ADDR_FW_VER_MAJOR           ((uint8_t*)0x01)
 #define EEPROM_ADDR_FW_VER_MINOR           ((uint8_t*)0x02)
+#define EEPROM_ADDR_MODE                   ((uint8_t*)0x03)
 #define EEPROM_ADDR_POS_PLUS               ((uint16_t*)0x10)
 #define EEPROM_ADDR_POS_MINUS              ((uint16_t*)0x12)
 #define EEPROM_ADDR_SENS_PLUS              ((uint16_t*)0x14)
@@ -95,6 +96,7 @@ void ee_save(void) {
 	eeprom_update_byte(EEPROM_ADDR_VERSION, 1);
 	eeprom_update_byte(EEPROM_ADDR_FW_VER_MAJOR, CONFIG_FW_MAJOR);
 	eeprom_update_byte(EEPROM_ADDR_FW_VER_MINOR, CONFIG_FW_MINOR);
+	eeprom_update_byte(EEPROM_ADDR_MODE, (mode == mOverride));
 	eeprom_update_word(EEPROM_ADDR_POS_PLUS, turnout.angle_plus);
 	eeprom_update_word(EEPROM_ADDR_POS_MINUS, turnout.angle_minus);
 	eeprom_update_word(EEPROM_ADDR_SENS_PLUS, turnout.sensor_plus);
@@ -137,4 +139,8 @@ void _ee_pos_change(void) {
 	turnout.ee_positions_parity = !turnout.ee_positions_parity;
 	turnout.ee_positions[i] = !turnout.ee_positions[i];
 	eeprom_write_byte(EEPROM_ADDR_POSITION + i, turnout.ee_positions[i]);
+}
+
+uint8_t ee_mode(void) {
+	return eeprom_read_byte(EEPROM_ADDR_MODE);
 }

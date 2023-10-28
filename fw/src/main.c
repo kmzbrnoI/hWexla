@@ -173,6 +173,8 @@ void on_btn_pressed(uint8_t button) {
 			programming_enter();
 		else if (mode == mProgramming)
 			programming_leave();
+		else if (mode == mOverride)
+			override_leave();
 		break;
 	}
 }
@@ -233,7 +235,7 @@ void set_outputs(void) {
 	bool my_plus = (turnout.position == tpPlus) && (magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_OK));
 	bool my_minus = (turnout.position == tpMinus) && (magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_OK));
 
-	if (mode == mRun) {
+	if ((mode == mRun) || (mode == mOverride)) {
 		set_output(PIN_OUT_PLUS, my_plus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS]));
 		set_output(PIN_OUT_MINUS, my_minus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_MINUS]));
 		set_output(PIN_BTN_PLUS_OUT, my_plus || (turnout.position == tpMovingToPlus && btn_flick));
@@ -277,13 +279,24 @@ void programming_leave(void) {
 	ee_to_save = true;
 }
 
+void override_enter(void) {
+	mode = mOverride;
+	ee_to_save = true;
+}
+
+void override_leave(void) {
+	mode = mRun;
+	ee_to_save = true;
+}
+
 void init_done(void) {
 	pwm_servo_stop();
 
 	set_output(PIN_LED_GREEN, true);
 	set_output(PIN_LED_RED, false);
 	set_output(PIN_LED_YELLOW, false);
-	mode = mRun;
+
+	mode = (ee_mode() == 1) ? mOverride : mRun;
 }
 
 void fail(FailCode code) {
@@ -299,7 +312,7 @@ void fail(FailCode code) {
 void led_green_update_1ms(void) {
 	const uint8_t FLICK_PERIOD = 250;
 
-	if (mode == mProgramming) {
+	if ((mode == mProgramming) || (mode == mOverride)) {
 		static uint8_t counter = 0;
 
 		counter++;
@@ -315,7 +328,7 @@ void led_green_update_1ms(void) {
 void led_yellow_update_1ms(void) {
 	const uint8_t FLICK_PERIOD = 250;
 
-	if ((mode == mRun) && (magnet_iswarn())) {
+	if (((mode == mRun) && (magnet_iswarn())) || (mode == mOverride)) {
 		static uint8_t counter = 0;
 
 		counter++;

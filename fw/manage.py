@@ -35,6 +35,7 @@ def str_mode(code: int) -> str:
         case 1: return 'mProgramming'
         case 2: return 'mInitializing'
         case 3: return 'mFail'
+        case 4: return 'mOverride'
         case _: return 'unknown'
 
 

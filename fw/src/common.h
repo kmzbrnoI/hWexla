@@ -48,6 +48,7 @@ typedef enum {
 	mProgramming = 1,
 	mInitializing = 2,
 	mFail = 3,
+	mOverride = 4,
 } Mode;
 
 extern volatile Turnout turnout;
@@ -68,5 +69,7 @@ void fail(FailCode);
 void memcpy_v(volatile void*, volatile void*, uint8_t);
 
 bool magnet_iswarn(void);
+void override_enter(void);
+void override_leave(void);
 
 #endif

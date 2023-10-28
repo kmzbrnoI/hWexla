@@ -19,4 +19,6 @@ void ee_incr_moved_minus(void);
 void ee_store_pos_plus(void);
 void ee_store_pos_minus(void);
 
+uint8_t ee_mode(void);
+
 #endif

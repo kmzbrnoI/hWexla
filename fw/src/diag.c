@@ -48,11 +48,11 @@ void diag_read(void) {
 
 	switch (c) {
 	case '+':
-		if ((!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS]))
+		if ((mode == mOverride) || ((!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS])))
 			switch_turnout(tpPlus);
 		break;
 	case '-':
-		if ((!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS]))
+		if ((mode == mOverride) || ((!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS])))
 			switch_turnout(tpMinus);
 		break;
 	case 'p':
@@ -67,6 +67,12 @@ void diag_read(void) {
 		break;
 	case 'f': // fail
 		fail(fDiag);
+		break;
+	case 'o':
+		if (mode == mOverride)
+			override_leave();
+		else if (mode == mRun)
+			override_enter();
 		break;
 	}
 }
