@@ -48,14 +48,25 @@ void diag_read(void) {
 
 	switch (c) {
 	case '+':
-		switch_move_per_tick++;
+		if ((!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS]))
+			switch_turnout(tpPlus);
 		break;
 	case '-':
+		if ((!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS]))
+			switch_turnout(tpMinus);
+		break;
+	case 'p':
+		switch_move_per_tick++;
+		break;
+	case 'm':
 		switch_move_per_tick--;
 		break;
 	case 'r': // reset
 		cli();
 		while (true);
+		break;
+	case 'f': // fail
+		fail(fDiag);
 		break;
 	}
 }

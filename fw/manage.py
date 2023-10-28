@@ -25,6 +25,7 @@ def str_fail_code(code: int) -> str:
         case 1: return 'fBadISR'
         case 2: return 'fInitServoVCC'
         case 3: return 'fServoVCC'
+        case 4: return 'fDiag'
         case _: return 'unknown'
 
 
@@ -58,9 +59,9 @@ def parse(data) -> OrderedDict:
 
     d['stream_version'] = str(data[0])
     d['fw'] = str(data[1]) + '.' + str(data[2])
+    d['mode'] = str_mode(data[5])
     d['fail'] = str_fail_code(data[3])
     d['magnet_warn'] = bool(data[4])
-    d['mode'] = str_mode(data[5])
 
     d['in+'] = bool(data[6] & 1)
     d['in-'] = bool((data[6] >> 1) & 1)
@@ -120,7 +121,7 @@ def main():
                     data = parse(ser.read(DATA_SIZE))
                     show(data)
         else:
-            ser.write(sys.stdin.read(1).encode('ascii'))
+            ser.write(sys.stdin.read(1).lower().encode('ascii'))
 
 
 if __name__ == '__main__':
