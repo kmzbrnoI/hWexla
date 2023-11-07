@@ -3,7 +3,19 @@
 """
 Communication with hWexla over UART
 
-This application does 2 things:
+Usage:
+  manage.py [options] <port>
+  manage.py resetterminal
+  manage.py -h | --help
+  manage.py --version
+
+Options:
+  -h --help         Show this screen.
+  --version         Show version.
+  -c --no-clear     Do not clear view after each arriving packet.
+  -r --raw          Show raw data.
+
+By default, this application does 2 things:
 1. It reads hWexla's diagnostic stream and prints human-readable stream to stdout.
 2. It reads stdin and sends pressed keys to hWexla.
 """
@@ -15,7 +27,9 @@ from collections import OrderedDict
 from typing import List
 import select
 import termios
+import docopt
 
+SW_VERSION = '1.0'
 DATA_SIZE = 32
 
 
@@ -51,7 +65,7 @@ def str_position(code: int) -> str:
 def parse_num(data: List[int]) -> int:
     result = 0
     for i, item in enumerate(data):
-        result |= item << (8*i)
+        result |= (item << (8*i))
     return result
 
 
@@ -87,29 +101,45 @@ def parse(data) -> OrderedDict:
     d['mag_value'] = parse_num(data[28:30])
     d['servo_vcc_value'] = parse_num(data[30:32])
 
+    print(data[19:23], parse_num(data[19:23]))
+
     return d
 
 
-def show(d: OrderedDict):
-    print(chr(27) + '[2J')  # clrscr
+def show(args, raw: List[int]):
+    d = parse(raw)
+    print('' if args['--no-clear'] else chr(27) + '[2J')  # clrscr or \n
     print(str(datetime.datetime.now().time()))
+    if args['--raw']:
+        print(humanify_buf(raw))
     for key, val in d.items():
         print(f'{key}: {val}')
 
 
 def init_stdin():
-    # get characters as typed (wuthout waiting for newline), do not write them back to terminal
+    # get characters as typed (without waiting for newline), do not write them back to terminal
     mode = termios.tcgetattr(sys.stdin)
     mode[3] &= ~(termios.ECHO | termios.ICANON)
     termios.tcsetattr(sys.stdin, termios.TCSAFLUSH, mode)
 
 
-def main():
-    if len(sys.argv) < 2:
-        sys.stderr.write(f'Usage: {sys.argv[0]} port\n')
-        sys.exit(1)
+def reset_stdin():
+    mode = termios.tcgetattr(sys.stdin)
+    mode[3] |= (termios.ECHO | termios.ICANON)
+    termios.tcsetattr(sys.stdin, termios.TCSAFLUSH, mode)
 
-    ser = serial.Serial(port=sys.argv[1], baudrate=38400)
+
+def humanify_buf(data: List[int]) -> str:
+    return ' '.join(['0x{:02x}'.format(byte) for byte in data])
+
+
+def main():
+    args = docopt.docopt(__doc__, version=SW_VERSION)
+    if args['resetterminal'] or args['<port>'] == 'resetterminal':
+        reset_stdin()
+        sys.exit(0)
+
+    ser = serial.Serial(port=args['<port>'], baudrate=38400)
     init_stdin()
 
     while selected := select.select([sys.stdin, ser], [], []):
@@ -119,8 +149,7 @@ def main():
             if read and read[0] == 0xBE:
                 read = ser.read(1)
                 if read and read[0] == 0xEF:
-                    data = parse(ser.read(DATA_SIZE))
-                    show(data)
+                    show(args, ser.read(DATA_SIZE))
         else:
             ser.write(sys.stdin.read(1).lower().encode('ascii'))
 
