@@ -16,7 +16,7 @@ from typing import List
 import select
 import termios
 
-DATA_SIZE = 31
+DATA_SIZE = 32
 
 
 def str_fail_code(code: int) -> str:
