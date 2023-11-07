@@ -248,10 +248,14 @@ void set_outputs(void) {
 	}
 
 	// Do not use sensor value to allow relay switching without physical servo
-	if (turnout.position == tpPlus)
-		set_output(PIN_RELAY_CONTROL, RELAY_STATE_PLUS);
-	else if (turnout.position == tpMinus)
-		set_output(PIN_RELAY_CONTROL, !RELAY_STATE_PLUS);
+	if (mode == mFail) {
+		set_output(PIN_RELAY_CONTROL, false);
+	} else {
+		if (turnout.position == tpPlus)
+			set_output(PIN_RELAY_CONTROL, RELAY_STATE_PLUS);
+		else if (turnout.position == tpMinus)
+			set_output(PIN_RELAY_CONTROL, !RELAY_STATE_PLUS);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
