@@ -310,6 +310,7 @@ void fail(FailCode code) {
 	set_output(PIN_LED_GREEN, false);
 	set_output(PIN_LED_YELLOW, false);
 	set_output(PIN_SERVO_POWER_EN, false);
+	io_fail();
 	fail_code = code;
 	mode = mFail;
 }

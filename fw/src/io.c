@@ -118,6 +118,17 @@ void io_init(void) {
 	ADCSRA = (1 << ADEN) | 0x5; // enable ADC, prescaler 32×
 }
 
+void io_fail(void) {
+	// Set IO as inputs to allow external voltage to be applied (protection & hardware fixing)
+	pin_mode(PIN_OUT_PLUS, INPUT);
+	pin_mode(PIN_OUT_MINUS, INPUT);
+	pin_mode(PIN_BTN_PLUS_OUT, INPUT);
+	pin_mode(PIN_BTN_MINUS_OUT, INPUT);
+	pin_mode(PIN_SERVO_POWER_EN, INPUT);
+	pin_mode(PIN_SERVO_PWM, INPUT);
+	pin_mode(PIN_RELAY_CONTROL, INPUT);
+}
+
 void adc_start_measure(void) {
 	mag_start_measure();
 }
