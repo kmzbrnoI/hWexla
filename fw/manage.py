@@ -32,6 +32,9 @@ import docopt
 SW_VERSION = '1.0'
 DATA_SIZE = 32
 
+BEGIN1 = 0xBE
+BEGIN2 = 0xEF
+
 
 def str_fail_code(code: int) -> str:
     match code:
@@ -101,8 +104,6 @@ def parse(data) -> OrderedDict:
     d['mag_value'] = parse_num(data[28:30])
     d['servo_vcc_value'] = parse_num(data[30:32])
 
-    print(data[19:23], parse_num(data[19:23]))
-
     return d
 
 
@@ -112,6 +113,7 @@ def show(args, raw: List[int]):
     print(str(datetime.datetime.now().time()))
     if args['--raw']:
         print(humanify_buf(raw))
+
     for key, val in d.items():
         print(f'{key}: {val}')
 
@@ -146,9 +148,9 @@ def main():
         read, _, _ = selected
         if ser in read:
             read = ser.read(1)
-            if read and read[0] == 0xBE:
+            if read and read[0] == BEGIN1:
                 read = ser.read(1)
-                if read and read[0] == 0xEF:
+                if read and read[0] == BEGIN2:
                     show(args, ser.read(DATA_SIZE))
         else:
             ser.write(sys.stdin.read(1).lower().encode('ascii'))
