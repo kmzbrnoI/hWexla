@@ -110,6 +110,9 @@ void init(void) {
 	set_output(PIN_SERVO_POWER_EN, true);
 	pwm_servo_gen(turnout.angle);
 
+	if (mode == mFail) // failed during startup
+		fail(fail_code); // fail again to reset outputs
+
 	sei(); // enable interrupts globally
 	wdt_enable(WDTO_250MS);
 }

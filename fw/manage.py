@@ -43,6 +43,7 @@ def str_fail_code(code: int) -> str:
         case 2: return 'fInitServoVCC'
         case 3: return 'fServoVCC'
         case 4: return 'fDiag'
+        case 5: return 'fOscCalMissing'
         case _: return 'unknown'
 
 

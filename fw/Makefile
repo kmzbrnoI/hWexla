@@ -1,5 +1,6 @@
 MCU = atmega8
 # Preserve EEPROM during chip-erase cycle
+# Set hfuse to 0xD9 to clear eeprom using avrdude -e
 FUSES = -U lfuse:w:0x14:m -U hfuse:w:0xD1:m -U lock:w:0xFF:m
 F_CPU = 8000000
 FORMAT = ihex
@@ -45,6 +46,7 @@ REMOVE = rm -f
 REMOVEDIR = rm -rf
 COPY = cp
 
+COMMA = ,
 
 # Define Messages
 # English
@@ -93,6 +95,17 @@ program: $(TARGET).hex $(TARGET).eep
 fuses:
 	$(AVRDUDE) $(AVRDUDE_FLAGS) $(FUSES)
 
+osccal_to_eeprom:
+	$(eval CALIBRATIONS=$(shell $(AVRDUDE) $(AVRDUDE_FLAGS) -U cal:r:-:h))
+	$(eval CALIBRATION=$(word 4, $(subst $(COMMA), ,$(CALIBRATIONS))))
+	$(AVRDUDE) $(AVRDUDE_FLAGS) -U eeprom:w:0xAA,$(CALIBRATION):m
+
+wipe:
+	$(AVRDUDE) $(AVRDUDE_FLAGS) -U hfuse:w:0xD9:m
+	$(AVRDUDE) $(AVRDUDE_FLAGS) -e
+
+program_new_mcu: wipe fuses osccal_to_eeprom program
+
 $(BUILDDIR)/%.hex: $(BUILDDIR)/%.elf
 	@echo
 	@echo $(MSG_FLASH) $@
@@ -137,4 +150,5 @@ $(shell mkdir -p $(dir $(TARGET)) 2>/dev/null)
 -include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
 
 .PHONY : all finish sizebefore sizeafter \
-build elf hex eep lss sym clean program debug gdb-config fuses
+	build elf hex eep lss sym clean program debug gdb-config fuses osccal_to_eeprom \
+	program_new_mcu wipe

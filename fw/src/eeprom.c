@@ -8,18 +8,22 @@
  * bytes to prevent exceeding of EEPROM memory write limit.
  */
 
-#define EEPROM_ADDR_VERSION                ((uint8_t*)0x00)
-#define EEPROM_ADDR_FW_VER_MAJOR           ((uint8_t*)0x01)
-#define EEPROM_ADDR_FW_VER_MINOR           ((uint8_t*)0x02)
-#define EEPROM_ADDR_MODE                   ((uint8_t*)0x03)
-#define EEPROM_ADDR_POS_PLUS               ((uint16_t*)0x10)
-#define EEPROM_ADDR_POS_MINUS              ((uint16_t*)0x12)
-#define EEPROM_ADDR_SENS_PLUS              ((uint16_t*)0x14)
-#define EEPROM_ADDR_SENS_MINUS             ((uint16_t*)0x16)
-#define EEPROM_ADDR_MOVE_PER_TICK          ((uint8_t*)0x18)
-#define EEPROM_ADDR_POSITION               ((uint8_t*)0x30) // size: 16 bytes, 8 words
-#define EEPROM_ADDR_MOVED_PLUS             ((uint16_t*)0x40) // size: 16 bytes, 8 words
-#define EEPROM_ADDR_MOVED_MINUS            ((uint16_t*)0x50) // size: 16 bytes
+#define EEPROM_ADDR_OSCCAL_ID              ((uint8_t*)0x00)
+#define EEPROM_ADDR_OSCCAL                 ((uint8_t*)0x01)
+#define EEPROM_ADDR_VERSION                ((uint8_t*)0x10)
+#define EEPROM_ADDR_FW_VER_MAJOR           ((uint8_t*)0x11)
+#define EEPROM_ADDR_FW_VER_MINOR           ((uint8_t*)0x12)
+#define EEPROM_ADDR_MODE                   ((uint8_t*)0x13)
+#define EEPROM_ADDR_POS_PLUS               ((uint16_t*)0x20)
+#define EEPROM_ADDR_POS_MINUS              ((uint16_t*)0x22)
+#define EEPROM_ADDR_SENS_PLUS              ((uint16_t*)0x24)
+#define EEPROM_ADDR_SENS_MINUS             ((uint16_t*)0x26)
+#define EEPROM_ADDR_MOVE_PER_TICK          ((uint8_t*)0x28)
+#define EEPROM_ADDR_POSITION               ((uint8_t*)0x40) // size: 16 bytes, 8 words
+#define EEPROM_ADDR_MOVED_PLUS             ((uint16_t*)0x50) // size: 16 bytes, 8 words
+#define EEPROM_ADDR_MOVED_MINUS            ((uint16_t*)0x60) // size: 16 bytes
+
+#define OSCCAL_ID_VALID                    0xAA
 
 volatile bool ee_to_save = false;
 volatile bool ee_to_store_pos_plus;
@@ -48,6 +52,12 @@ void _ee_default_config(void) {
 }
 
 void ee_load(void) {
+	if (eeprom_read_byte(EEPROM_ADDR_OSCCAL_ID) != OSCCAL_ID_VALID) {
+		fail(fOscCalMissing); // will not exit fuction
+	} else {
+		OSCCAL = eeprom_read_byte(EEPROM_ADDR_OSCCAL);
+	}
+
 	uint8_t version = eeprom_read_byte(EEPROM_ADDR_VERSION);
 	if (version == 0xFF) {
 		_ee_default_config();

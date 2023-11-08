@@ -61,6 +61,7 @@ typedef enum {
 	fInitServoVCC = 2,
 	fServoVCC = 3,
 	fDiag = 4,
+	fOscCalMissing = 5,
 } FailCode;
 
 extern FailCode fail_code;
