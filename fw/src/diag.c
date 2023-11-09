@@ -6,6 +6,13 @@
 #include "io.h"
 #include "inputs.h"
 
+///////////////////////////////////////////////////////////////////////////////
+
+uint16_t servo_vcc_recorded_min = 0xFFFF;
+bool servo_vcc_warn = false;
+
+///////////////////////////////////////////////////////////////////////////////
+
 void diag_send() {
 	if (!usart_idle())
 		return;
@@ -16,7 +23,7 @@ void diag_send() {
 	usart_out[3] = CONFIG_FW_MAJOR;
 	usart_out[4] = CONFIG_FW_MINOR;
 	usart_out[5] = fail_code;
-	usart_out[6] = magnet_iswarn();
+	usart_out[6] = magnet_iswarn() | (servo_vcc_warn << 1);
 	usart_out[7] = mode;
 	usart_out[8] = (in_debounced[DEB_IN_PLUS]) | (in_debounced[DEB_IN_MINUS] << 1) | \
 		(in_debounced[DEB_BTN_PLUS] << 2) | (in_debounced[DEB_BTN_MINUS] << 3) | \
@@ -34,8 +41,9 @@ void diag_send() {
 	usart_out[29] = switch_move_per_tick;
 	memcpy_v(usart_out+30, &mag_value, 2);
 	memcpy_v(usart_out+32, &servo_vcc_value, 2);
+	memcpy_v(usart_out+34, &servo_vcc_recorded_min, 2);
 
-	usart_send(34);
+	usart_send(36);
 }
 
 void diag_read(void) {
@@ -47,18 +55,18 @@ void diag_read(void) {
 	usart_in = 0;
 
 	switch (c) {
-	case '+':
+	case '+': // move to +
 		if ((mode == mOverride) || ((!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS])))
 			switch_turnout(tpPlus);
 		break;
-	case '-':
+	case '-': // move to -
 		if ((mode == mOverride) || ((!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS])))
 			switch_turnout(tpMinus);
 		break;
-	case 'p':
+	case 'p': // increase speed
 		switch_move_per_tick++;
 		break;
-	case 'm':
+	case 'm': // decrease speed
 		switch_move_per_tick--;
 		break;
 	case 'r': // reset
@@ -67,6 +75,10 @@ void diag_read(void) {
 		break;
 	case 'f': // fail
 		fail(fDiag);
+		break;
+	case 'w': // reset servo warning
+		servo_vcc_warn = false;
+		servo_vcc_recorded_min = 0xFFFF;
 		break;
 	case 'o':
 		if (mode == mOverride)

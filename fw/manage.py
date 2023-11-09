@@ -30,7 +30,7 @@ import termios
 import docopt
 
 SW_VERSION = '1.0'
-DATA_SIZE = 32
+DATA_SIZE = 34
 
 BEGIN1 = 0xBE
 BEGIN2 = 0xEF
@@ -80,7 +80,8 @@ def parse(data) -> OrderedDict:
     d['fw'] = str(data[1]) + '.' + str(data[2])
     d['mode'] = str_mode(data[5])
     d['fail'] = str_fail_code(data[3])
-    d['magnet_warn'] = bool(data[4])
+    d['magnet_warn'] = bool(data[4] & 1)
+    d['servo_vcc_warn'] = bool((data[4] >> 1) & 1)
 
     d['in+'] = bool(data[6] & 1)
     d['in-'] = bool((data[6] >> 1) & 1)
@@ -104,6 +105,7 @@ def parse(data) -> OrderedDict:
     d['move_per_tick'] = str(data[27])
     d['mag_value'] = parse_num(data[28:30])
     d['servo_vcc_value'] = parse_num(data[30:32])
+    d['servo_vcc_recorded_min'] = parse_num(data[32:34])
 
     return d
 

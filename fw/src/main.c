@@ -336,7 +336,7 @@ void led_green_update_1ms(void) {
 void led_yellow_update_1ms(void) {
 	const uint8_t FLICK_PERIOD = 250;
 
-	if (((mode == mRun) && (magnet_iswarn())) || (mode == mOverride)) {
+	if (((mode == mRun) && ((magnet_iswarn()) || (servo_vcc_warn))) || (mode == mOverride)) {
 		static uint8_t counter = 0;
 
 		counter++;
@@ -383,6 +383,10 @@ void on_adc_done(void) {
 	} else if (mode != mFail) {
 		if (servo_vcc_value < SERVO_VCC_MIN)
 			fail(fServoVCC);
+		if (servo_vcc_value < servo_vcc_recorded_min)
+			servo_vcc_recorded_min = servo_vcc_value;
+		if (servo_vcc_value < SERVO_VCC_WARN)
+			servo_vcc_warn = true;
 	}
 }
 
