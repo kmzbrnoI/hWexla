@@ -104,8 +104,11 @@ def parse(data) -> OrderedDict:
     d['moved_minus'] = parse_num(data[23:27])
     d['move_per_tick'] = str(data[27])
     d['mag_value'] = parse_num(data[28:30])
+    d['mag_voltage'] = round((d['mag_value']/1024) * 5, 2)
     d['servo_vcc_value'] = parse_num(data[30:32])
+    d['servo_vcc_voltage'] = round((d['servo_vcc_value']/1024) * 5, 2)
     d['servo_vcc_recorded_min'] = parse_num(data[32:34])
+    d['servo_vcc_recorded_min_voltage'] = round((d['servo_vcc_recorded_min']/1024) * 5, 2)
 
     return d
 
