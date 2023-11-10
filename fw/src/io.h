@@ -59,8 +59,11 @@
 #define PIN_LED_GREEN IO_PIND5
 
 #define MAG_MAX_VALUE 1023
-#define SERVO_VCC_WARN  983 // 4.8 V (= 983/1024 * 5.0)
-#define SERVO_VCC_MIN  921 // 4.5 V (= 921/1024 * 5.0)
+
+#define SERVO_VCC_MIN_WARN 481 // 4.7 V (= x/512 * 5.0)
+#define SERVO_VCC_MIN 430 // 4.2 V (= x/512 * 5.0)
+#define SERVO_VCC_MAX_WARN  532 // 5.2 V (= x/512 * 5.0)
+#define SERVO_VCC_MAX 563 // 5.5 V (= x/512 * 5.0)
 
 void set_output(uint8_t pin, bool state);
 bool get_input(uint8_t pin);

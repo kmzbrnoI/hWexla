@@ -7,12 +7,14 @@
  */
 
 extern volatile bool ee_to_save;
+extern volatile bool ee_to_save_servo_vcc;
 extern volatile bool ee_to_store_pos_plus;
 extern volatile bool ee_to_store_pos_minus;
 
 // Warning: these functions take long time to execute
 void ee_load(void);
 void ee_save(void);
+void ee_save_servo_vcc(void);
 
 void ee_incr_moved_plus(void);
 void ee_incr_moved_minus(void);

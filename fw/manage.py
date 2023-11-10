@@ -30,7 +30,7 @@ import termios
 import docopt
 
 SW_VERSION = '1.0'
-DATA_SIZE = 34
+DATA_SIZE = 36
 
 BEGIN1 = 0xBE
 BEGIN2 = 0xEF
@@ -80,8 +80,9 @@ def parse(data) -> OrderedDict:
     d['fw'] = str(data[1]) + '.' + str(data[2])
     d['mode'] = str_mode(data[5])
     d['fail'] = str_fail_code(data[3])
-    d['magnet_warn'] = bool(data[4] & 1)
-    d['servo_vcc_warn'] = bool((data[4] >> 1) & 1)
+    d['magnet_warn'] = bool(data[4] >> 7)
+    d['servo_vcc_warn_low'] = bool((data[4]) & 1)
+    d['servo_vcc_warn_high'] = bool((data[4] >> 1) & 1)
 
     d['in+'] = bool(data[6] & 1)
     d['in-'] = bool((data[6] >> 1) & 1)
@@ -106,9 +107,11 @@ def parse(data) -> OrderedDict:
     d['mag_value'] = parse_num(data[28:30])
     d['mag_voltage'] = round((d['mag_value']/1024) * 5, 2)
     d['servo_vcc_value'] = parse_num(data[30:32])
-    d['servo_vcc_voltage'] = round((d['servo_vcc_value']/1024) * 5, 2)
+    d['servo_vcc_voltage'] = round((d['servo_vcc_value']/512) * 5, 2)
     d['servo_vcc_recorded_min'] = parse_num(data[32:34])
-    d['servo_vcc_recorded_min_voltage'] = round((d['servo_vcc_recorded_min']/1024) * 5, 2)
+    d['servo_vcc_recorded_min_voltage'] = round((d['servo_vcc_recorded_min']/512) * 5, 2)
+    d['servo_vcc_recorded_max'] = parse_num(data[34:36])
+    d['servo_vcc_recorded_max_voltage'] = round((d['servo_vcc_recorded_max']/512) * 5, 2)
 
     return d
 

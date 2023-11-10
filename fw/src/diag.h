@@ -6,7 +6,7 @@
 #define DIAG_STREAM_VERSION 1
 
 extern uint16_t servo_vcc_recorded_min;
-extern bool servo_vcc_warn;
+extern uint16_t servo_vcc_recorded_max;
 
 void diag_send(void);
 void diag_read(void);

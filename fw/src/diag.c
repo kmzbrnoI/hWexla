@@ -5,11 +5,12 @@
 #include "usart.h"
 #include "io.h"
 #include "inputs.h"
+#include "eeprom.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
 uint16_t servo_vcc_recorded_min = 0xFFFF;
-bool servo_vcc_warn = false;
+uint16_t servo_vcc_recorded_max = 0;
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -23,7 +24,7 @@ void diag_send() {
 	usart_out[3] = CONFIG_FW_MAJOR;
 	usart_out[4] = CONFIG_FW_MINOR;
 	usart_out[5] = fail_code;
-	usart_out[6] = magnet_iswarn() | (servo_vcc_warn << 1);
+	usart_out[6] = (magnet_iswarn() << 7) | warnings.all;
 	usart_out[7] = mode;
 	usart_out[8] = (in_debounced[DEB_IN_PLUS]) | (in_debounced[DEB_IN_MINUS] << 1) | \
 		(in_debounced[DEB_BTN_PLUS] << 2) | (in_debounced[DEB_BTN_MINUS] << 3) | \
@@ -42,8 +43,9 @@ void diag_send() {
 	memcpy_v(usart_out+30, &mag_value, 2);
 	memcpy_v(usart_out+32, &servo_vcc_value, 2);
 	memcpy_v(usart_out+34, &servo_vcc_recorded_min, 2);
+	memcpy_v(usart_out+36, &servo_vcc_recorded_max, 2);
 
-	usart_send(36);
+	usart_send(38);
 }
 
 void diag_read(void) {
@@ -77,8 +79,10 @@ void diag_read(void) {
 		fail(fDiag);
 		break;
 	case 'w': // reset servo warning
-		servo_vcc_warn = false;
+		warnings.all = 0;
 		servo_vcc_recorded_min = 0xFFFF;
+		servo_vcc_recorded_max = 0;
+		ee_to_save = true;
 		break;
 	case 'o':
 		if (mode == mOverride)

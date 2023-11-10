@@ -48,6 +48,7 @@ volatile uint8_t init_adc_vcc_nok_count = 0;
 volatile uint8_t diag_counter = 0;
 #define DIAG_UPDATE_PERIOD 200 // 200 ms
 FailCode fail_code = fNoFail;
+Warnings warnings;
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -63,6 +64,11 @@ int main() {
 		if (ee_to_save) {
 			ee_save();
 			ee_to_save = false;
+			ee_to_save_servo_vcc = false;
+		}
+		if (ee_to_save_servo_vcc) {
+			ee_save_servo_vcc();
+			ee_to_save_servo_vcc = false;
 		}
 		if (ee_to_store_pos_plus) {
 			ee_store_pos_plus();
@@ -87,6 +93,7 @@ void init(void) {
 	ACSR |= ACD;  // analog comparator disable
 	TIMSK = 0;
 	mode = mInitializing;
+	warnings.all = 0;
 
 	io_init();
 	set_output(PIN_LED_RED, true);
@@ -336,7 +343,7 @@ void led_green_update_1ms(void) {
 void led_yellow_update_1ms(void) {
 	const uint8_t FLICK_PERIOD = 250;
 
-	if (((mode == mRun) && ((magnet_iswarn()) || (servo_vcc_warn))) || (mode == mOverride)) {
+	if (((mode == mRun) && ((magnet_iswarn()) || (warnings.all > 0))) || (mode == mOverride)) {
 		static uint8_t counter = 0;
 
 		counter++;
@@ -369,7 +376,7 @@ void led_red_update_1ms(void) {
 
 void on_adc_done(void) {
 	if (mode == mInitializing) {
-		if (servo_vcc_value >= SERVO_VCC_MIN) {
+		if ((servo_vcc_value >= SERVO_VCC_MIN) && (servo_vcc_value <= SERVO_VCC_MAX)) {
 			init_adc_vcc_ok_count++;
 			if (init_adc_vcc_ok_count >= INIT_ADC_VCC_LIMIT)
 				init_done();
@@ -381,12 +388,26 @@ void on_adc_done(void) {
 		}
 
 	} else if (mode != mFail) {
-		if (servo_vcc_value < SERVO_VCC_MIN)
+		if ((servo_vcc_value < SERVO_VCC_MIN) || (servo_vcc_value > SERVO_VCC_MAX))
 			fail(fServoVCC);
-		if (servo_vcc_value < servo_vcc_recorded_min)
+
+		if (servo_vcc_value < servo_vcc_recorded_min) {
 			servo_vcc_recorded_min = servo_vcc_value;
-		if (servo_vcc_value < SERVO_VCC_WARN)
-			servo_vcc_warn = true;
+			ee_to_save_servo_vcc = true;
+		}
+		if (servo_vcc_value > servo_vcc_recorded_max) {
+			servo_vcc_recorded_max = servo_vcc_value;
+			ee_to_save_servo_vcc = true;
+		}
+
+		if ((servo_vcc_value < SERVO_VCC_MIN_WARN) && (!warnings.sep.servo_vcc_low)) {
+			warnings.sep.servo_vcc_low = true;
+			ee_to_save = true;
+		}
+		if ((servo_vcc_value > SERVO_VCC_MAX_WARN) && (!warnings.sep.servo_vcc_high)) {
+			warnings.sep.servo_vcc_high = true;
+			ee_to_save = true;
+		}
 	}
 }
 

@@ -64,7 +64,16 @@ typedef enum {
 	fOscCalMissing = 5,
 } FailCode;
 
+typedef union {
+	uint8_t all;
+	struct {
+		bool servo_vcc_low : 1;
+		bool servo_vcc_high : 1;
+	} sep;
+} Warnings;
+
 extern FailCode fail_code;
+extern Warnings warnings;
 
 void fail(FailCode);
 void memcpy_v(volatile void*, volatile void*, uint8_t);
