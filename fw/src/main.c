@@ -251,10 +251,10 @@ void set_outputs(void) {
 		set_output(PIN_BTN_PLUS_OUT, my_plus || (turnout.position == tpMovingToPlus && btn_flick));
 		set_output(PIN_BTN_MINUS_OUT, my_minus || (turnout.position == tpMovingToMinus && btn_flick));
 	} else {
-		set_output(PIN_OUT_PLUS, false);
-		set_output(PIN_OUT_MINUS, false);
-		set_output(PIN_BTN_PLUS_OUT, false); // needs to be false to read both buttons
-		set_output(PIN_BTN_MINUS_OUT, false); // needs to be false to read both buttons
+		set_output(PIN_OUT_PLUS, mode == mFail);
+		set_output(PIN_OUT_MINUS, mode == mFail);
+		set_output(PIN_BTN_PLUS_OUT, mode == mFail); // needs to be false to read both buttons
+		set_output(PIN_BTN_MINUS_OUT, mode == mFail); // needs to be false to read both buttons
 	}
 
 	// Do not use sensor value to allow relay switching without physical servo
@@ -317,7 +317,12 @@ void fail(FailCode code) {
 	set_output(PIN_LED_GREEN, false);
 	set_output(PIN_LED_YELLOW, false);
 	set_output(PIN_SERVO_POWER_EN, false);
-	io_fail();
+
+	// Set IO as inputs to allow external voltage to be applied (protection & hardware fixing)
+	pin_mode(PIN_SERVO_POWER_EN, INPUT);
+	pin_mode(PIN_SERVO_PWM, INPUT);
+	pin_mode(PIN_RELAY_CONTROL, INPUT);
+
 	fail_code = code;
 	mode = mFail;
 }
