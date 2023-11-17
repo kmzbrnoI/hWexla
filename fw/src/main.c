@@ -85,7 +85,6 @@ int main() {
 		}
 
 		wdt_reset();
-		_delay_ms(1);
 	}
 }
 
