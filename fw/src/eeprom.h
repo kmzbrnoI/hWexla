@@ -19,6 +19,7 @@ extern FailCode ee_last_fail;
 void ee_load(void);
 void ee_save(void);
 void ee_save_servo_vcc(void);
+void ee_save_warnings(void);
 
 void ee_incr_moved_plus(void);
 void ee_incr_moved_minus(void);

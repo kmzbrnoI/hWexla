@@ -69,6 +69,7 @@ typedef union {
 	struct {
 		bool servo_vcc_low : 1;
 		bool servo_vcc_high : 1;
+		bool wdg_reset : 1;
 	} sep;
 } Warnings;
 

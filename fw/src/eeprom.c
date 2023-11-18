@@ -128,18 +128,22 @@ void ee_save(void) {
 	eeprom_update_byte(EEPROM_ADDR_FW_VER_MAJOR, CONFIG_FW_MAJOR);
 	eeprom_update_byte(EEPROM_ADDR_FW_VER_MINOR, CONFIG_FW_MINOR);
 	eeprom_update_byte(EEPROM_ADDR_MODE, (mode == mOverride));
-	eeprom_update_byte(EEPROM_ADDR_WARNINGS, warnings.all);
 	eeprom_update_word(EEPROM_ADDR_POS_PLUS, turnout.angle_plus);
 	eeprom_update_word(EEPROM_ADDR_POS_MINUS, turnout.angle_minus);
 	eeprom_update_word(EEPROM_ADDR_SENS_PLUS, turnout.sensor_plus);
 	eeprom_update_word(EEPROM_ADDR_SENS_MINUS, turnout.sensor_minus);
 	eeprom_update_byte(EEPROM_ADDR_MOVE_PER_TICK, switch_move_per_tick);
 	ee_save_servo_vcc();
+	ee_save_warnings();
 }
 
 void ee_save_servo_vcc(void) {
 	eeprom_update_word(EEPROM_ADDR_SERVO_VCC_MIN, servo_vcc_recorded_min);
 	eeprom_update_word(EEPROM_ADDR_SERVO_VCC_MAX, servo_vcc_recorded_max);
+}
+
+void ee_save_warnings(void) {
+	eeprom_update_byte(EEPROM_ADDR_WARNINGS, warnings.all);
 }
 
 void ee_incr_moved_plus(void) {

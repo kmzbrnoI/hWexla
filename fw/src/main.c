@@ -117,6 +117,11 @@ void init(void) {
 	pwm_servo_init();
 	usart_initialize();
 
+	if (((MCUCSR >> WDRF) & 1)) {
+		warnings.sep.wdg_reset = true;
+		ee_save_warnings();
+	}
+
 	// Timer 2 @ 1 kHz (1 ms)
 	TCCR2 = (1 << WGM21) | (1 << CS21) | (1 << CS20); // CTC; prescaler 32×
 	OCR2 = 248; // 1 ms
