@@ -22,15 +22,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 int main();
-static inline void init(void);
-static inline void set_outputs(void);
-static inline void programming_enter(void);
-static inline void programming_leave(void);
-static inline void init_done(void);
-static inline void led_green_update_1ms(void);
-static inline void led_yellow_update_1ms(void);
-static inline void led_red_update_1ms(void);
-static inline void inputs_poll(void);
+static void init(void);
+static void set_outputs(void);
+static void programming_enter(void);
+static void programming_leave(void);
+static void init_done(void);
+static void led_green_update_1ms(void);
+static void led_yellow_update_1ms(void);
+static void led_red_update_1ms(void);
+static void inputs_poll(void);
 bool magnet_isclose(uint16_t value, uint8_t threshold);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -132,21 +132,21 @@ ISR(BADISR_vect) {
 ISR(TIMER2_COMP_vect) {
 	// Timer 2 @ 1 kHz (1 ms)
 
-	static volatile uint8_t counter_20ms = 0;
+	static uint8_t counter_20ms = 0;
 	counter_20ms++;
 	if (counter_20ms >= 20) {
 		counter_20ms = 0;
 		switch_update();
 	}
 
-	static volatile uint8_t counter_50ms = 0;
+	static uint8_t counter_50ms = 0;
 	counter_50ms++;
 	if (counter_50ms >= 50) {
 		adc_start_measure();
 		counter_50ms = 0;
 	}
 
-	static volatile uint8_t flick_counter = 0;
+	static uint8_t flick_counter = 0;
 	flick_counter++;
 	if (flick_counter >= BTN_FLICK_PERIOD) {
 		btn_flick = !btn_flick;
