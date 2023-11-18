@@ -16,6 +16,8 @@
 #define EEPROM_ADDR_FW_VER_MINOR           ((uint8_t*)0x12)
 #define EEPROM_ADDR_MODE                   ((uint8_t*)0x13)
 #define EEPROM_ADDR_WARNINGS               ((uint8_t*)0x14)
+#define EEPROM_ADDR_FAIL_COUNT             ((uint8_t*)0x15)
+#define EEPROM_ADDR_LAST_FAIL              ((uint8_t*)0x16)
 #define EEPROM_ADDR_POS_PLUS               ((uint16_t*)0x20)
 #define EEPROM_ADDR_POS_MINUS              ((uint16_t*)0x22)
 #define EEPROM_ADDR_SENS_PLUS              ((uint16_t*)0x24)
@@ -33,6 +35,11 @@ volatile bool ee_to_save = false;
 volatile bool ee_to_save_servo_vcc = false;
 volatile bool ee_to_store_pos_plus;
 volatile bool ee_to_store_pos_minus;
+
+uint8_t ee_fail_count;
+FailCode ee_last_fail;
+
+///////////////////////////////////////////////////////////////////////////////
 
 static void _ee_pos_change(void);
 
@@ -54,6 +61,8 @@ void _ee_default_config(void) {
 	}
 	for (size_t i = 0; i < EEPROM_POSITION_COUNT; i++)
 		eeprom_write_byte(EEPROM_ADDR_POSITION + i, 0);
+
+	ee_reset_fail();
 }
 
 void ee_load(void) {
@@ -71,6 +80,8 @@ void ee_load(void) {
 	}
 
 	warnings.all = eeprom_read_byte(EEPROM_ADDR_WARNINGS);
+	ee_fail_count = eeprom_read_byte(EEPROM_ADDR_FAIL_COUNT);
+	ee_last_fail = eeprom_read_byte(EEPROM_ADDR_LAST_FAIL);
 
 	turnout.angle_plus = eeprom_read_word(EEPROM_ADDR_POS_PLUS);
 	if (turnout.angle_plus > PWM_ANGLE_MAX)
@@ -170,4 +181,19 @@ void _ee_pos_change(void) {
 
 uint8_t ee_mode(void) {
 	return eeprom_read_byte(EEPROM_ADDR_MODE);
+}
+
+void ee_fail(FailCode code) {
+	ee_last_fail = code;
+	if (ee_fail_count < 0xFF)
+		ee_fail_count++;
+	eeprom_update_byte(EEPROM_ADDR_FAIL_COUNT, ee_fail_count);
+	eeprom_update_byte(EEPROM_ADDR_LAST_FAIL, ee_last_fail);
+}
+
+void ee_reset_fail(void) {
+	ee_fail_count = 0;
+	ee_last_fail = fNoFail;
+	eeprom_update_byte(EEPROM_ADDR_FAIL_COUNT, ee_fail_count);
+	eeprom_update_byte(EEPROM_ADDR_LAST_FAIL, ee_last_fail);
 }

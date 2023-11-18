@@ -30,7 +30,7 @@ import termios
 import docopt
 
 SW_VERSION = '1.0'
-DATA_SIZE = 36
+DATA_SIZE = 38
 
 BEGIN1 = 0xBE
 BEGIN2 = 0xEF
@@ -78,39 +78,41 @@ def parse(data) -> OrderedDict:
 
     d['stream_version'] = str(data[0])
     d['fw'] = str(data[1]) + '.' + str(data[2])
-    d['mode'] = str_mode(data[5])
+    d['mode'] = str_mode(data[7])
     d['fail'] = str_fail_code(data[3])
     d['magnet_warn'] = bool(data[4] >> 7)
     d['servo_vcc_warn_low'] = bool((data[4]) & 1)
     d['servo_vcc_warn_high'] = bool((data[4] >> 1) & 1)
+    d['fail_count'] = data[5]
+    d['last_fail'] = str_fail_code(data[6])
 
-    d['in+'] = bool(data[6] & 1)
-    d['in-'] = bool((data[6] >> 1) & 1)
-    d['in_btn+'] = bool((data[6] >> 2) & 1)
-    d['in_btn-'] = bool((data[6] >> 3) & 1)
-    d['in_btn'] = bool((data[6] >> 4) & 1)
-    d['in_slave'] = bool((data[6] >> 5) & 1)
+    d['in+'] = bool(data[8] & 1)
+    d['in-'] = bool((data[8] >> 1) & 1)
+    d['in_btn+'] = bool((data[8] >> 2) & 1)
+    d['in_btn-'] = bool((data[8] >> 3) & 1)
+    d['in_btn'] = bool((data[8] >> 4) & 1)
+    d['in_slave'] = bool((data[8] >> 5) & 1)
 
-    d['out+'] = bool(data[7] & 1)
-    d['out-'] = bool((data[7] >> 1) & 1)
-    d['out_relay'] = bool((data[7] >> 2) & 1)
-    d['out_power'] = bool((data[7] >> 3) & 1)
-    d['turnout_pos'] = str_position(data[8])
-    d['angle'] = parse_num(data[9:11])
-    d['angle_plus'] = parse_num(data[11:13])
-    d['angle_minus'] = parse_num(data[13:15])
-    d['sensor_plus'] = parse_num(data[15:17])
-    d['sensor_minus'] = parse_num(data[17:19])
-    d['moved_plus'] = parse_num(data[19:23])
-    d['moved_minus'] = parse_num(data[23:27])
-    d['move_per_tick'] = str(data[27])
-    d['mag_value'] = parse_num(data[28:30])
+    d['out+'] = bool(data[9] & 1)
+    d['out-'] = bool((data[9] >> 1) & 1)
+    d['out_relay'] = bool((data[9] >> 2) & 1)
+    d['out_power'] = bool((data[9] >> 3) & 1)
+    d['turnout_pos'] = str_position(data[10])
+    d['angle'] = parse_num(data[11:13])
+    d['angle_plus'] = parse_num(data[13:15])
+    d['angle_minus'] = parse_num(data[15:17])
+    d['sensor_plus'] = parse_num(data[17:19])
+    d['sensor_minus'] = parse_num(data[19:21])
+    d['moved_plus'] = parse_num(data[21:25])
+    d['moved_minus'] = parse_num(data[25:29])
+    d['move_per_tick'] = str(data[29])
+    d['mag_value'] = parse_num(data[30:32])
     d['mag_voltage'] = round((d['mag_value']/1024) * 5, 2)
-    d['servo_vcc_value'] = parse_num(data[30:32])
+    d['servo_vcc_value'] = parse_num(data[32:34])
     d['servo_vcc_voltage'] = round((d['servo_vcc_value']/512) * 5, 2)
-    d['servo_vcc_recorded_min'] = parse_num(data[32:34])
+    d['servo_vcc_recorded_min'] = parse_num(data[34:36])
     d['servo_vcc_recorded_min_voltage'] = round((d['servo_vcc_recorded_min']/512) * 5, 2)
-    d['servo_vcc_recorded_max'] = parse_num(data[34:36])
+    d['servo_vcc_recorded_max'] = parse_num(data[36:38])
     d['servo_vcc_recorded_max_voltage'] = round((d['servo_vcc_recorded_max']/512) * 5, 2)
 
     return d
