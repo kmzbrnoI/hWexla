@@ -6,12 +6,12 @@
 #include "io.h"
 
 bool _switching = false;
-volatile uint8_t switch_move_per_tick = 4;
-volatile TurnoutPos _target_pos;
-volatile uint8_t end_remain_counter;
-volatile uint8_t begin_remain_counter;
-volatile bool _relay_switched;
-volatile uint16_t _middle;
+uint8_t switch_move_per_tick = 4;
+TurnoutPos _target_pos;
+uint8_t end_remain_counter;
+uint8_t begin_remain_counter;
+bool _relay_switched;
+uint16_t _middle;
 
 #define BEGIN_REMAIN 5 // send 100 ms stable signal at end of switching
 #define END_REMAIN 10 // send 200 ms stable signal at end of switching

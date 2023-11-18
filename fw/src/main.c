@@ -42,10 +42,12 @@ volatile bool btn_flick = false;
 volatile uint8_t prog_btn_counter_ms = 0;
 #define PROG_BTN_MAX 20 // ms
 volatile uint8_t pseudorand = 0;
-volatile uint8_t init_adc_vcc_ok_count = 0;
-volatile uint8_t init_adc_vcc_nok_count = 0;
+uint8_t init_adc_vcc_ok_count = 0;
+uint8_t init_adc_vcc_nok_count = 0;
 #define INIT_ADC_VCC_LIMIT 5 // cca 250 ms
 volatile uint8_t diag_counter = 0;
+volatile bool isr_1ms_req = false;
+volatile bool isr_switch_update_req = false;
 #define DIAG_UPDATE_PERIOD 200 // 200 ms
 FailCode fail_code = fNoFail;
 Warnings warnings;
@@ -61,6 +63,17 @@ int main() {
 		adc_poll();
 		diag_read();
 
+		if (isr_1ms_req) {
+			inputs_update_1ms();
+			led_green_update_1ms();
+			led_yellow_update_1ms();
+			led_red_update_1ms();
+			isr_1ms_req = false;
+		}
+		if (isr_switch_update_req) {
+			switch_update();
+			isr_switch_update_req = false;
+		}
 		if (ee_to_save) {
 			ee_save();
 			ee_to_save = false;
@@ -131,12 +144,13 @@ ISR(BADISR_vect) {
 
 ISR(TIMER2_COMP_vect) {
 	// Timer 2 @ 1 kHz (1 ms)
+	isr_1ms_req = true;
 
 	static uint8_t counter_20ms = 0;
 	counter_20ms++;
 	if (counter_20ms >= 20) {
 		counter_20ms = 0;
-		switch_update();
+		isr_switch_update_req = true;
 	}
 
 	static uint8_t counter_50ms = 0;
@@ -159,10 +173,6 @@ ISR(TIMER2_COMP_vect) {
 	if (diag_counter < DIAG_UPDATE_PERIOD)
 		diag_counter++;
 
-	inputs_update_1ms();
-	led_green_update_1ms();
-	led_yellow_update_1ms();
-	led_red_update_1ms();
 	pseudorand++;
 }
 

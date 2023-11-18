@@ -74,7 +74,7 @@ void io_init(void);
 void adc_start_measure(void);
 void adc_poll(void);
 void on_adc_done(void);
-extern volatile uint16_t mag_value;
-extern volatile uint16_t servo_vcc_value;
+extern uint16_t mag_value;
+extern uint16_t servo_vcc_value;
 
 #endif

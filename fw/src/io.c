@@ -9,9 +9,9 @@ typedef enum {
 	adcServoVcc = 2,
 } AdcCurrent;
 
-volatile uint16_t mag_value = 0;
-volatile uint16_t servo_vcc_value = 0;
-volatile AdcCurrent adcCurrent = adcNone;
+uint16_t mag_value = 0;
+uint16_t servo_vcc_value = 0;
+AdcCurrent adcCurrent = adcNone;
 
 ///////////////////////////////////////////////////////////////////////////////
 
