@@ -139,7 +139,7 @@ ISR(TIMER2_COMP_vect) {
 		switch_update();
 	}
 
-	static volatile uint16_t counter_50ms = 0;
+	static volatile uint8_t counter_50ms = 0;
 	counter_50ms++;
 	if (counter_50ms >= 50) {
 		adc_start_measure();
@@ -159,7 +159,7 @@ ISR(TIMER2_COMP_vect) {
 	if (diag_counter < DIAG_UPDATE_PERIOD)
 		diag_counter++;
 
-	buttons_update_1ms();
+	inputs_update_1ms();
 	led_green_update_1ms();
 	led_yellow_update_1ms();
 	led_red_update_1ms();

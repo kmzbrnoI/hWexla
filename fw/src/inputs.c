@@ -14,7 +14,7 @@ uint8_t _inputs[DEB_COUNT] = {
 	PIN_SLAVE,
 };
 
-void _button_update_1ms(uint8_t i) {
+void _inputs_update_1ms(uint8_t i) {
 	if (!get_input(_inputs[i])) {
 		if (_counters[i] < DEBOUNCE_READS) {
 			_counters[i]++;
@@ -32,7 +32,7 @@ void _button_update_1ms(uint8_t i) {
 	}
 }
 
-void buttons_update_1ms(void) {
+void inputs_update_1ms(void) {
 	for (size_t i = 0; i < DEB_COUNT; i++)
-		_button_update_1ms(i);
+		_inputs_update_1ms(i);
 }

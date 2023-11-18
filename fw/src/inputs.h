@@ -7,10 +7,10 @@
 
 #define DEBOUNCE_READS 20 // also time in ms
 
-void on_btn_pressed(uint8_t button);
-void buttons_update_1ms(void);
+void on_btn_pressed(uint8_t input);
+void inputs_update_1ms(void);
 
-enum DebouncedButton {
+enum DebouncedInput {
 	DEB_IN_PLUS = 0,
 	DEB_IN_MINUS,
 	DEB_BTN_PLUS,
