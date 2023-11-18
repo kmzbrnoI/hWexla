@@ -133,7 +133,7 @@ void init(void) {
 		fail(fail_code); // fail again to reset outputs
 
 	sei(); // enable interrupts globally
-	wdt_enable(WDTO_250MS);
+	wdt_enable(WDTO_30MS);
 }
 
 ISR(BADISR_vect) {
