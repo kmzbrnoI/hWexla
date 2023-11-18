@@ -79,43 +79,76 @@ def parse(data) -> OrderedDict:
     d['stream_version'] = str(data[0])
     d['fw'] = str(data[1]) + '.' + str(data[2])
     d['mode'] = str_mode(data[7])
-    d['fail'] = str_fail_code(data[3])
-    d['magnet_warn'] = bool(data[4] >> 7)
-    d['servo_vcc_warn_low'] = bool((data[4]) & 1)
-    d['servo_vcc_warn_high'] = bool((data[4] >> 1) & 1)
-    d['fail_count'] = data[5]
-    d['last_fail'] = str_fail_code(data[6])
 
-    d['in+'] = bool(data[8] & 1)
-    d['in-'] = bool((data[8] >> 1) & 1)
-    d['in_btn+'] = bool((data[8] >> 2) & 1)
-    d['in_btn-'] = bool((data[8] >> 3) & 1)
-    d['in_btn'] = bool((data[8] >> 4) & 1)
-    d['in_slave'] = bool((data[8] >> 5) & 1)
+    d['FAIL'] = OrderedDict()
+    fail = d['FAIL']
+    fail['fail'] = str_fail_code(data[3])
+    fail['fail_count'] = data[5]
+    fail['last_fail'] = str_fail_code(data[6])
 
-    d['out+'] = bool(data[9] & 1)
-    d['out-'] = bool((data[9] >> 1) & 1)
-    d['out_relay'] = bool((data[9] >> 2) & 1)
-    d['out_power'] = bool((data[9] >> 3) & 1)
-    d['turnout_pos'] = str_position(data[10])
-    d['angle'] = parse_num(data[11:13])
-    d['angle_plus'] = parse_num(data[13:15])
-    d['angle_minus'] = parse_num(data[15:17])
-    d['sensor_plus'] = parse_num(data[17:19])
-    d['sensor_minus'] = parse_num(data[19:21])
-    d['moved_plus'] = parse_num(data[21:25])
-    d['moved_minus'] = parse_num(data[25:29])
-    d['move_per_tick'] = str(data[29])
-    d['mag_value'] = parse_num(data[30:32])
-    d['mag_voltage'] = round((d['mag_value']/1024) * 5, 2)
-    d['servo_vcc_value'] = parse_num(data[32:34])
-    d['servo_vcc_voltage'] = round((d['servo_vcc_value']/512) * 5, 2)
-    d['servo_vcc_recorded_min'] = parse_num(data[34:36])
-    d['servo_vcc_recorded_min_voltage'] = round((d['servo_vcc_recorded_min']/512) * 5, 2)
-    d['servo_vcc_recorded_max'] = parse_num(data[36:38])
-    d['servo_vcc_recorded_max_voltage'] = round((d['servo_vcc_recorded_max']/512) * 5, 2)
+    d['WARNINGS'] = OrderedDict()
+    warn = d['WARNINGS']
+    warn['all'] = data[4]
+    warn['magnet_warn'] = bool(data[4] >> 7)
+    warn['servo_vcc_warn_low'] = bool((data[4]) & 1)
+    warn['servo_vcc_warn_high'] = bool((data[4] >> 1) & 1)
+    warn['wdg_reset'] = bool((data[4] >> 2) & 1)
+
+    d['INPUTS'] = OrderedDict()
+    inp = d['INPUTS']
+    inp['in+'] = bool(data[8] & 1)
+    inp['in-'] = bool((data[8] >> 1) & 1)
+    inp['in_btn+'] = bool((data[8] >> 2) & 1)
+    inp['in_btn-'] = bool((data[8] >> 3) & 1)
+    inp['in_btn'] = bool((data[8] >> 4) & 1)
+    inp['in_slave'] = bool((data[8] >> 5) & 1)
+
+    d['OUTPUTS'] = OrderedDict()
+    out = d['OUTPUTS']
+    out['out+'] = bool(data[9] & 1)
+    out['out-'] = bool((data[9] >> 1) & 1)
+    out['out_relay'] = bool((data[9] >> 2) & 1)
+    out['out_power'] = bool((data[9] >> 3) & 1)
+
+    d['CORE'] = OrderedDict()
+    core = d['CORE']
+    core['turnout_pos'] = str_position(data[10])
+    core['angle'] = parse_num(data[11:13])
+
+    d['CONFIG'] = OrderedDict()
+    config = d['CONFIG']
+    config['angle_plus'] = parse_num(data[13:15])
+    config['angle_minus'] = parse_num(data[15:17])
+    config['sensor_plus'] = parse_num(data[17:19])
+    config['sensor_minus'] = parse_num(data[19:21])
+    config['move_per_tick'] = str(data[29])
+
+    d['STAT'] = OrderedDict()
+    stat = d['STAT']
+    stat['moved_plus'] = parse_num(data[21:25])
+    stat['moved_minus'] = parse_num(data[25:29])
+
+    d['SENSORS'] = OrderedDict()
+    sens = d['SENSORS']
+    sens['mag_value'] = parse_num(data[30:32])
+    sens['mag_voltage'] = round((sens['mag_value']/1024) * 5, 2)
+    sens['servo_vcc_value'] = parse_num(data[32:34])
+    sens['servo_vcc_voltage'] = round((sens['servo_vcc_value']/512) * 5, 2)
+    sens['servo_vcc_recorded_min'] = parse_num(data[34:36])
+    sens['servo_vcc_recorded_min_voltage'] = round((sens['servo_vcc_recorded_min']/512) * 5, 2)
+    sens['servo_vcc_recorded_max'] = parse_num(data[36:38])
+    sens['servo_vcc_recorded_max_voltage'] = round((sens['servo_vcc_recorded_max']/512) * 5, 2)
 
     return d
+
+
+def print_dict(d, prefix: str) -> None:
+    for key, val in d.items():
+        if isinstance(val, dict):
+            print(f'{prefix}{key}')
+            print_dict(val, prefix+'| ')
+        else:
+            print(f'{prefix}{key}: {val}')
 
 
 def show(args, raw: List[int]):
@@ -125,8 +158,7 @@ def show(args, raw: List[int]):
     if args['--raw']:
         print(humanify_buf(raw))
 
-    for key, val in d.items():
-        print(f'{key}: {val}')
+    print_dict(d, '')
 
 
 def init_stdin():
