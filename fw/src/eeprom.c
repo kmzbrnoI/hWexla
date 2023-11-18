@@ -33,8 +33,8 @@
 
 volatile bool ee_to_save = false;
 volatile bool ee_to_save_servo_vcc = false;
-volatile bool ee_to_store_pos_plus;
-volatile bool ee_to_store_pos_minus;
+volatile bool ee_to_save_pos_plus;
+volatile bool ee_to_save_pos_minus;
 
 uint8_t ee_fail_count;
 FailCode ee_last_fail;
@@ -162,14 +162,14 @@ void ee_incr_moved_minus(void) {
 	turnout.ee_moved_minus_mini = (turnout.ee_moved_minus_mini+1) % EEPROM_MOVED_COUNT;
 }
 
-void ee_store_pos_plus(void) {
+void ee_save_pos_plus(void) {
 	if (turnout.ee_positions_parity) {
 		// = currently is minus
 		_ee_pos_change();
 	}
 }
 
-void ee_store_pos_minus(void) {
+void ee_save_pos_minus(void) {
 	if (!turnout.ee_positions_parity) {
 		// = currently is plus
 		_ee_pos_change();

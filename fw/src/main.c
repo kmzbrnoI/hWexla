@@ -85,13 +85,13 @@ int main() {
 			ee_save_servo_vcc();
 			ee_to_save_servo_vcc = false;
 		}
-		if (ee_to_store_pos_plus) {
-			ee_store_pos_plus();
-			ee_to_store_pos_plus = false;
+		if (ee_to_save_pos_plus) {
+			ee_save_pos_plus();
+			ee_to_save_pos_plus = false;
 		}
-		if (ee_to_store_pos_minus) {
-			ee_store_pos_minus();
-			ee_to_store_pos_minus = false;
+		if (ee_to_save_pos_minus) {
+			ee_save_pos_minus();
+			ee_to_save_pos_minus = false;
 		}
 
 		if (diag_counter >= DIAG_UPDATE_PERIOD) {
@@ -191,9 +191,9 @@ ISR(TIMER2_COMP_vect) {
 
 void on_switch_done(void) {
 	if (turnout.position == tpPlus)
-		ee_to_store_pos_plus = true;
+		ee_to_save_pos_plus = true;
 	else
-		ee_to_store_pos_minus = true;
+		ee_to_save_pos_minus = true;
 }
 
 void on_btn_pressed(uint8_t button) {
