@@ -27,30 +27,34 @@ static void set_outputs(void);
 static void programming_enter(void);
 static void programming_leave(void);
 static void init_done(void);
-static void led_green_update_1ms(void);
-static void led_yellow_update_1ms(void);
-static void led_red_update_1ms(void);
+static void leds_update(void);
 static void inputs_poll(void);
 bool magnet_isclose(uint16_t value, uint8_t threshold);
 
 ///////////////////////////////////////////////////////////////////////////////
 
+#define BTN_FLICK_PERIOD 150 // ms (max uint8_t)
+#define LED_FLICK_PERIOD 500 // ms (max uint16_t)
+#define LED_FLICK_ON 250 // ms
+#define PROG_BTN_MAX 20 // ms
+#define INIT_ADC_VCC_LIMIT 5 // cca 250 ms
+#define DIAG_UPDATE_PERIOD 200 // 200 ms
+
+FailCode fail_code = fNoFail;
+Warnings warnings;
+
 volatile Turnout turnout;
 volatile Mode mode;
+
 volatile bool btn_flick = false;
-#define BTN_FLICK_PERIOD 150 // ms (max uint8_t)
 volatile uint8_t prog_btn_counter_ms = 0;
-#define PROG_BTN_MAX 20 // ms
 volatile uint8_t pseudorand = 0;
 uint8_t init_adc_vcc_ok_count = 0;
 uint8_t init_adc_vcc_nok_count = 0;
-#define INIT_ADC_VCC_LIMIT 5 // cca 250 ms
 volatile uint8_t diag_counter = 0;
 volatile bool isr_1ms_req = false;
 volatile bool isr_switch_update_req = false;
-#define DIAG_UPDATE_PERIOD 200 // 200 ms
-FailCode fail_code = fNoFail;
-Warnings warnings;
+volatile uint16_t led_flick_counter = 0;
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -62,12 +66,10 @@ int main() {
 		set_outputs();
 		adc_poll();
 		diag_read();
+		leds_update();
 
 		if (isr_1ms_req) {
 			inputs_update_1ms();
-			led_green_update_1ms();
-			led_yellow_update_1ms();
-			led_red_update_1ms();
 			isr_1ms_req = false;
 		}
 		if (isr_switch_update_req) {
@@ -172,6 +174,10 @@ ISR(TIMER2_COMP_vect) {
 
 	if (diag_counter < DIAG_UPDATE_PERIOD)
 		diag_counter++;
+
+	led_flick_counter++;
+	if (led_flick_counter >= LED_FLICK_PERIOD)
+		led_flick_counter = 0;
 
 	pseudorand++;
 }
@@ -339,52 +345,13 @@ void fail(FailCode code) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void led_green_update_1ms(void) {
-	const uint8_t FLICK_PERIOD = 250;
-
-	if ((mode == mProgramming) || (mode == mOverride)) {
-		static uint8_t counter = 0;
-
-		counter++;
-		if (counter >= FLICK_PERIOD) {
-			set_output(PIN_LED_GREEN, !get_output(PIN_LED_GREEN));
-			counter = 0;
-		}
-	} else {
-		set_output(PIN_LED_GREEN, (mode == mRun));
-	}
-}
-
-void led_yellow_update_1ms(void) {
-	const uint8_t FLICK_PERIOD = 250;
-
-	if (((mode == mRun) && ((magnet_iswarn()) || (warnings.all > 0))) || (mode == mOverride)) {
-		static uint8_t counter = 0;
-
-		counter++;
-		if (counter >= FLICK_PERIOD) {
-			set_output(PIN_LED_YELLOW, !get_output(PIN_LED_YELLOW));
-			counter = 0;
-		}
-	} else {
-		set_output(PIN_LED_YELLOW, false);
-	}
-}
-
-void led_red_update_1ms(void) {
-	const uint8_t FLICK_PERIOD = 250;
-
-	if (mode == mFail) {
-		static uint8_t counter = 0;
-
-		counter++;
-		if (counter >= FLICK_PERIOD) {
-			set_output(PIN_LED_RED, !get_output(PIN_LED_RED));
-			counter = 0;
-		}
-	} else if (mode == mRun) {
-		set_output(PIN_LED_RED, false);
-	}
+void leds_update(void) {
+	bool flick_on = (led_flick_counter < LED_FLICK_ON);
+	set_output(PIN_LED_GREEN, (mode == mRun) ||
+		(((mode == mProgramming) || (mode == mOverride)) && (flick_on)));
+	set_output(PIN_LED_YELLOW, (flick_on) &&
+		(((mode == mRun) && ((magnet_iswarn()) || (warnings.all > 0))) || (mode == mOverride)));
+	set_output(PIN_LED_RED, (mode == mFail) && (flick_on));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
