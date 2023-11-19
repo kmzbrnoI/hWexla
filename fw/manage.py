@@ -93,6 +93,7 @@ def parse(data) -> OrderedDict:
     warn['servo_vcc_warn_low'] = bool((data[4]) & 1)
     warn['servo_vcc_warn_high'] = bool((data[4] >> 1) & 1)
     warn['wdg_reset'] = bool((data[4] >> 2) & 1)
+    warn['missed_timer'] = bool((data[4] >> 3) & 1)
 
     d['INPUTS'] = OrderedDict()
     inp = d['INPUTS']

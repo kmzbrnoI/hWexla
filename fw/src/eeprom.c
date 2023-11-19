@@ -5,32 +5,6 @@
 #include "switch.h"
 #include "diag.h"
 
-/* Often-changed data in EEPROM (position, n.o. turns +/-) are split on multiple
- * bytes to prevent exceeding of EEPROM memory write limit.
- */
-
-#define EEPROM_ADDR_OSCCAL_ID              ((uint8_t*)0x00)
-#define EEPROM_ADDR_OSCCAL                 ((uint8_t*)0x01)
-#define EEPROM_ADDR_VERSION                ((uint8_t*)0x10)
-#define EEPROM_ADDR_FW_VER_MAJOR           ((uint8_t*)0x11)
-#define EEPROM_ADDR_FW_VER_MINOR           ((uint8_t*)0x12)
-#define EEPROM_ADDR_MODE                   ((uint8_t*)0x13)
-#define EEPROM_ADDR_WARNINGS               ((uint8_t*)0x14)
-#define EEPROM_ADDR_FAIL_COUNT             ((uint8_t*)0x15)
-#define EEPROM_ADDR_LAST_FAIL              ((uint8_t*)0x16)
-#define EEPROM_ADDR_POS_PLUS               ((uint16_t*)0x20)
-#define EEPROM_ADDR_POS_MINUS              ((uint16_t*)0x22)
-#define EEPROM_ADDR_SENS_PLUS              ((uint16_t*)0x24)
-#define EEPROM_ADDR_SENS_MINUS             ((uint16_t*)0x26)
-#define EEPROM_ADDR_MOVE_PER_TICK          ((uint8_t*)0x28)
-#define EEPROM_ADDR_POSITION               ((uint8_t*)0x40) // size: 16 bytes, 8 words
-#define EEPROM_ADDR_MOVED_PLUS             ((uint16_t*)0x50) // size: 16 bytes, 8 words
-#define EEPROM_ADDR_MOVED_MINUS            ((uint16_t*)0x60) // size: 16 bytes
-#define EEPROM_ADDR_SERVO_VCC_MIN          ((uint16_t*)0x70)
-#define EEPROM_ADDR_SERVO_VCC_MAX          ((uint16_t*)0x72)
-
-#define OSCCAL_ID_VALID                    0xAA
-
 volatile bool ee_to_save = false;
 volatile bool ee_to_save_servo_vcc = false;
 volatile bool ee_to_save_pos_plus;
@@ -41,10 +15,25 @@ FailCode ee_last_fail;
 
 ///////////////////////////////////////////////////////////////////////////////
 
+static bool _ee_nonblock_update_byte(uint8_t* addr, uint8_t value);
+static bool _ee_nonblock_update_word(uint16_t* addr, uint16_t value);
 static void _ee_pos_change(void);
 
 ///////////////////////////////////////////////////////////////////////////////
 
+bool _ee_nonblock_update_byte(uint8_t* addr, uint8_t value) {
+	if (!eeprom_is_ready()) return false;
+	eeprom_update_byte(addr, value);
+	return true;
+}
+
+bool _ee_nonblock_update_word(uint16_t* addr, uint16_t value) {
+	if (!eeprom_is_ready()) return false;
+	eeprom_update_byte((uint8_t*)addr, value & 0xFF);
+	if (!eeprom_is_ready()) return false;
+	eeprom_update_byte((uint8_t*)addr+1, value >> 8);
+	return true;
+}
 
 void _ee_default_config(void) {
 	turnout.angle_plus = 350;
@@ -75,7 +64,7 @@ void ee_load(void) {
 	uint8_t version = eeprom_read_byte(EEPROM_ADDR_VERSION);
 	if (version == 0xFF) {
 		_ee_default_config();
-		ee_save();
+		while (!ee_save());
 		return;
 	}
 
@@ -123,27 +112,26 @@ void ee_load(void) {
 	servo_vcc_recorded_max = eeprom_read_word(EEPROM_ADDR_SERVO_VCC_MAX);
 }
 
-void ee_save(void) {
-	eeprom_update_byte(EEPROM_ADDR_VERSION, 1);
-	eeprom_update_byte(EEPROM_ADDR_FW_VER_MAJOR, CONFIG_FW_MAJOR);
-	eeprom_update_byte(EEPROM_ADDR_FW_VER_MINOR, CONFIG_FW_MINOR);
-	eeprom_update_byte(EEPROM_ADDR_MODE, (mode == mOverride));
-	eeprom_update_word(EEPROM_ADDR_POS_PLUS, turnout.angle_plus);
-	eeprom_update_word(EEPROM_ADDR_POS_MINUS, turnout.angle_minus);
-	eeprom_update_word(EEPROM_ADDR_SENS_PLUS, turnout.sensor_plus);
-	eeprom_update_word(EEPROM_ADDR_SENS_MINUS, turnout.sensor_minus);
-	eeprom_update_byte(EEPROM_ADDR_MOVE_PER_TICK, switch_move_per_tick);
-	ee_save_servo_vcc();
-	ee_save_warnings();
+bool ee_save(void) {
+	if (!_ee_nonblock_update_byte(EEPROM_ADDR_VERSION, 1)) return false;
+	if (!_ee_nonblock_update_byte(EEPROM_ADDR_FW_VER_MAJOR, CONFIG_FW_MAJOR)) return false;
+	if (!_ee_nonblock_update_byte(EEPROM_ADDR_FW_VER_MINOR, CONFIG_FW_MINOR)) return false;
+	if (!_ee_nonblock_update_byte(EEPROM_ADDR_MODE, (mode == mOverride))) return false;
+	if (!_ee_nonblock_update_word(EEPROM_ADDR_POS_PLUS, turnout.angle_plus)) return false;
+	if (!_ee_nonblock_update_word(EEPROM_ADDR_POS_MINUS, turnout.angle_minus)) return false;
+	if (!_ee_nonblock_update_word(EEPROM_ADDR_SENS_PLUS, turnout.sensor_plus)) return false;
+	if (!_ee_nonblock_update_word(EEPROM_ADDR_SENS_MINUS, turnout.sensor_minus)) return false;
+	if (!_ee_nonblock_update_byte(EEPROM_ADDR_MOVE_PER_TICK, switch_move_per_tick)) return false;
+	if (!_ee_nonblock_update_byte(EEPROM_ADDR_WARNINGS, warnings.all)) return false;
+	if (!ee_save_servo_vcc()) return false;
+
+	return true;
 }
 
-void ee_save_servo_vcc(void) {
-	eeprom_update_word(EEPROM_ADDR_SERVO_VCC_MIN, servo_vcc_recorded_min);
-	eeprom_update_word(EEPROM_ADDR_SERVO_VCC_MAX, servo_vcc_recorded_max);
-}
-
-void ee_save_warnings(void) {
-	eeprom_update_byte(EEPROM_ADDR_WARNINGS, warnings.all);
+bool ee_save_servo_vcc(void) {
+	if (!_ee_nonblock_update_word(EEPROM_ADDR_SERVO_VCC_MIN, servo_vcc_recorded_min)) return false;
+	if (!_ee_nonblock_update_word(EEPROM_ADDR_SERVO_VCC_MAX, servo_vcc_recorded_max)) return false;
+	return true;
 }
 
 void ee_incr_moved_plus(void) {
@@ -162,18 +150,22 @@ void ee_incr_moved_minus(void) {
 	turnout.ee_moved_minus_mini = (turnout.ee_moved_minus_mini+1) % EEPROM_MOVED_COUNT;
 }
 
-void ee_save_pos_plus(void) {
+bool ee_save_pos_plus(void) {
 	if (turnout.ee_positions_parity) {
 		// = currently is minus
+		if (!eeprom_is_ready()) return false;
 		_ee_pos_change();
 	}
+	return true;
 }
 
-void ee_save_pos_minus(void) {
+bool ee_save_pos_minus(void) {
 	if (!turnout.ee_positions_parity) {
 		// = currently is plus
+		if (!eeprom_is_ready()) return false;
 		_ee_pos_change();
 	}
+	return true;
 }
 
 void _ee_pos_change(void) {

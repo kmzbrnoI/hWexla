@@ -70,6 +70,7 @@ typedef union {
 		bool servo_vcc_low : 1;
 		bool servo_vcc_high : 1;
 		bool wdg_reset : 1;
+		bool missed_timer : 1;
 	} sep;
 } Warnings;
 

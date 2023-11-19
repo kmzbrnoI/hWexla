@@ -52,7 +52,6 @@ volatile uint8_t pseudorand = 0;
 uint8_t init_adc_vcc_ok_count = 0;
 uint8_t init_adc_vcc_nok_count = 0;
 volatile uint8_t diag_counter = 0;
-volatile bool isr_1ms_req = false;
 volatile bool isr_switch_update_req = false;
 volatile uint16_t led_flick_counter = 0;
 
@@ -68,30 +67,29 @@ int main() {
 		diag_read();
 		leds_update();
 
-		if (isr_1ms_req) {
-			inputs_update_1ms();
-			isr_1ms_req = false;
-		}
 		if (isr_switch_update_req) {
 			switch_update();
 			isr_switch_update_req = false;
 		}
+
+		// Saving to EEPROM can take a really long time -> save only if eeprom is ready
 		if (ee_to_save) {
-			ee_save();
-			ee_to_save = false;
-			ee_to_save_servo_vcc = false;
+			if (ee_save()) {
+				ee_to_save = false;
+				ee_to_save_servo_vcc = false;
+			}
 		}
-		if (ee_to_save_servo_vcc) {
-			ee_save_servo_vcc();
-			ee_to_save_servo_vcc = false;
+		else if (ee_to_save_servo_vcc) {
+			if (ee_save_servo_vcc())
+				ee_to_save_servo_vcc = false;
 		}
-		if (ee_to_save_pos_plus) {
-			ee_save_pos_plus();
-			ee_to_save_pos_plus = false;
+		else if (ee_to_save_pos_plus) {
+			if (ee_save_pos_plus())
+				ee_to_save_pos_plus = false;
 		}
-		if (ee_to_save_pos_minus) {
-			ee_save_pos_minus();
-			ee_to_save_pos_minus = false;
+		else if (ee_to_save_pos_minus) {
+			if (ee_save_pos_minus())
+				ee_to_save_pos_minus = false;
 		}
 
 		if (diag_counter >= DIAG_UPDATE_PERIOD) {
@@ -117,10 +115,12 @@ void init(void) {
 	pwm_servo_init();
 	usart_initialize();
 
-	if (((MCUCSR >> WDRF) & 1)) {
+	bool reset_wanted = eeprom_read_byte(EEPROM_ADDR_RESET_WANTED);
+	if ((((MCUCSR >> WDRF) & 1)) && (!reset_wanted)) {
 		warnings.sep.wdg_reset = true;
-		ee_save_warnings();
+		ee_to_save = true;
 	}
+	eeprom_update_byte(EEPROM_ADDR_RESET_WANTED, 0);
 
 	// Timer 2 @ 1 kHz (1 ms)
 	TCCR2 = (1 << WGM21) | (1 << CS21) | (1 << CS20); // CTC; prescaler 32×
@@ -131,7 +131,6 @@ void init(void) {
 	uint8_t delay = (turnout.moved_plus % 10)+2; // 100-600 ms; step=50 ms
 	for (size_t i = 0; i < delay; i++)
 		_delay_ms(50);
-	set_output(PIN_LED_GREEN, true);
 
 	set_output(PIN_SERVO_POWER_EN, true);
 	pwm_servo_gen(turnout.angle);
@@ -140,7 +139,7 @@ void init(void) {
 		fail(fail_code); // fail again to reset outputs
 
 	sei(); // enable interrupts globally
-	wdt_enable(WDTO_30MS);
+	wdt_enable(WDTO_60MS);
 }
 
 ISR(BADISR_vect) {
@@ -151,12 +150,14 @@ ISR(BADISR_vect) {
 
 ISR(TIMER2_COMP_vect) {
 	// Timer 2 @ 1 kHz (1 ms)
-	isr_1ms_req = true;
+	inputs_update_1ms();
 
 	static uint8_t counter_20ms = 0;
 	counter_20ms++;
 	if (counter_20ms >= 20) {
 		counter_20ms = 0;
+		if ((isr_switch_update_req) && (mode != mFail))
+			warnings.sep.missed_timer = true;
 		isr_switch_update_req = true;
 	}
 
@@ -325,11 +326,6 @@ void override_leave(void) {
 
 void init_done(void) {
 	pwm_servo_stop();
-
-	set_output(PIN_LED_GREEN, true);
-	set_output(PIN_LED_RED, false);
-	set_output(PIN_LED_YELLOW, false);
-
 	mode = (ee_mode() == 1) ? mOverride : mRun;
 }
 
@@ -352,7 +348,7 @@ void fail(FailCode code) {
 
 void leds_update(void) {
 	bool flick_on = (led_flick_counter < LED_FLICK_ON);
-	set_output(PIN_LED_GREEN, (mode == mRun) ||
+	set_output(PIN_LED_GREEN, (mode == mRun) || (mode == mInitializing) ||
 		(((mode == mProgramming) || (mode == mOverride)) && (flick_on)));
 	set_output(PIN_LED_YELLOW, (flick_on) &&
 		(((mode == mRun) && ((magnet_iswarn()) || (warnings.all > 0))) || (mode == mOverride)));

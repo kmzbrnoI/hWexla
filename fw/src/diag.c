@@ -1,4 +1,5 @@
 #include <avr/interrupt.h>
+#include <avr/eeprom.h>
 #include "diag.h"
 #include "common.h"
 #include "switch.h"
@@ -74,16 +75,18 @@ void diag_read(void) {
 		switch_move_per_tick--;
 		break;
 	case 'r': // reset
+		eeprom_update_byte(EEPROM_ADDR_RESET_WANTED, true);
 		cli();
 		while (true);
 		break;
 	case 'f': // fail
 		fail(fDiag);
 		break;
-	case 'w': // reset servo warning
+	case 'w': // reset warnings
 		warnings.all = 0;
 		servo_vcc_recorded_min = 0xFFFF;
 		servo_vcc_recorded_max = 0;
+		ee_to_save_servo_vcc = true;
 		ee_to_save = true;
 		ee_reset_fail();
 		break;
