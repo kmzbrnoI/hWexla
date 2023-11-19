@@ -73,6 +73,11 @@ def parse_num(data: List[int]) -> int:
     return result
 
 
+def str_voltage(raw: int, raw_max: int, vmax: int) -> str:
+    u = round((raw/raw_max) * vmax, 2)
+    return f'{raw} ({u} V)'
+
+
 def parse(data) -> OrderedDict:
     d = OrderedDict()
 
@@ -90,8 +95,8 @@ def parse(data) -> OrderedDict:
     warn = d['WARNINGS']
     warn['all'] = data[4]
     warn['magnet_warn'] = bool(data[4] >> 7)
-    warn['servo_vcc_warn_low'] = bool((data[4]) & 1)
-    warn['servo_vcc_warn_high'] = bool((data[4] >> 1) & 1)
+    warn['servo_vcc_low'] = bool((data[4]) & 1)
+    warn['servo_vcc_high'] = bool((data[4] >> 1) & 1)
     warn['wdg_reset'] = bool((data[4] >> 2) & 1)
     warn['missed_timer'] = bool((data[4] >> 3) & 1)
 
@@ -99,17 +104,17 @@ def parse(data) -> OrderedDict:
     inp = d['INPUTS']
     inp['in+'] = bool(data[8] & 1)
     inp['in-'] = bool((data[8] >> 1) & 1)
-    inp['in_btn+'] = bool((data[8] >> 2) & 1)
-    inp['in_btn-'] = bool((data[8] >> 3) & 1)
-    inp['in_btn'] = bool((data[8] >> 4) & 1)
-    inp['in_slave'] = bool((data[8] >> 5) & 1)
+    inp['btn+'] = bool((data[8] >> 2) & 1)
+    inp['btn-'] = bool((data[8] >> 3) & 1)
+    inp['btn'] = bool((data[8] >> 4) & 1)
+    inp['slave'] = bool((data[8] >> 5) & 1)
 
     d['OUTPUTS'] = OrderedDict()
     out = d['OUTPUTS']
     out['out+'] = bool(data[9] & 1)
     out['out-'] = bool((data[9] >> 1) & 1)
-    out['out_relay'] = bool((data[9] >> 2) & 1)
-    out['out_power'] = bool((data[9] >> 3) & 1)
+    out['relay'] = bool((data[9] >> 2) & 1)
+    out['power'] = bool((data[9] >> 3) & 1)
 
     d['CORE'] = OrderedDict()
     core = d['CORE']
@@ -131,14 +136,10 @@ def parse(data) -> OrderedDict:
 
     d['SENSORS'] = OrderedDict()
     sens = d['SENSORS']
-    sens['mag_value'] = parse_num(data[30:32])
-    sens['mag_voltage'] = round((sens['mag_value']/1024) * 5, 2)
-    sens['servo_vcc_value'] = parse_num(data[32:34])
-    sens['servo_vcc_voltage'] = round((sens['servo_vcc_value']/512) * 5, 2)
-    sens['servo_vcc_recorded_min'] = parse_num(data[34:36])
-    sens['servo_vcc_recorded_min_voltage'] = round((sens['servo_vcc_recorded_min']/512) * 5, 2)
-    sens['servo_vcc_recorded_max'] = parse_num(data[36:38])
-    sens['servo_vcc_recorded_max_voltage'] = round((sens['servo_vcc_recorded_max']/512) * 5, 2)
+    sens['magnet'] = str_voltage(parse_num(data[30:32]), 1024, 5)
+    sens['servo_vcc'] = str_voltage(parse_num(data[32:34]), 512, 5)
+    sens['servo_vcc_recorded_min'] = str_voltage(parse_num(data[34:36]), 512, 5)
+    sens['servo_vcc_recorded_max'] = str_voltage(parse_num(data[36:38]), 512, 5)
 
     return d
 
