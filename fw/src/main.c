@@ -9,6 +9,7 @@
 #include <avr/wdt.h>
 #include <avr/eeprom.h>
 #include <avr/boot.h>
+#include <util/atomic.h>
 #include <stdlib.h>
 
 #include "io.h"
@@ -53,7 +54,7 @@ uint8_t init_adc_vcc_ok_count = 0;
 uint8_t init_adc_vcc_nok_count = 0;
 volatile uint8_t diag_counter = 0;
 volatile bool isr_switch_update_req = false;
-volatile uint16_t led_flick_counter = 0;
+volatile uint16_t led_flick_counter = 0; // warn: read in ATOMIC_BLOCK
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -350,7 +351,10 @@ void fail(FailCode code) {
 ///////////////////////////////////////////////////////////////////////////////
 
 void leds_update(void) {
-	bool flick_on = (led_flick_counter < LED_FLICK_ON);
+	bool flick_on;
+	ATOMIC_BLOCK(ATOMIC_FORCEON) {
+		flick_on = (led_flick_counter < LED_FLICK_ON);
+	}
 	set_output(PIN_LED_GREEN, (mode == mRun) || (mode == mInitializing) ||
 		(((mode == mProgramming) || (mode == mOverride)) && (flick_on)));
 	set_output(PIN_LED_YELLOW, (flick_on) &&
