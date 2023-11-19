@@ -143,11 +143,15 @@ def parse(data) -> OrderedDict:
     return d
 
 
-def print_dict(d, prefix: str) -> None:
-    for key, val in d.items():
+def print_dict(d, depth: int) -> None:
+    for i, (key, val) in enumerate(d.items()):
+        prefix = ' '*depth
+        if depth > 0:
+            prefix += ('├── ' if i < len(d)-1 else '└── ')
+
         if isinstance(val, dict):
             print(f'{prefix}{key}')
-            print_dict(val, prefix+'| ')
+            print_dict(val, depth+1)
         else:
             print(f'{prefix}{key}: {val}')
 
@@ -159,7 +163,7 @@ def show(args, raw: List[int]):
     if args['--raw']:
         print(humanify_buf(raw))
 
-    print_dict(d, '')
+    print_dict(d, 0)
 
 
 def init_stdin():
