@@ -7,8 +7,10 @@
 
 #define DEBOUNCE_READS 20 // also time in ms
 
+void inputs_init(void);
 void on_btn_pressed(uint8_t input);
 void inputs_update_1ms(void);
+void inputs_update(void);
 
 enum DebouncedInput {
 	DEB_IN_PLUS = 0,
@@ -20,6 +22,6 @@ enum DebouncedInput {
 	DEB_COUNT
 };
 
-extern bool in_debounced[DEB_COUNT];
+extern volatile bool in_debounced[DEB_COUNT];
 
 #endif

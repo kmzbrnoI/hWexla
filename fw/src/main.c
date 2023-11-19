@@ -61,6 +61,7 @@ int main() {
 	init();
 
 	while (true) {
+		inputs_update();
 		inputs_poll();
 		set_outputs();
 		adc_poll();
@@ -111,6 +112,7 @@ void init(void) {
 	set_output(PIN_LED_RED, true);
 	set_output(PIN_LED_YELLOW, true);
 
+	inputs_init();
 	ee_load();
 	pwm_servo_init();
 	usart_initialize();
@@ -150,6 +152,7 @@ ISR(BADISR_vect) {
 
 ISR(TIMER2_COMP_vect) {
 	// Timer 2 @ 1 kHz (1 ms)
+	// Execution on this timer taked ~100 us
 	inputs_update_1ms();
 
 	static uint8_t counter_20ms = 0;

@@ -40,7 +40,7 @@ void set_output(uint8_t pin, bool state) {
 }
 
 bool get_input(uint8_t pin) {
-	// buttons on active LEDs are considered as inacive
+	// buttons on active LEDs are considered as inactive
 	if (pin == PIN_BTN_PLUS_IN && get_output(PIN_BTN_PLUS_OUT))
 		return true;
 	if (pin == PIN_BTN_MINUS_IN && get_output(PIN_BTN_MINUS_OUT))
