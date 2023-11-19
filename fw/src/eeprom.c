@@ -68,7 +68,7 @@ void ee_load(void) {
 		return;
 	}
 
-	warnings.all = eeprom_read_byte(EEPROM_ADDR_WARNINGS);
+	warnings.all = eeprom_read_byte(EEPROM_ADDR_WARNINGS) & 0x7F;
 	ee_fail_count = eeprom_read_byte(EEPROM_ADDR_FAIL_COUNT);
 	ee_last_fail = eeprom_read_byte(EEPROM_ADDR_LAST_FAIL);
 
@@ -122,7 +122,7 @@ bool ee_save(void) {
 	if (!_ee_nonblock_update_word(EEPROM_ADDR_SENS_PLUS, turnout.sensor_plus)) return false;
 	if (!_ee_nonblock_update_word(EEPROM_ADDR_SENS_MINUS, turnout.sensor_minus)) return false;
 	if (!_ee_nonblock_update_byte(EEPROM_ADDR_MOVE_PER_TICK, switch_move_per_tick)) return false;
-	if (!_ee_nonblock_update_byte(EEPROM_ADDR_WARNINGS, warnings.all)) return false;
+	if (!_ee_nonblock_update_byte(EEPROM_ADDR_WARNINGS, warnings.all & 0x7F)) return false;
 	if (!ee_save_servo_vcc()) return false;
 
 	return true;

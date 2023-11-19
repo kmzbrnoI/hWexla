@@ -71,6 +71,8 @@ typedef union {
 		bool servo_vcc_high : 1;
 		bool wdg_reset : 1;
 		bool missed_timer : 1;
+		uint8_t _padding : 3;
+		bool magnet : 1; // not persistent!
 	} sep;
 } Warnings;
 

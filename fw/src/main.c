@@ -40,6 +40,8 @@ bool magnet_isclose(uint16_t value, uint8_t threshold);
 #define PROG_BTN_MAX 20 // ms
 #define INIT_ADC_VCC_LIMIT 5 // cca 250 ms
 #define DIAG_UPDATE_PERIOD 200 // 200 ms
+#define WARN_IND_MAX 10000 // 10 s
+#define WARN_IND_BEGIN 9000
 
 FailCode fail_code = fNoFail;
 Warnings warnings;
@@ -54,7 +56,8 @@ uint8_t init_adc_vcc_ok_count = 0;
 uint8_t init_adc_vcc_nok_count = 0;
 volatile uint8_t diag_counter = 0;
 volatile bool isr_switch_update_req = false;
-volatile uint16_t led_flick_counter = 0; // warn: read in ATOMIC_BLOCK
+volatile uint16_t led_flick_counter = 0; // note: read in ATOMIC_BLOCK!
+volatile uint16_t warn_ind_counter = 0; // warning indication on outputs; note: read in ATOMIC_BLOCK!
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -64,10 +67,11 @@ int main() {
 	while (true) {
 		inputs_update();
 		inputs_poll();
-		set_outputs();
 		adc_poll();
+		warnings.sep.magnet = magnet_iswarn();
 		diag_read();
 		leds_update();
+		set_outputs();
 
 		if (isr_switch_update_req) {
 			switch_update();
@@ -189,6 +193,10 @@ ISR(TIMER2_COMP_vect) {
 	if (led_flick_counter >= LED_FLICK_PERIOD)
 		led_flick_counter = 0;
 
+	warn_ind_counter++;
+	if (warn_ind_counter > WARN_IND_MAX)
+		warn_ind_counter = 0;
+
 	pseudorand++;
 }
 
@@ -272,9 +280,14 @@ void set_outputs(void) {
 	bool my_plus = (turnout.position == tpPlus) && (magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_OK));
 	bool my_minus = (turnout.position == tpMinus) && (magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_OK));
 
+	bool warn_output_active;
+	ATOMIC_BLOCK(ATOMIC_FORCEON) {
+		warn_output_active = ((warnings.all > 0) && (warn_ind_counter >= WARN_IND_BEGIN));
+	}
+
 	if ((mode == mRun) || (mode == mOverride)) {
-		set_output(PIN_OUT_PLUS, my_plus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS]));
-		set_output(PIN_OUT_MINUS, my_minus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_MINUS]));
+		set_output(PIN_OUT_PLUS, (my_plus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS])) || (warn_output_active));
+		set_output(PIN_OUT_MINUS, (my_minus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_MINUS])) || (warn_output_active));
 		set_output(PIN_BTN_PLUS_OUT, my_plus || (turnout.position == tpMovingToPlus && btn_flick));
 		set_output(PIN_BTN_MINUS_OUT, my_minus || (turnout.position == tpMovingToMinus && btn_flick));
 	} else {
@@ -366,7 +379,7 @@ void leds_update(void) {
 	set_output(PIN_LED_GREEN, (mode == mRun) || (mode == mInitializing) ||
 		(((mode == mProgramming) || (mode == mOverride)) && (flick_on)));
 	set_output(PIN_LED_YELLOW, (flick_on) &&
-		(((mode == mRun) && ((magnet_iswarn()) || (warnings.all > 0))) || (mode == mOverride)));
+		(((mode == mRun) && (warnings.all > 0)) || (mode == mOverride)));
 	set_output(PIN_LED_RED, (mode == mFail) && (flick_on));
 }
 

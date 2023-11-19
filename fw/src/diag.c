@@ -25,7 +25,7 @@ void diag_send() {
 	usart_out[3] = CONFIG_FW_MAJOR;
 	usart_out[4] = CONFIG_FW_MINOR;
 	usart_out[5] = fail_code;
-	usart_out[6] = (magnet_iswarn() << 7) | warnings.all;
+	usart_out[6] = warnings.all;
 	usart_out[7] = ee_fail_count;
 	usart_out[8] = ee_last_fail;
 	usart_out[9] = mode;
@@ -84,7 +84,6 @@ void diag_read(void) {
 		warnings.all = 0;
 		servo_vcc_recorded_min = 0xFFFF;
 		servo_vcc_recorded_max = 0;
-		ee_to_save_servo_vcc = true;
 		ee_to_save = true;
 		ee_reset_fail();
 		break;
