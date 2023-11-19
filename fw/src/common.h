@@ -83,5 +83,6 @@ void memcpy_v(volatile void*, volatile void*, uint8_t);
 bool magnet_iswarn(void);
 void override_enter(void);
 void override_leave(void);
+void reset(void);
 
 #endif

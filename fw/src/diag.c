@@ -75,9 +75,7 @@ void diag_read(void) {
 		switch_move_per_tick--;
 		break;
 	case 'r': // reset
-		eeprom_update_byte(EEPROM_ADDR_RESET_WANTED, true);
-		cli();
-		while (true);
+		reset();
 		break;
 	case 'f': // fail
 		fail(fDiag);

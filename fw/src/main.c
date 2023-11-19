@@ -210,6 +210,8 @@ void on_btn_pressed(uint8_t button) {
 			programming_leave();
 		else if (mode == mOverride)
 			override_leave();
+		else if (mode == mFail)
+			reset();
 		break;
 	}
 }
@@ -346,6 +348,12 @@ void fail(FailCode code) {
 	fail_code = code;
 	mode = mFail;
 	ee_fail(code);
+}
+
+void reset(void) {
+	eeprom_update_byte(EEPROM_ADDR_RESET_WANTED, true);
+	cli();
+	while (true);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
