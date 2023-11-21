@@ -15,7 +15,7 @@
 #define RELAY_STATE_PLUS true
 
 #define MAG_THRESHOLD_WARN 30 // 3% (1024 * 3% = ~30)
-#define MAG_THRESHOLD_OK 40 // 4% (1024 * 4% = ~40)
+#define MAG_THRESHOLD_OK 50 // 5% (1024 * 4% = ~50)
 
 typedef enum {
 	tpPlus = 0,

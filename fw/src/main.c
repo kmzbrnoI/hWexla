@@ -280,14 +280,17 @@ void set_outputs(void) {
 	bool my_plus = (turnout.position == tpPlus) && (magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_OK));
 	bool my_minus = (turnout.position == tpMinus) && (magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_OK));
 
-	bool warn_output_active;
-	ATOMIC_BLOCK(ATOMIC_FORCEON) {
-		warn_output_active = ((warnings.all > 0) && (warn_ind_counter >= WARN_IND_BEGIN));
+	bool warn_output_active = ((my_plus) || (my_minus)) && (warnings.all > 0) \
+		&& (!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS]);
+	if (warn_output_active) {
+		ATOMIC_BLOCK(ATOMIC_FORCEON) {
+			warn_output_active &= (warn_ind_counter >= WARN_IND_BEGIN);
+		}
 	}
 
 	if ((mode == mRun) || (mode == mOverride)) {
-		set_output(PIN_OUT_PLUS, (my_plus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS])) || (warn_output_active));
-		set_output(PIN_OUT_MINUS, (my_minus && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_MINUS])) || (warn_output_active));
+		set_output(PIN_OUT_PLUS, ((my_plus || warn_output_active) && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS])));
+		set_output(PIN_OUT_MINUS, ((my_minus || warn_output_active) && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_MINUS])));
 		set_output(PIN_BTN_PLUS_OUT, my_plus || (turnout.position == tpMovingToPlus && btn_flick));
 		set_output(PIN_BTN_MINUS_OUT, my_minus || (turnout.position == tpMovingToMinus && btn_flick));
 	} else {
