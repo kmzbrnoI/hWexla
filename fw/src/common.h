@@ -14,8 +14,10 @@
 
 #define RELAY_STATE_PLUS true
 
-#define MAG_THRESHOLD_WARN 30 // 3% (1024 * 3% = ~30)
-#define MAG_THRESHOLD_OK 50 // 5% (1024 * 4% = ~50)
+#define MAG_THRESHOLD_WARN_IN 20
+#define MAG_THRESHOLD_WARN_OUT 30 // 3% (1024 * 3% = ~30)
+#define MAG_THRESHOLD_OK_IN 30
+#define MAG_THRESHOLD_OK_OUT 50 // 5% (1024 * 5% = ~50)
 
 typedef enum {
 	tpPlus = 0,
@@ -86,5 +88,7 @@ bool magnet_iswarn(void);
 void override_enter(void);
 void override_leave(void);
 void reset(void);
+
+bool hysteresis(bool previous, bool new_to_false, bool new_to_true);
 
 #endif

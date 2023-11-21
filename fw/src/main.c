@@ -267,18 +267,33 @@ bool magnet_isclose(uint16_t value, uint8_t threshold) {
 }
 
 bool magnet_iswarn(void) {
-	if (turnout.position == tpPlus) {
-		return !magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_WARN);
-	}
-	if (turnout.position == tpMinus) {
-		return !magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_WARN);
-	}
+	// Hysteresis calculation
+	static bool magnet_plus = false;
+	static bool magnet_minus = false;
+	magnet_plus = hysteresis(magnet_plus, !magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_WARN_OUT),
+		magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_WARN_IN));
+	magnet_minus = hysteresis(magnet_minus, !magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_WARN_OUT),
+		magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_WARN_IN));
+
+	if (turnout.position == tpPlus)
+		return !magnet_plus;
+	else if (turnout.position == tpMinus)
+		return !magnet_minus;
+
 	return false;
 }
 
 void set_outputs(void) {
-	bool my_plus = (turnout.position == tpPlus) && (magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_OK));
-	bool my_minus = (turnout.position == tpMinus) && (magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_OK));
+	// Hysteresis calculation
+	static bool magnet_plus = false;
+	static bool magnet_minus = false;
+	magnet_plus = hysteresis(magnet_plus, !magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_OK_OUT),
+		magnet_isclose(turnout.sensor_plus, MAG_THRESHOLD_OK_IN));
+	magnet_minus = hysteresis(magnet_minus, !magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_OK_OUT),
+		magnet_isclose(turnout.sensor_minus, MAG_THRESHOLD_OK_IN));
+
+	bool my_plus = (turnout.position == tpPlus) && (magnet_plus);
+	bool my_minus = (turnout.position == tpMinus) && (magnet_minus);
 
 	bool warn_output_active = ((my_plus) || (my_minus)) && (warnings.all > 0) \
 		&& (!in_debounced[DEB_IN_PLUS]) && (!in_debounced[DEB_IN_MINUS]);
