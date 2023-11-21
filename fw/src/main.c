@@ -289,8 +289,8 @@ void set_outputs(void) {
 	}
 
 	if ((mode == mRun) || (mode == mOverride)) {
-		set_output(PIN_OUT_PLUS, ((my_plus || warn_output_active) && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_PLUS])));
-		set_output(PIN_OUT_MINUS, ((my_minus || warn_output_active) && (get_input(PIN_SLAVE) || in_debounced[DEB_IN_MINUS])));
+		set_output(PIN_OUT_PLUS, ((my_plus || warn_output_active) && (!in_debounced[DEB_SLAVE] || in_debounced[DEB_IN_PLUS])));
+		set_output(PIN_OUT_MINUS, ((my_minus || warn_output_active) && (!in_debounced[DEB_SLAVE] || in_debounced[DEB_IN_MINUS])));
 		set_output(PIN_BTN_PLUS_OUT, my_plus || (turnout.position == tpMovingToPlus && btn_flick));
 		set_output(PIN_BTN_MINUS_OUT, my_minus || (turnout.position == tpMovingToMinus && btn_flick));
 	} else {
