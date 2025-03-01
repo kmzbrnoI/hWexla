@@ -3763,6 +3763,26 @@
 		)
 		(uuid "fd4f480b-41e3-4755-8c72-8d94e88829ef")
 	)
+	(text "Mounting holes"
+		(exclude_from_sim no)
+		(at 39.37 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "6e75e5ae-bb9c-4288-b975-fa0ec04d4abe")
+	)
+	(text "Turnout wire\nholes"
+		(exclude_from_sim no)
+		(at 69.85 111.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "92859e79-c760-4469-bf52-4140b6feec82")
+	)
 	(global_label "IN-SLAVE"
 		(shape input)
 		(at 157.48 35.56 180)
