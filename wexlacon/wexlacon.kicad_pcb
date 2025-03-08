@@ -1757,121 +1757,6 @@
 			)
 		)
 	)
-	(footprint "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
-		(layer "F.Cu")
-		(uuid "493577b9-c48d-4478-9f55-93bd0e6d707b")
-		(at 161.3 103.5)
-		(descr "THT pad as test Point, diameter 2.0mm, hole diameter 1.0mm")
-		(tags "test point THT pad")
-		(property "Reference" "H4"
-			(at 0 -1.998 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "9b770bf8-bdc8-46ae-9e90-5f27d369a61a")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "1.0mm"
-			(at 0 2.05 0)
-			(layer "F.Fab")
-			(uuid "1e83ddb6-5e76-4175-a307-a321a3997996")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e98d8eb8-9259-4e84-a055-240ef0ea0733")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e39aef41-51d1-4c17-8ddb-45f416051117")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e42ad3ee-e8de-4ade-bc30-433a9df26168")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property ki_fp_filters "MountingHole*")
-		(path "/1bb11f59-513b-4736-ac31-380b50965244")
-		(sheetname "Root")
-		(sheetfile "wexlacon.kicad_sch")
-		(attr exclude_from_pos_files exclude_from_bom)
-		(fp_circle
-			(center 0 0)
-			(end 0 1.2)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(fill none)
-			(layer "F.SilkS")
-			(uuid "c03169dd-fe9c-4390-807f-623447333ee6")
-		)
-		(fp_circle
-			(center 0 0)
-			(end 1.5 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill none)
-			(layer "F.CrtYd")
-			(uuid "8c2a433e-e9a3-48e5-b689-145910795337")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 -2 0)
-			(layer "F.Fab")
-			(uuid "85336436-c985-4c81-830c-b27d6a6b4a1b")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(pad "1" thru_hole circle
-			(at 0 0)
-			(size 2 2)
-			(drill 1)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(uuid "d56e8ec2-ba4d-4dab-a97a-a109f35c09d6")
-		)
-	)
 	(footprint "TerminalBlock_Euroclamp:MVE252-5-V"
 		(layer "F.Cu")
 		(uuid "9d24adf1-30b0-4700-a20d-024c8e9f1b54")
@@ -2418,121 +2303,6 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(uuid "ed0f05ba-7158-402e-8fc8-e9cdceb09851")
-		)
-	)
-	(footprint "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
-		(layer "F.Cu")
-		(uuid "cc784719-dfde-40aa-87c5-5249fb28aa62")
-		(at 161.3 115.5)
-		(descr "THT pad as test Point, diameter 2.0mm, hole diameter 1.0mm")
-		(tags "test point THT pad")
-		(property "Reference" "H6"
-			(at 0 -1.998 0)
-			(layer "F.SilkS")
-			(hide yes)
-			(uuid "dba52e7c-7da1-41ed-bd45-56f4244f2c23")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "1.0mm"
-			(at 0 2.05 0)
-			(layer "F.Fab")
-			(uuid "cfff4c92-d62e-4133-b412-e095e7ea6bad")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1ec1d900-1827-4800-a063-388ac3f90cc5")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1a6943f0-5a8a-4a1c-8d8d-16cf090c168f")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1a800330-6a89-4fbe-8797-9ac1bea7da08")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property ki_fp_filters "MountingHole*")
-		(path "/c6965c55-a7be-426d-8b47-04b3453eda36")
-		(sheetname "Root")
-		(sheetfile "wexlacon.kicad_sch")
-		(attr exclude_from_pos_files exclude_from_bom)
-		(fp_circle
-			(center 0 0)
-			(end 0 1.2)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(fill none)
-			(layer "F.SilkS")
-			(uuid "61082dd4-072a-442c-9329-746b9f67f78b")
-		)
-		(fp_circle
-			(center 0 0)
-			(end 1.5 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill none)
-			(layer "F.CrtYd")
-			(uuid "7502a1e0-85b0-44d2-a408-e538d63aa8eb")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 -2 0)
-			(layer "F.Fab")
-			(uuid "4c462cc1-1e48-48cd-a852-3313a35580da")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(pad "1" thru_hole circle
-			(at 0 0)
-			(size 2 2)
-			(drill 1)
-			(layers "*.Cu" "*.Mask")
-			(remove_unused_layers no)
-			(uuid "9c2f3e30-355a-4dce-ab86-753c171732c4")
 		)
 	)
 	(footprint "MountingHole:MountingHole_3.2mm_M3_Pad"
@@ -5019,6 +4789,22 @@
 			)
 			(justify bottom)
 		)
+	)
+	(via
+		(at 161.3 103.5)
+		(size 2.5)
+		(drill 1.8)
+		(layers "F.Cu" "B.Cu")
+		(net 0)
+		(uuid "7442e739-6161-4990-87ef-7f5c0972c5b7")
+	)
+	(via
+		(at 161.3 115.5)
+		(size 2.5)
+		(drill 1.8)
+		(layers "F.Cu" "B.Cu")
+		(net 0)
+		(uuid "e7dc1221-0cf5-4b37-893a-9c292a1d7f48")
 	)
 	(segment
 		(start 149.604 105.338057)

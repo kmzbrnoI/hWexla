@@ -3751,9 +3751,9 @@
 		)
 		(uuid "6e75e5ae-bb9c-4288-b975-fa0ec04d4abe")
 	)
-	(text "Turnout wire\nholes"
+	(text "Turnout wire\nhole"
 		(exclude_from_sim no)
-		(at 69.85 111.76 0)
+		(at 69.85 116.84 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4567,69 +4567,6 @@
 			(project "wexlacon"
 				(path "/0fece1c8-c6d0-4b5d-a04d-4f9ff43ff97c"
 					(reference "#FLG02")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 66.04 116.84 0)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(uuid "1bb11f59-513b-4736-ac31-380b50965244")
-		(property "Reference" "H4"
-			(at 68.58 116.3708 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1.0mm"
-			(at 68.58 118.0522 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
-			(at 66.04 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 66.04 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 66.04 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project ""
-				(path "/0fece1c8-c6d0-4b5d-a04d-4f9ff43ff97c"
-					(reference "H4")
 					(unit 1)
 				)
 			)
@@ -6046,70 +5983,6 @@
 			(project ""
 				(path "/0fece1c8-c6d0-4b5d-a04d-4f9ff43ff97c"
 					(reference "#PWR06")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 66.04 127 0)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c6965c55-a7be-426d-8b47-04b3453eda36")
-		(property "Reference" "H6"
-			(at 68.58 125.7878 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1.0mm"
-			(at 68.58 128.2121 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
-			(at 66.04 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 66.04 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole without connection"
-			(at 66.04 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "wexlacon"
-				(path "/0fece1c8-c6d0-4b5d-a04d-4f9ff43ff97c"
-					(reference "H6")
 					(unit 1)
 				)
 			)
