@@ -22,6 +22,13 @@ contains all data.
   only connector. Stepdowns like [RB0005](https://github.com/RoboticsBrno/RB0005-UniversalStepDown)
   are expected to be used.
 
+## Parts
+
+1. [PCB](pcb)
+2. [Firmware](fw)
+3. [WEXLACON PCB](wexlacon)
+4. [Diagnostic PCB](diagpcb)
+
 ## [Requirements](requirements.md)
 
 In czech only
