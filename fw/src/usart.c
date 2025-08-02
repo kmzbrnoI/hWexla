@@ -20,7 +20,7 @@ static void _send_next(void);
 void usart_initialize(void) {
 	usart_in = 0;
 
-	UBRRL = 12; // ~38461.54 baud/s (F_CPU/16/BAUD_RATE-1)
+	UBRRL = 12; // ~38461.54 baud/s (F_CPU/16/BAUD_RATE-1) - picked because of lowest deviation at 8 MHz
 	UBRRH = 0;
 	UCSRB = _BV(TXEN) | _BV(RXEN) | _BV(RXCIE) | _BV(TXCIE);
 	UCSRC = _BV(URSEL) | _BV(UCSZ1) | _BV(UCSZ0); // async operation, no parity, 1 stop-bit, 8-bit
