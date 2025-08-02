@@ -146,13 +146,13 @@ void adc_poll(void) {
 		switch (old) {
 		case adcMagnet:
 			ATOMIC_BLOCK(ATOMIC_FORCEON) {
-				mag_value = value; // WARN: could be interrupted in half of writing
+				mag_value = value;
 			}
 			servo_vcc_start_measure();
 			break;
 		case adcServoVcc:
 			ATOMIC_BLOCK(ATOMIC_FORCEON) {
-				servo_vcc_value = value; // WARN: could be interrupted in half of writing
+				servo_vcc_value = value;
 			}
 			on_adc_done();
 			break;
