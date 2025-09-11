@@ -60,10 +60,10 @@
 
 #define MAG_MAX_VALUE 1023
 
-#define SERVO_VCC_MIN_WARN 461 // 4.5 V (= x/512 * 5.0)
-#define SERVO_VCC_MIN 410 // 4.0 V (= x/512 * 5.0)
-#define SERVO_VCC_MAX_WARN  532 // 5.2 V (= x/512 * 5.0)
-#define SERVO_VCC_MAX 563 // 5.5 V (= x/512 * 5.0)
+#define SERVO_VCC_MIN_WARN 410 // 4.0 V (= x/512 * 5.0)
+#define SERVO_VCC_MIN 350 // 3.5 V (= x/512 * 5.0)
+#define SERVO_VCC_MAX_WARN 563 // 5.5 V (= x/512 * 5.0)
+#define SERVO_VCC_MAX 594 // 5.8 V (= x/512 * 5.0)
 
 void set_output(uint8_t pin, bool state);
 bool get_input(uint8_t pin);
