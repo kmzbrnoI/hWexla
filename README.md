@@ -33,6 +33,21 @@ contains all data.
 
 In czech only
 
+## Piece check
+
+Pass following checks to mark a piece of (newly manufactured) hWexla as
+*quality check pass*.
+
+1. Check programming interface is working.
+2. Check diagnostic interface is working (browser visible, accepting commands).
+3. Check all inputs are working (browser + functional test).
+4. Check all outputs are working (browser + HW tester).
+5. Check servo moves in full range.
+6. Check magnet values, test signalization of end-position-reached.
+7. Check relay output.
+8. Monitor recorded minimum&maximum servo voltage.
+9. Check for errors/warnings (browser).
+
 ## Authors
 
 hWexla was designed in [Model Railroaders Club
