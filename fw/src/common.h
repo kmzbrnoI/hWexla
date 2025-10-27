@@ -7,7 +7,7 @@
 /* Definition of common types */
 
 #define CONFIG_FW_MAJOR 1
-#define CONFIG_FW_MINOR 4
+#define CONFIG_FW_MINOR 5
 
 #define EEPROM_POSITION_COUNT 16
 #define EEPROM_MOVED_COUNT    8
