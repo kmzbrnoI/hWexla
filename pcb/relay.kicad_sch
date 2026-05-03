@@ -600,7 +600,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Relay_THT:Relay_DPDT_Kemet_EC2"
+			(property "Footprint" "Relay_THT:Relay_DPDT_Kemet_EC2_NU"
 				(at 0 0 0)
 				(effects
 					(font
@@ -636,7 +636,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "Relay*THT*Kemet*EC2*"
+			(property "ki_fp_filters" "Relay*Kemet*EC2*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1113,6 +1113,7 @@
 		)
 		(symbol "Transistor_FET:2N7002"
 			(pin_names
+				(offset 0)
 				(hide yes)
 			)
 			(exclude_from_sim no)
@@ -1148,7 +1149,7 @@
 				)
 			)
 			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF"
-				(at 0 0 0)
+				(at 5.08 -3.81 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1328,7 +1329,7 @@
 				)
 				(polyline
 					(pts
-						(xy 2.794 0.508) (xy 2.921 0.381) (xy 3.683 0.381) (xy 3.81 0.254)
+						(xy 2.921 0.381) (xy 3.683 0.381)
 					)
 					(stroke
 						(width 0)
@@ -1411,8 +1412,12 @@
 		)
 		(symbol "power:GND"
 			(power)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
+				(hide yes)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1488,8 +1493,7 @@
 				(pin power_in line
 					(at 0 0 270)
 					(length 0)
-					(hide yes)
-					(name "GND"
+					(name "~"
 						(effects
 							(font
 								(size 1.27 1.27)
