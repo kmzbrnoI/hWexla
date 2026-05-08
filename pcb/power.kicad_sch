@@ -1903,17 +1903,6 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "   TME\nSL050-60"
-		(exclude_from_sim no)
-		(at 39.37 51.435 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0bacc342-bf6d-4eee-9bd7-b85fe807d6f1")
-	)
 	(text "Power for servo & relay"
 		(exclude_from_sim no)
 		(at 142.24 33.02 0)
@@ -1979,17 +1968,6 @@
 			(justify left bottom)
 		)
 		(uuid "dbbbcbf5-ed09-4c20-902c-70f108158aba")
-	)
-	(text "       TME\nBSMD1206-SS0.5"
-		(exclude_from_sim no)
-		(at 203.835 52.07 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "df60ed00-3445-4abd-b857-c15ee303d110")
 	)
 	(junction
 		(at 144.78 118.11)
@@ -2729,6 +2707,15 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "TME" "BSMD1206-SS0.5"
+			(at 212.09 52.07 90)
+			(show_name yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -3846,6 +3833,15 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "TME" "SL050-60"
+			(at 44.45 50.8 90)
+			(show_name yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"

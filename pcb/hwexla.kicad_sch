@@ -9389,15 +9389,6 @@
 				)
 			)
 		)
-		(property "Sim.Enable" "0"
-			(at 24.13 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(instances
 			(project "hwexla"
 				(path "/1cc5480b-56b7-4379-98e2-ccafc88911a7"
@@ -9458,15 +9449,6 @@
 				(font
 					(size 1.27 1.27)
 				)
-			)
-		)
-		(property "Sim.Enable" "0"
-			(at 251.46 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
 			)
 		)
 		(instances
