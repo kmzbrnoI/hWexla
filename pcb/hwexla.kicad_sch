@@ -12963,7 +12963,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "jlcpcb_tooling_holes:jlcpcb_tooling_holes"
+		(property "Footprint" "MountingHole:ToolingHole_1.152mm"
 			(at 36.195 189.865 0)
 			(effects
 				(font
@@ -13177,7 +13177,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "jlcpcb_tooling_holes:jlcpcb_tooling_holes"
+		(property "Footprint" "MountingHole:ToolingHole_1.152mm"
 			(at 36.195 184.15 0)
 			(effects
 				(font
