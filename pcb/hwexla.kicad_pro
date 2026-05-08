@@ -669,6 +669,12 @@
           "label": "TME",
           "name": "TME",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "ValueAlt",
+          "name": "ValueAlt",
+          "show": false
         }
       ],
       "filter_string": "",
