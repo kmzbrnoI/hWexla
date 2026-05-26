@@ -5051,17 +5051,6 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "Pin 3 for compatibility with SOT353"
-		(exclude_from_sim no)
-		(at 230.505 158.75 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9df787c3-a670-412a-97ee-3b9ca2130648")
-	)
 	(text "Variants:\nATmega8a, ATmega328p, ATmega328pb"
 		(exclude_from_sim no)
 		(at 215.9 81.28 0)
@@ -5229,12 +5218,6 @@
 		(uuid "acb6c3f3-e677-4f35-9fc2-138ba10f33af")
 	)
 	(junction
-		(at 238.125 139.7)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b9644345-2c8d-4f54-9d32-2353cd6b3881")
-	)
-	(junction
 		(at 133.35 160.02)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5287,6 +5270,10 @@
 	(no_connect
 		(at 135.89 167.64)
 		(uuid "460147d8-e4b6-4910-88e9-07d1ddd6c2df")
+	)
+	(no_connect
+		(at 238.125 147.32)
+		(uuid "756e9c3a-5271-415b-bacc-eeb93a248de8")
 	)
 	(bus_entry
 		(at 162.56 58.42)
@@ -5472,7 +5459,7 @@
 	)
 	(wire
 		(pts
-			(xy 238.125 139.7) (xy 233.045 139.7)
+			(xy 233.045 139.7) (xy 249.555 139.7)
 		)
 		(stroke
 			(width 0)
@@ -5949,16 +5936,6 @@
 			(type default)
 		)
 		(uuid "48132d4a-2aa0-40cd-8961-8e534a6db5ff")
-	)
-	(wire
-		(pts
-			(xy 238.125 139.7) (xy 238.125 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4878a973-8775-4f7d-86ae-0369e38c9333")
 	)
 	(wire
 		(pts
@@ -6849,16 +6826,6 @@
 			(type default)
 		)
 		(uuid "b9c0c276-e6f1-47dd-b072-0f92904248ca")
-	)
-	(wire
-		(pts
-			(xy 249.555 139.7) (xy 238.125 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bc1d5740-b0c7-4566-95b0-470ac47a1fb3")
 	)
 	(wire
 		(pts
