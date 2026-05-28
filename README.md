@@ -38,15 +38,16 @@ In czech only
 Pass following checks to mark a piece of (newly manufactured) hWexla as
 *quality check pass*.
 
-1. Check programming interface is working.
-2. Check diagnostic interface is working (browser visible, accepting commands).
-3. Check all inputs are working (browser + functional test).
-4. Check all outputs are working (browser + HW tester).
-5. Check servo moves in full range.
-6. Check magnet values, test signalization of end-position-reached.
-7. Check relay output.
-8. Monitor recorded minimum&maximum servo voltage.
-9. Check for errors/warnings (browser).
+1. Optical inspection.
+2. Check programming interface is working.
+3. Check diagnostic interface is working (browser visible, accepting commands).
+4. Check all inputs are working (browser + functional test).
+5. Check all outputs are working (browser + HW tester).
+6. Check servo moves in full range.
+7. Check magnet values, test signalization of end-position-reached.
+8. Check relay output.
+9. Monitor recorded minimum&maximum servo voltage.
+10. Check for errors/warnings (browser).
 
 ## Authors
 
