@@ -522,6 +522,156 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:D_Schottky"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "D_Schottky"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Schottky diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "diode Schottky"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "D_Schottky_0_1"
+				(polyline
+					(pts
+						(xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "D_Schottky_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:Fuse"
 			(pin_numbers
 				(hide yes)
@@ -1101,11 +1251,12 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Diode:1N4007"
+		(symbol "Diode:1N5819"
 			(pin_numbers
 				(hide yes)
 			)
 			(pin_names
+				(offset 1.016)
 				(hide yes)
 			)
 			(exclude_from_sim no)
@@ -1119,7 +1270,7 @@
 					)
 				)
 			)
-			(property "Value" "1N4007"
+			(property "Value" "1N5819"
 				(at 0 -2.54 0)
 				(effects
 					(font
@@ -1136,7 +1287,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "http://www.vishay.com/docs/88503/1n4001.pdf"
+			(property "Datasheet" "http://www.vishay.com/docs/88525/1n5817.pdf"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1145,7 +1296,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "1000V 1A General Purpose Rectifier Diode, DO-41"
+			(property "Description" "40V 1A Schottky Barrier Rectifier Diode, DO-41"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1154,25 +1305,7 @@
 					(hide yes)
 				)
 			)
-			(property "Sim.Device" "D"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Pins" "1=K 2=A"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "diode"
+			(property "ki_keywords" "diode Schottky"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1190,10 +1323,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "1N4007_0_1"
+			(symbol "1N5819_0_1"
 				(polyline
 					(pts
-						(xy -1.27 1.27) (xy -1.27 -1.27)
+						(xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635)
 					)
 					(stroke
 						(width 0.254)
@@ -1228,7 +1361,7 @@
 					)
 				)
 			)
-			(symbol "1N4007_1_1"
+			(symbol "1N5819_1_1"
 				(pin passive line
 					(at -3.81 0 0)
 					(length 2.54)
@@ -1951,12 +2084,12 @@
 	)
 	(text "Power for logic"
 		(exclude_from_sim no)
-		(at 149.86 107.95 0)
+		(at 165.1 145.415 0)
 		(effects
 			(font
 				(size 2.54 2.54)
 			)
-			(justify left bottom)
+			(justify bottom)
 		)
 		(uuid "b7dfd91c-6180-48d0-832a-f6a5a032a686")
 	)
@@ -1982,6 +2115,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1d1a7683-c090-4798-9b40-7ed0d9f3ce3b")
+	)
+	(junction
+		(at 152.4 118.11)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "26be36d6-fc0b-404a-b8bd-c21981d062d5")
 	)
 	(junction
 		(at 69.85 59.69)
@@ -2026,6 +2165,12 @@
 		(uuid "be118b00-015b-445a-8fc5-7bf35350fda8")
 	)
 	(junction
+		(at 178.435 118.11)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d1870905-09db-4a54-a71c-89ccb6a11ae2")
+	)
+	(junction
 		(at 77.47 82.55)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2058,6 +2203,26 @@
 			(type default)
 		)
 		(uuid "009b0d62-e9ea-4825-9fdf-befd291c76ce")
+	)
+	(wire
+		(pts
+			(xy 168.91 105.41) (xy 178.435 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08006a83-9708-4cd2-91d0-8ad79b3a6e99")
+	)
+	(wire
+		(pts
+			(xy 178.435 118.11) (xy 185.42 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "144b17e0-3fd8-4326-b6a1-60765dbd8244")
 	)
 	(wire
 		(pts
@@ -2221,6 +2386,16 @@
 	)
 	(wire
 		(pts
+			(xy 178.435 105.41) (xy 178.435 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72d264d2-3186-4d5b-8176-e5eb30f5ba6f")
+	)
+	(wire
+		(pts
 			(xy 86.36 59.69) (xy 100.33 59.69)
 		)
 		(stroke
@@ -2371,6 +2546,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 105.41) (xy 152.4 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c26e3a64-d20d-4a82-b8eb-14c21f9361ce")
+	)
+	(wire
+		(pts
 			(xy 77.47 78.74) (xy 77.47 82.55)
 		)
 		(stroke
@@ -2391,6 +2576,26 @@
 	)
 	(wire
 		(pts
+			(xy 152.4 118.11) (xy 144.78 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d11ceefa-8d60-46d6-82b9-020cb1d2b826")
+	)
+	(wire
+		(pts
+			(xy 152.4 105.41) (xy 152.4 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d23d0585-901d-4022-88e2-11ad4f28114f")
+	)
+	(wire
+		(pts
 			(xy 100.33 118.11) (xy 119.38 118.11)
 		)
 		(stroke
@@ -2401,7 +2606,7 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 118.11) (xy 185.42 118.11)
+			(xy 172.72 118.11) (xy 178.435 118.11)
 		)
 		(stroke
 			(width 0)
@@ -2481,7 +2686,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 118.11) (xy 144.78 118.11)
+			(xy 157.48 118.11) (xy 152.4 118.11)
 		)
 		(stroke
 			(width 0)
@@ -4083,7 +4288,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:1N4007")
+		(lib_id "Diode:1N5819")
 		(at 123.19 118.11 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4099,7 +4304,7 @@
 				)
 			)
 		)
-		(property "Value" "1N4007"
+		(property "Value" "1N5819"
 			(at 123.19 114.9096 0)
 			(effects
 				(font
@@ -4116,7 +4321,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://www.vishay.com/docs/88503/1n4001.pdf"
+		(property "Datasheet" "http://www.vishay.com/docs/88525/1n5817.pdf"
 			(at 123.19 118.11 0)
 			(effects
 				(font
@@ -4125,15 +4330,16 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "40V 1A Schottky Barrier Rectifier Diode, DO-41"
 			(at 123.19 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "LCSC" "C64898"
+		(property "LCSC" "C191023"
 			(at 123.19 118.11 0)
 			(effects
 				(font
@@ -4374,6 +4580,82 @@
 			(project "hwexla"
 				(path "/1cc5480b-56b7-4379-98e2-ccafc88911a7/00000000-0000-0000-0000-000061aa5240"
 					(reference "R17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Schottky")
+		(at 165.1 105.41 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b56fff13-2d10-45e9-9cb4-ad7aa0d84f25")
+		(property "Reference" "D9"
+			(at 164.7825 99.9955 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1N5819"
+			(at 164.7825 102.4198 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 165.1 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 165.1 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Schottky diode"
+			(at 165.1 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C191023"
+			(at 165.1 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "35ef0854-cdde-432e-8ae7-85bb5bf1ef4d")
+		)
+		(pin "1"
+			(uuid "204542c5-3a52-4e27-861d-7abf404b91b1")
+		)
+		(instances
+			(project "hwexla"
+				(path "/1cc5480b-56b7-4379-98e2-ccafc88911a7/00000000-0000-0000-0000-000061aa5240"
+					(reference "D9")
 					(unit 1)
 				)
 			)
