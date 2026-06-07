@@ -7,9 +7,9 @@
 volatile uint8_t usart_out[USART_OUT_BUF_SIZE];
 
 volatile char usart_in; // input is 1-byte bufferred
-volatile bool _sending = false;
-volatile uint8_t _send_next_pos;
-volatile uint8_t _send_size;
+static volatile bool _sending = false;
+static volatile uint8_t _send_next_pos;
+static volatile uint8_t _send_size;
 
 ///////////////////////////////////////////////////////////////////////////////
 

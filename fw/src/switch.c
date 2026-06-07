@@ -5,13 +5,14 @@
 #include "eeprom.h"
 #include "io.h"
 
-bool _switching = false;
 uint8_t switch_move_per_tick = 4;
-TurnoutPos _target_pos;
-uint8_t end_remain_counter;
-uint8_t begin_remain_counter;
-bool _relay_switched;
-uint16_t _middle;
+
+static bool _switching = false;
+static uint8_t _begin_remain_counter;
+static uint8_t _end_remain_counter;
+static TurnoutPos _target_pos;
+static bool _relay_switched;
+static uint16_t _middle;
 
 #define BEGIN_REMAIN 5 // send 100 ms stable signal at end of switching
 #define END_REMAIN 10 // send 200 ms stable signal at end of switching
@@ -24,8 +25,8 @@ void switch_turnout(TurnoutPos pos) {
 
 	_switching = true;
 	_target_pos = pos;
-	begin_remain_counter = 0;
-	end_remain_counter = 0;
+	_begin_remain_counter = 0;
+	_end_remain_counter = 0;
 	_relay_switched = false;
 
 	if (turnout.angle_plus > turnout.angle_minus) {
@@ -64,15 +65,15 @@ bool _dir(TurnoutPos dir) {
 void switch_update(void) {
 	if (!_switching)
 		return;
-	if (begin_remain_counter < BEGIN_REMAIN) {
-		begin_remain_counter++;
+	if (_begin_remain_counter < BEGIN_REMAIN) {
+		_begin_remain_counter++;
 		return;
 	}
 
 	if (((_target_pos == tpPlus && turnout.angle == turnout.angle_plus)) ||
 		((_target_pos == tpMinus && turnout.angle == turnout.angle_minus))) {
-		end_remain_counter++;
-		if (end_remain_counter >= END_REMAIN) {
+		_end_remain_counter++;
+		if (_end_remain_counter >= END_REMAIN) {
 			turnout.position = _target_pos;
 			switch_stop();
 			return;
