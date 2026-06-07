@@ -32,6 +32,9 @@ void pwm_servo_init(void) {
 }
 
 void pwm_servo_gen(int16_t angle) {
+	if (angle > PWM_ANGLE_MAX)
+		return;
+
 	_angle = angle;
 
 	if (!pwm_servo_generating()) {
