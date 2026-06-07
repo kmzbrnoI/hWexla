@@ -91,7 +91,7 @@ void switch_update(void) {
 					turnout.angle = turnout.angle_minus;
 			}
 		} else {
-			turnout.angle -= switch_move_per_tick;
+			turnout.angle -= (turnout.angle >= switch_move_per_tick) ? switch_move_per_tick : turnout.angle;
 
 			if (_target_pos == tpPlus) {
 				if (turnout.angle < turnout.angle_plus)
