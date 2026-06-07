@@ -4,6 +4,7 @@
 #include "pwm_servo_gen.h"
 #include "switch.h"
 #include "diag.h"
+#include "io.h"
 
 volatile bool ee_to_save = false;
 volatile bool ee_to_save_servo_vcc = false;
@@ -36,11 +37,11 @@ bool _ee_nonblock_update_word(uint16_t* addr, uint16_t value) {
 }
 
 void _ee_default_config(void) {
-	turnout.angle_plus = 350;
-	turnout.angle_minus = 150;
-	turnout.angle = 250;
-	turnout.sensor_plus = 750;
-	turnout.sensor_minus = 250;
+	turnout.angle_plus = (PWM_ANGLE_MAX/10)*6;
+	turnout.angle_minus = (PWM_ANGLE_MAX/10)*4;
+	turnout.angle = PWM_ANGLE_MAX/2;
+	turnout.sensor_plus = (MAG_MAX_VALUE/10)*7;
+	turnout.sensor_minus =  (MAG_MAX_VALUE/10)*3;
 	turnout.moved_plus = 0;
 	turnout.moved_minus = 0;
 
