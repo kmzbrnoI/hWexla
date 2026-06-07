@@ -2,13 +2,16 @@
 #include "pwm_servo_gen.h"
 #include "io.h"
 
-volatile int16_t _angle;
-volatile int16_t _angle_buf;
-volatile bool _should_generate = false;
+static volatile int16_t _angle;
+static volatile int16_t _angle_buf;
+static volatile bool _should_generate = false;
+
+// output signal range: 8750-9750 (PWM_ANGLE_MAX) ~ 0.5-2.5 ms pulse (extended sweep)
+#define ANGLE_TO_OCR1A 8750
 
 static inline void _pwm_servo_start(uint16_t angle) {
-	OCR1A = angle+9000;
-	TCCR1B |= (1 << CS11); // Clock source = prescaler 8×
+	OCR1A = angle + ANGLE_TO_OCR1A;
+	TCCR1B |= (1 << CS11); // Clock source = prescaler 8× ~ 1 MHz
 }
 
 static inline void _pwm_servo_stop(void) {
@@ -24,7 +27,7 @@ void pwm_servo_init(void) {
 	TCCR1A = (1 << COM1A1) | (1 << COM1A0); // OC1A on Compare Match high level
 	TCCR1B = (1 << WGM13); // Phase&freq correct PWM TOP=ICR1
 	TIMSK |= (1 << OCIE1A) | (1 << OCIE1B);
-	ICR1 = 10000;
+	ICR1 = 10000; // top value ~ 50 Hz ~ 20 ms period
 	OCR1B = 0;
 }
 
@@ -59,5 +62,5 @@ ISR(TIMER1_COMPA_vect) {
 
 ISR(TIMER1_COMPB_vect) {
 	// Interrupt after full period → update pwm width
-	OCR1A = _angle+9000;
+	OCR1A = _angle + ANGLE_TO_OCR1A;
 }
