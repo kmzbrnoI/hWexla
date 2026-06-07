@@ -69,10 +69,12 @@ void diag_read(void) {
 			switch_turnout(tpMinus);
 		break;
 	case 'p': // increase speed
-		switch_move_per_tick++;
+		if (switch_move_per_tick < 20)
+			switch_move_per_tick++;
 		break;
 	case 'm': // decrease speed
-		switch_move_per_tick--;
+		if (switch_move_per_tick > 1)
+			switch_move_per_tick--;
 		break;
 	case 'r': // reset
 		reset();
