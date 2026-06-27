@@ -3,7 +3,7 @@ WEXLACON
 
 WEXLACON is a PCB permanently mounted to the railway layout to which hWexla connects.
 
-Schematic and the PCB was designed in KiCad 8.
+Schematic and the PCB was designed in KiCad 9.
 
 ## Authors
 
