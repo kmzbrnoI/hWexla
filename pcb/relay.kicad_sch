@@ -1826,7 +1826,7 @@
 		)
 		(uuid "524dc8d0-13b4-43fe-b274-8ac08bc4b894")
 	)
-	(hierarchical_label "RELA-"
+	(hierarchical_label "RELA+"
 		(shape bidirectional)
 		(at 119.38 77.47 180)
 		(effects
@@ -1837,7 +1837,7 @@
 		)
 		(uuid "62c6f8ce-78e5-4ab3-bb01-2fcb0df87aa6")
 	)
-	(hierarchical_label "RELA+"
+	(hierarchical_label "RELA-"
 		(shape bidirectional)
 		(at 119.38 82.55 180)
 		(effects
@@ -1870,7 +1870,7 @@
 		)
 		(uuid "895d5ca3-0e9a-421e-88ea-3017edd2db62")
 	)
-	(hierarchical_label "RELB+"
+	(hierarchical_label "RELB-"
 		(shape bidirectional)
 		(at 119.38 92.71 180)
 		(effects
@@ -1881,7 +1881,7 @@
 		)
 		(uuid "9f5c7a80-7220-432e-865b-d1468e8a8d4c")
 	)
-	(hierarchical_label "RELB-"
+	(hierarchical_label "RELB+"
 		(shape bidirectional)
 		(at 119.38 87.63 180)
 		(effects
