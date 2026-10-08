@@ -26,11 +26,10 @@ LDFLAGS = -Wl,-Map=$(TARGET).map,--cref
 
 #---------------- Programming Options (avrdude) ----------------
 
-AVRDUDE_PROGRAMMER = stk500
-AVRDUDE_PORT = /dev/ttyUSB0
+AVRDUDE_PROGRAMMER = pickit5_isp
 AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 AVRDUDE_WRITE_EEPROM = -U eeprom:w:$(TARGET).eep
-AVRDUDE_FLAGS = -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER) -B1
+AVRDUDE_FLAGS = -p $(MCU) -c $(AVRDUDE_PROGRAMMER) -x vtarg=0
 
 #============================================================================
 
