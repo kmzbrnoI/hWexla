@@ -22,12 +22,11 @@ jobs:
         run: avr-gcc --version
 
       - name: Build firmware
-        run: |
-          cd fw
-          make
+        working-directory: fw
+        run: make
           
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: avr-firmware
-          path: fw/build/hWexla.hex
+          path: fw/build/
