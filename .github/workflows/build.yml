@@ -1,0 +1,33 @@
+name: Build firmware
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install AVR toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-avr avr-libc binutils-avr make
+
+      - name: Show compiler version
+        run: avr-gcc --version
+
+      - name: Build firmware
+        run: |
+          cd fw
+          make
+          
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: avr-firmware
+          path: fw/build/hWexla.hex
