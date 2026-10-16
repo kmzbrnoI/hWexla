@@ -1,6 +1,8 @@
 hWexla – Switch motor
 =====================
 
+[![Build firmware](https://github.com/kmzbrnoI/hWexla/actions/workflows/build.yml/badge.svg)](https://github.com/kmzbrnoI/hWexla/actions/workflows/build.yml)
+
 hWexla is a switch motor designed in [Model Railroader Club Brno I](https://kmz-brno.cz/)
 to switch their turnouts. The project is opensource & openhardware, this repository
 contains all data.
